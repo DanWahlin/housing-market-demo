@@ -25,13 +25,12 @@ You don't need to write code to run the demo. You paste a prompt and check what 
 | --- | --- |
 | [`talk/copilot-app-put-ai-agents-to-work.pptx`](talk/copilot-app-put-ai-agents-to-work.pptx) | The talk slides, with speaker notes |
 | [`talk/outline.md`](talk/outline.md) | The 35-minute timeline, all prompts, and the timing from a full test run |
-| [`data/`](data/) | Public housing data: FHFA House Price Index and CFPB mortgage (HMDA) data. See [`data/README.md`](data/README.md). |
-| [`scripts/fetch-data.mjs`](scripts/fetch-data.mjs) | Downloads the latest data again |
-| [`AGENTS.md`](AGENTS.md) | Instructions that every agent reads first: data rules, output folders, and metric definitions |
+| [`data/`](data/), [`scripts/fetch-data.mjs`](scripts/fetch-data.mjs) | Public housing data (FHFA House Price Index and CFPB mortgage data) and the script that downloads it. The data agent makes both. See [`data/README.md`](data/README.md). |
+| [`AGENTS.md`](AGENTS.md) | Instructions that every agent reads first: data sources, data rules, output folders, and metric definitions |
 | [`templates/github-dark-template.pptx`](templates/github-dark-template.pptx) | The slide template the briefing agent copies |
 | [`site/`](site/), [`analysis/`](analysis/), [`briefings/`](briefings/) | The finished results from our test run |
 
-For a live run, start from the `demo-start` branch. It has the data and instructions but none of the results, so the agents build everything from scratch.
+For a live run, start from the `demo-start` branch. It has the instructions and the slide template, but no data and no results, so the agents do everything from scratch.
 
 ## What you need
 
@@ -44,24 +43,33 @@ For a live run, start from the `demo-start` branch. It has the data and instruct
 ## Run the demo
 
 1. Clone this repo and add it as a project in the Copilot app.
-2. Switch to `demo-start` and get fresh data. Commit it if anything changed:
-
-   ```bash
-   git switch demo-start
-   node scripts/fetch-data.mjs
-   git commit -am "Refresh data"
-   ```
-
-3. In the prompt box, open the mode menu and set **Tool permissions** to **Approve all**. If you skip this, sessions in Autopilot stop and wait for you to approve each command.
-4. Start each prompt below in its own new session (new worktree). In the workspace menu, set **Base branch** to `demo-start`. Start the website in **Plan** mode and the others in **Autopilot**.
+2. In the prompt box, open the mode menu and set **Tool permissions** to **Approve all**. If you skip this, sessions in Autopilot stop and wait for you to approve each command.
+3. Start two sessions from `demo-start` (in the workspace menu, set **Base branch** to `demo-start`), both in **Autopilot**:
+   - **Get the data** (prompt 1). It downloads the data, checks it, and pushes a new branch.
+   - **WorkIQ session brief** (prompt 5). It does not need the housing data.
+4. When the data session pushes its branch, start the website, Excel, and PowerPoint sessions (prompts 2 to 4). Set **Base branch** to the data session's branch. Start the website in **Plan** mode and the other two in **Autopilot**.
 5. When the website plan appears, approve it and pick **Autopilot**.
 
-In our test run, all four finished in about 10 minutes, running side by side.
+In our test run, the data was ready in about 2 minutes. The WorkIQ, PowerPoint, and website sessions finished 2 to 9 minutes after they started. The Excel session took 20 minutes because it had to find the cause of a repair message. We added tips to `AGENTS.md` to prevent that.
 
 ## Prompts
 
 <details>
-<summary><b>1. Website</b> (Plan mode, then Autopilot)</summary>
+<summary><b>1. Get the data</b> (Autopilot, from <code>demo-start</code>)</summary>
+
+```text
+Get the public housing data for this demo. Use the "Data" section in AGENTS.md.
+
+1. Write scripts/fetch-data.mjs in Node.js with no npm packages. It downloads the FHFA House Price Index and the CFPB HMDA data and writes the five CSV files listed in AGENTS.md to data/.
+2. Run it. Check each file: the row count, the first and last period, and no empty key values. Show me a short summary table.
+3. Write data/README.md: a short data dictionary with the sources and links.
+4. Commit the script and the data, and push the branch.
+```
+
+</details>
+
+<details>
+<summary><b>2. Website</b> (Plan mode, then Autopilot)</summary>
 
 ```text
 Plan a public website called "U.S. Housing Market Explorer" in site/ that uses the data in data/. The audience is business leaders who look at it on a large screen and on their phones.
@@ -87,7 +95,7 @@ Keep the plan short.
 </details>
 
 <details>
-<summary><b>2. Excel workbook</b> (Autopilot)</summary>
+<summary><b>3. Excel workbook</b> (Autopilot)</summary>
 
 ```text
 Build an Excel workbook, analysis/housing-market-analysis.xlsx, for a business analyst. Use the data in data/.
@@ -104,7 +112,7 @@ When the workbook is done, open it in Microsoft Excel to make sure that it opens
 </details>
 
 <details>
-<summary><b>3. PowerPoint briefing</b> (Autopilot)</summary>
+<summary><b>4. PowerPoint briefing</b> (Autopilot)</summary>
 
 ```text
 Create a 7-slide executive briefing, briefings/housing-market-briefing.pptx, about the U.S. housing market. Use the data in data/. Use the look of templates/github-dark-template.pptx (colors, fonts, and card style).
@@ -119,7 +127,7 @@ When the deck is done, render each slide to PNG, check for text that overflows o
 </details>
 
 <details>
-<summary><b>4. WorkIQ session brief</b> (Autopilot)</summary>
+<summary><b>5. WorkIQ session brief</b> (Autopilot, from <code>demo-start</code>)</summary>
 
 Change `Fannie Mae` to the name of your event or customer.
 
@@ -143,7 +151,7 @@ Then compare the brief with talk/outline.md. Add a "Gaps" section that lists wha
 </details>
 
 <details>
-<summary><b>5. Weekly automation</b> (create it in Automations)</summary>
+<summary><b>6. Weekly automation</b> (create it in Automations)</summary>
 
 ```text
 Every Monday at 8:00 AM, run node scripts/fetch-data.mjs. If the FHFA or HMDA data changed, rebuild and redeploy the website, update the PowerPoint briefing and the Excel workbook, and write a five-line summary of what changed in the housing data since last week.
@@ -152,7 +160,7 @@ Every Monday at 8:00 AM, run node scripts/fetch-data.mjs. If the FHFA or HMDA da
 </details>
 
 <details>
-<summary><b>6. Optional: fix bugs and open a pull request</b> (send to the website session after it deploys)</summary>
+<summary><b>7. Optional: fix bugs and open a pull request</b> (send to the website session after it deploys)</summary>
 
 ```text
 Review site/ for accessibility and correctness problems. Fix the problems that you find, add a test for each fix, then commit and open a pull request.
@@ -165,7 +173,7 @@ Review site/ for accessibility and correctness problems. Fix the problems that y
 The timeline, the speaker notes, and the backup plan are in [`talk/outline.md`](talk/outline.md). Some tips from the test run:
 
 - Run the WorkIQ prompt the day before and read the brief. It reads your real email, so check it before it goes on a projector. In our run it also found eight gaps in the talk plan, which is worth mentioning on stage.
-- Start all four sessions in the first ten minutes. Then show the results in the order they finish: brief, briefing, workbook, website.
+- Start the data and WorkIQ sessions first, and talk about where the data comes from while the agent downloads it. Then start the other three. Show the results in the order they finish: brief, briefing, workbook, website.
 - Keep the finished results in `main` as a backup. If a session is slow on stage, open the result from `main` and keep going.
 - Show the QR code from `site/qr-code.png` and ask people to open the live site on their phones. It gets the non-developers in the room involved.
 - Change the title slide, which says "Fannie Mae AI Summit," to your event. Slides 7 and 8 use a Morph transition to show you as a conductor and each session as a section of the orchestra.
