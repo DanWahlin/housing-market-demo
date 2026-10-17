@@ -55,6 +55,11 @@ Keep each session in its own folder so the sessions do not conflict.
 - Microsoft Excel and PowerPoint, and LibreOffice (`soffice`) for headless rendering
 - `templates/github-dark-template.pptx`: the dark GitHub slide template for decks
 
+## Excel tips
+
+- In an Excel table, write calculated columns as plain values, not formulas. Table formulas often cause a repair message.
+- If Excel shows a repair message, first read the newest `Repair Result*.xml` file in `~/Library/Containers/com.microsoft.Excel/Data/tmp/`. It names the broken part.
+
 ## Style
 
 - Keep code small and readable. Prefer a few clear files over many small ones.
