@@ -144,7 +144,7 @@ Every Monday at 8:00 AM, run python3 scripts/fetch_data.py. If the FHFA or HMDA 
 
 ### Optional: fix bugs and open a pull request
 
-Developers. The abstract promises agents that fix bugs and open pull requests. To show this, first push this repo to a private GitHub repository. Then send this follow-up prompt to the website session after it deploys:
+Developers. The abstract promises agents that fix bugs and open pull requests. The repo must be on GitHub so that the agent can open the pull request. After the website session deploys, send it this follow-up prompt:
 
 ```text
 Review site/ for accessibility and correctness problems. Fix the problems that you find, add a test for each fix, then commit and open a pull request.
