@@ -12,9 +12,9 @@ This repo has everything for the talk **"GitHub Copilot app: Put AI Agents to Wo
 
 | Agent builds | For | Result |
 | --- | --- | --- |
-| An interactive website, deployed to Azure | Developers and IT managers | [Live site](https://calm-rock-09895ae0f.5.azurestaticapps.net) · [code](https://github.com/DanWahlin/housing-market-demo/tree/danwahlin-housing-market-explorer-site/site) |
-| An Excel workbook with a PivotTable and dashboard | Business analysts | [Workbook](https://github.com/DanWahlin/housing-market-demo/tree/danwahlin-excel-analysis/analysis) |
-| A 7-slide executive briefing | Leaders and project managers | [Briefing](https://github.com/DanWahlin/housing-market-demo/tree/danwahlin-powerpoint-briefing/briefings) |
+| An interactive website, deployed to Azure | Developers and IT managers | [Live site](https://calm-rock-09895ae0f.5.azurestaticapps.net) · [code](site/) |
+| An Excel workbook with a PivotTable and dashboard | Business analysts | [Workbook](analysis/housing-market-analysis.xlsx) |
+| A 7-slide executive briefing | Leaders and project managers | [Briefing](briefings/housing-market-briefing.pptx) |
 | A session brief from your Microsoft 365 email and meetings (WorkIQ) | Project managers | Not in this repo because it has private event details |
 
 You don't need to write code to run the demo. You paste a prompt and check what the agent builds.
@@ -29,8 +29,9 @@ You don't need to write code to run the demo. You paste a prompt and check what 
 | [`scripts/fetch_data.py`](scripts/fetch_data.py) | Downloads the latest data again |
 | [`AGENTS.md`](AGENTS.md) | Instructions that every agent reads first: data rules, output folders, and metric definitions |
 | [`templates/github-dark-template.pptx`](templates/github-dark-template.pptx) | The slide template the briefing agent copies |
+| [`site/`](site/), [`analysis/`](analysis/), [`briefings/`](briefings/) | The finished results from our test run |
 
-The agent results are on their own branches so `main` stays clean for a live run.
+For a live run, start from the `demo-start` branch. It has the data and instructions but none of the results, so the agents build everything from scratch.
 
 ## What you need
 
@@ -43,15 +44,16 @@ The agent results are on their own branches so `main` stays clean for a live run
 ## Run the demo
 
 1. Clone this repo and add it as a project in the Copilot app.
-2. Get fresh data and commit it:
+2. Switch to `demo-start` and get fresh data. Commit it if anything changed:
 
    ```bash
+   git switch demo-start
    python3 scripts/fetch_data.py
    git commit -am "Refresh data"
    ```
 
 3. In the prompt box, open the mode menu and set **Tool permissions** to **Approve all**. If you skip this, sessions in Autopilot stop and wait for you to approve each command.
-4. Start each prompt below in its own new session (new worktree). Start the website in **Plan** mode and the others in **Autopilot**.
+4. Start each prompt below in its own new session (new worktree). In the workspace menu, set **Base branch** to `demo-start`. Start the website in **Plan** mode and the others in **Autopilot**.
 5. When the website plan appears, approve it and pick **Autopilot**.
 
 In our test run, all four finished in about 10 minutes, running side by side.
@@ -164,7 +166,7 @@ The timeline, the speaker notes, and the backup plan are in [`talk/outline.md`](
 
 - Run the WorkIQ prompt the day before and read the brief. It reads your real email, so check it before it goes on a projector. In our run it also found eight gaps in the talk plan, which is worth mentioning on stage.
 - Start all four sessions in the first ten minutes. Then show the results in the order they finish: brief, briefing, workbook, website.
-- Keep the result branches as a backup. If a session is slow on stage, switch to its branch and keep going.
+- Keep the finished results in `main` as a backup. If a session is slow on stage, open the result from `main` and keep going.
 - Show the QR code from `site/qr-code.png` and ask people to open the live site on their phones. It gets the non-developers in the room involved.
 - Change the title slide, which says "Fannie Mae AI Summit," to your event. Slides 7 and 8 use a Morph transition to show you as a conductor and each session as a section of the orchestra.
 - Leave five minutes at the end for questions or a slow step.

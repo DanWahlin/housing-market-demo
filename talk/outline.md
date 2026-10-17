@@ -34,18 +34,18 @@ All four prompts ran at the same time and finished. The proof run lost about 16 
 | PowerPoint briefing | 7 slides on the dark template, native charts, speaker notes, checked for overflow | About 10 minutes |
 | Website | 8 Vitest tests pass, build passes, deployed to `https://calm-rock-09895ae0f.5.azurestaticapps.net` | About 9 minutes, including the plan and the deploy |
 
-The results are on these branches. If a live session is slow, show the result from its branch:
+The results are in `main` (`site/`, `analysis/`, and `briefings/`) and on these branches. If a live session is slow, show the finished result:
 
 - `danwahlin-housing-market-explorer-site`
 - `danwahlin-excel-analysis`
 - `danwahlin-powerpoint-briefing`
-- `danwahlin-workiq-session-brief`
+- `danwahlin-workiq-session-brief` (local only, not on GitHub, because it has private event details)
 
 ## Before the talk
 
 1. Send the talk deck (`talk/copilot-app-put-ai-agents-to-work.pptx`) to the organizers. They asked for materials before the event.
 2. In the Copilot app, open the **housing-market-demo** project.
-3. Run `python3 scripts/fetch_data.py` to get the latest data, then commit it.
+3. Switch to the `demo-start` branch, run `python3 scripts/fetch_data.py` to get the latest data, then commit it. `demo-start` has no results, so the agents build everything from scratch.
 4. Run `az account show` to make sure that you are signed in to Azure.
 5. Make sure that the WorkIQ MCP server is connected (**Customize** > **MCP**).
 6. **Important:** In the composer, open the mode menu, select **Tool permissions**, and then select **Approve all**. Do this before you send each prompt. If you do not, Autopilot sessions stop and wait for approval.
@@ -54,7 +54,7 @@ The results are on these branches. If a live session is slow, show the result fr
 
 ## Prompts
 
-Start each prompt in a new **project session** (worktree) in the housing-market-demo project.
+Start each prompt in a new **project session** (worktree) in the housing-market-demo project. In the workspace menu, set **Base branch** to `demo-start`.
 
 ### Session 1: Website (Plan mode, then Autopilot)
 
