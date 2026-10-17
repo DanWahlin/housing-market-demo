@@ -30,7 +30,13 @@ You don't need to write code to run the demo. You paste a prompt and check what 
 | [`templates/github-dark-template.pptx`](templates/github-dark-template.pptx) | The slide template the briefing agent copies |
 | [`site/`](site/), [`analysis/`](analysis/), [`briefings/`](briefings/) | The finished results from our test run |
 
-For a live run, start from the `demo-start` branch. It has the instructions and the slide template, but no data and no results, so the agents do everything from scratch.
+The repo has three branches:
+
+| Branch | What it has | Use it for |
+| --- | --- | --- |
+| `main` | Everything, including the finished results | Reading and backup |
+| `demo-start` | Instructions, talk files, and the slide template. No data and no results. | The start of a live run |
+| `live-data` | `demo-start` plus the data | The base for the website, Excel, and PowerPoint sessions. The data session replaces it on each run. |
 
 ## What you need
 

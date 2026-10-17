@@ -1,10 +1,10 @@
 # Agent instructions
 
-This repo is a live demo for a GitHub Copilot app talk. Several agent sessions run at the same time. Each session builds one output from the same public housing data.
+This repo is a live demo for a GitHub Copilot app talk. First, one data session downloads the public housing data. Then several sessions run at the same time, and each one builds one output from that data.
 
 ## Data
 
-The first session (the data session) downloads the data into `data/`. All other sessions only read `data/`. They must not change it.
+The first session (the data session) downloads the data into `data/` and pushes its work to the `live-data` branch. The other sessions start from `live-data`. They only read `data/` and must not change it.
 
 ### Files the data session creates
 
@@ -33,6 +33,7 @@ The first session (the data session) downloads the data into `data/`. All other 
   - **U.S. year-over-year change:** average the three monthly U.S. `index_nsa` values for the latest complete quarter, then compare with the same quarter one year earlier.
   - **Change since 2019 Q4:** the latest quarter compared with 2019 Q4 (the last quarter before the pandemic).
   - **State and metro year-over-year change:** `index_nsa` for the latest quarter compared with the same quarter one year earlier.
+- Never include names of people, email addresses, or phone numbers in any output.
 - Report facts from the data. Do not make forecasts, give investment advice, or say anything about Fannie Mae's views. Add this footer to each output: "Built from public FHFA and CFPB data. Not an official Fannie Mae, FHFA, or CFPB product."
 
 ## Output folders
