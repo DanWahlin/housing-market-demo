@@ -1,4 +1,4 @@
-# GitHub Copilot app: AI Agents for Developers, Knowledge Workers, and Everyone in Between
+# GitHub Copilot app: Put AI Agents to Work for Developers, Knowledge Workers, and Leaders
 
 35-minute session for Fannie Mae. One public dataset, four roles, four agents that run at the same time.
 
@@ -8,26 +8,49 @@
 
 ## Timeline
 
+Lunch follows the session, so the plan ends at 30:00 and keeps 5 minutes for questions and delays.
+
 | Time | Segment | What the audience sees | Roles |
 | --- | --- | --- | --- |
-| 0:00 to 4:00 | Slides: the problem | The opening question, the problem for each role, the quote, the app in one picture, the storyline | Everyone |
-| 4:00 to 8:00 | Start four sessions | Session 1 starts in **Plan** mode. Sessions 2, 3, and 4 start in **Autopilot**. The sidebar shows four agents at work. | Everyone |
-| 8:00 to 10:00 | Approve the plan | Read the website plan, then approve it and switch to **Autopilot**. Talk about worktrees: each agent works on its own branch, so the agents do not conflict. | Developers, IT managers |
-| 10:00 to 14:00 | WorkIQ brief | The session brief from Microsoft 365, the privacy rules in the prompt, and the gap check against this outline | Knowledge workers, leaders |
-| 14:00 to 19:00 | PowerPoint briefing | Open the deck. Click a chart to show that it is a native, editable chart. Read the speaker notes. | Knowledge workers, leaders |
-| 19:00 to 24:00 | Excel workbook | PivotTable and PivotChart, the state drop-down that drives the dashboard, the heat map | Business analysts |
-| 24:00 to 29:00 | Website and deploy | Browser preview in the app, animated map, tests, deploy to Azure Static Web Apps, QR code so the audience opens the live site on their phones | Developers, IT managers |
-| 29:00 to 31:00 | Optional: automation | Create a weekly automation that gets new data and updates the site and the deck every Monday | Leaders, IT managers |
-| 31:00 to 35:00 | Slides: close | What you saw, the quote, how to start | Everyone |
+| 0:00 to 4:00 | Slides 1 to 8 | The opening question, the problem for each role, the quotes, the app, the storyline | Everyone |
+| 4:00 to 7:00 | Slide 9, then start four sessions | Session 1 starts in **Plan** mode. Sessions 2, 3, and 4 start in **Autopilot**. The sidebar shows four agents at work. | Everyone |
+| 7:00 to 9:00 | Approve the plan | Read the website plan, approve it, and select **Autopilot**. Explain worktrees: each agent works on its own branch. | Developers, IT managers |
+| 9:00 to 12:00 | WorkIQ brief | The brief from Microsoft 365, the privacy rules in the prompt, and the gaps that it found in this talk plan | Project managers, knowledge workers |
+| 12:00 to 16:00 | PowerPoint briefing | Open the deck. Click a chart to show that it is native and editable. Show the speaker notes. | Leaders, project managers |
+| 16:00 to 20:00 | Excel workbook | PivotTable and PivotChart, the state drop-down that drives the dashboard, the heat map, the sparklines | Business analysts |
+| 20:00 to 25:00 | Website and deploy | Browser preview, Play button, state panel, tests, Azure Static Web Apps URL, QR code for phones | Developers, IT managers |
+| 25:00 to 27:00 | Automation | Create the weekly automation that gets new data and updates all outputs | Leaders, IT managers |
+| 27:00 to 30:00 | Slides 10 to 14 | What the agents built, how you stay in control, the quote, one task to try this week | Everyone |
+| 30:00 to 35:00 | Questions | Buffer for questions or a slow live step | Everyone |
+
+## Proof run (17 October 2026)
+
+All four prompts ran at the same time and finished. The proof run lost about 16 minutes because the sessions waited for tool approval. Without that wait, each session needs this much time:
+
+| Session | Result | Agent time |
+| --- | --- | --- |
+| WorkIQ brief | `talk/session-brief.md`, no names, 3 items skipped, 8 gaps found | About 5 minutes |
+| Excel workbook | Data table, PivotTable and PivotChart, dashboard with drop-down, heat map, and sparklines. Opens in Excel with no repair message. | About 8 minutes |
+| PowerPoint briefing | 7 slides on the dark template, native charts, speaker notes, checked for overflow | About 10 minutes |
+| Website | 8 Vitest tests pass, build passes, deployed to `https://calm-rock-09895ae0f.5.azurestaticapps.net` | About 9 minutes, including the plan and the deploy |
+
+The results are on these branches. If a live session is slow, show the result from its branch:
+
+- `danwahlin-housing-market-explorer-site`
+- `danwahlin-excel-analysis`
+- `danwahlin-powerpoint-briefing`
+- `danwahlin-workiq-session-brief`
 
 ## Before the talk
 
-1. In the Copilot app, open the **housing-market-demo** project.
-2. Run `python3 scripts/fetch_data.py` to get the latest data, then commit it.
-3. Run `az account show` to make sure that you are signed in to Azure.
-4. Make sure that the WorkIQ MCP server is connected (**Customize** > **MCP**).
-5. Copy each prompt below into a text file so you can paste it quickly.
-6. Keep the backup branches from the proof run. If a live session is slow, switch to the backup output and continue the story.
+1. Send the talk deck (`talk/copilot-app-put-ai-agents-to-work.pptx`) to the organizers. They asked for materials before the event.
+2. In the Copilot app, open the **housing-market-demo** project.
+3. Run `python3 scripts/fetch_data.py` to get the latest data, then commit it.
+4. Run `az account show` to make sure that you are signed in to Azure.
+5. Make sure that the WorkIQ MCP server is connected (**Customize** > **MCP**).
+6. **Important:** In the composer, open the mode menu, select **Tool permissions**, and then select **Approve all**. Do this before you send each prompt. If you do not, Autopilot sessions stop and wait for approval.
+7. Run the WorkIQ prompt once and read the result before you show it live.
+8. Copy each prompt below into a text file so you can paste it quickly.
 
 ## Prompts
 
@@ -111,12 +134,20 @@ Rules:
 Then compare the brief with talk/outline.md. Add a "Gaps" section that lists what the organizers asked for that the talk does not cover yet.
 ```
 
-### Optional: weekly automation
+### Weekly automation
 
-Leaders and IT managers. Create it in **Automations**, show it, and do not run it on stage.
+Leaders and IT managers. The abstract promises automation, so keep this segment. Create it in **Automations**, show it, and do not run it on stage.
 
 ```text
 Every Monday at 8:00 AM, run python3 scripts/fetch_data.py. If the FHFA or HMDA data changed, rebuild and redeploy the website, update the PowerPoint briefing and the Excel workbook, and write a five-line summary of what changed in the housing data since last week.
+```
+
+### Optional: fix bugs and open a pull request
+
+Developers. The abstract promises agents that fix bugs and open pull requests. To show this, first push this repo to a private GitHub repository. Then send this follow-up prompt to the website session after it deploys:
+
+```text
+Review site/ for accessibility and correctness problems. Fix the problems that you find, add a test for each fix, then commit and open a pull request.
 ```
 
 ## Other ideas

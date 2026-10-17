@@ -7,6 +7,11 @@ This repo is a live demo for a GitHub Copilot app talk. Several agent sessions r
 - Read `data/README.md` first. It describes every file and column.
 - Do not change files in `data/`. Read them only.
 - Use only the data in `data/`. Do not invent numbers. Show the latest period and the source (FHFA HPI, CFPB HMDA) next to every chart.
+- Use these standard metrics so that every output shows the same numbers:
+  - **Latest period:** the latest complete quarter in `hpi_state_quarterly.csv`.
+  - **U.S. year-over-year change:** average the three monthly U.S. `index_nsa` values for the latest complete quarter, then compare with the same quarter one year earlier.
+  - **Change since 2019 Q4:** the latest quarter compared with 2019 Q4 (the last quarter before the pandemic).
+  - **State and metro year-over-year change:** `index_nsa` for the latest quarter compared with the same quarter one year earlier.
 - Report facts from the data. Do not make forecasts, give investment advice, or say anything about Fannie Mae's views. Add this footer to each output: "Built from public FHFA and CFPB data. Not an official Fannie Mae, FHFA, or CFPB product."
 
 ## Output folders
