@@ -1,6 +1,6 @@
 # Data dictionary
 
-All files are public U.S. government data. To download them again, run `python3 scripts/fetch_data.py`.
+All files are public U.S. government data. To download them again, run `node scripts/fetch-data.mjs`.
 
 | File | Source | Grain | Columns |
 | --- | --- | --- | --- |

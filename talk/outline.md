@@ -45,7 +45,7 @@ The results are on these branches. If a live session is slow, show the result fr
 
 1. Send the talk deck (`talk/copilot-app-put-ai-agents-to-work.pptx`) to the organizers. They asked for materials before the event.
 2. In the Copilot app, open the **housing-market-demo** project.
-3. Run `python3 scripts/fetch_data.py` to get the latest data, then commit it.
+3. Run `node scripts/fetch-data.mjs` to get the latest data, then commit it.
 4. Run `az account show` to make sure that you are signed in to Azure.
 5. Make sure that the WorkIQ MCP server is connected (**Customize** > **MCP**).
 6. **Important:** In the composer, open the mode menu, select **Tool permissions**, and then select **Approve all**. Do this before you send each prompt. If you do not, Autopilot sessions stop and wait for approval.
@@ -139,7 +139,7 @@ Then compare the brief with talk/outline.md. Add a "Gaps" section that lists wha
 Leaders and IT managers. The abstract promises automation, so keep this segment. Create it in **Automations**, show it, and do not run it on stage.
 
 ```text
-Every Monday at 8:00 AM, run python3 scripts/fetch_data.py. If the FHFA or HMDA data changed, rebuild and redeploy the website, update the PowerPoint briefing and the Excel workbook, and write a five-line summary of what changed in the housing data since last week.
+Every Monday at 8:00 AM, run node scripts/fetch-data.mjs. If the FHFA or HMDA data changed, rebuild and redeploy the website, update the PowerPoint briefing and the Excel workbook, and write a five-line summary of what changed in the housing data since last week.
 ```
 
 ### Optional: fix bugs and open a pull request
