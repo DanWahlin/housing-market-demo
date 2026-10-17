@@ -2,7 +2,7 @@ import * as d3 from 'd3';
 import { feature } from 'topojson-client';
 import type { Topology, GeometryCollection } from 'topojson-specification';
 import { pct } from './math.ts';
-import { yoyColor, trendChart, hmdaChart, metroChart, legend, PURPOSES, reducedMotion } from './charts.ts';
+import { yoyColor, trendChart, hmdaChart, metroChart, legend, PURPOSES, reducedMotion, refreshPalette, naColor } from './charts.ts';
 
 type State = { code: string; name: string; fips: string; yoy: (number | null)[]; sa: (number | null)[] };
 type Summary = { period: string; usPeriod: string; usYoy: number; usSince2019Q4: number; fastest: { name: string; value: number }; slowest: { name: string; value: number } };
@@ -16,6 +16,7 @@ const [summary, { quarters, states }, metros, hmda, topo] = await Promise.all([
   get<Summary>('summary.json'), get<{ quarters: string[]; states: State[] }>('states.json'),
   get<Metros>('metros.json'), get<Hmda>('hmda.json'), get<Topology>('us-states.json'),
 ]);
+refreshPalette();
 const SRC_HPI = `Source: FHFA House Price Index, purchase-only. Latest period: ${summary.period}.`;
 
 // ---------- Hero ----------
@@ -76,7 +77,7 @@ function paint(animate: boolean) {
     this.setAttribute('aria-label', `${s.name}: ${pct(v)} year over year, ${quarters[qi]}`);
   });
   (animate && !reducedMotion() ? statePaths.transition().duration(220) : statePaths)
-    .attr('fill', (f) => { const v = byFips.get(String(f.id))!.yoy[qi]; return v == null ? '#444c56' : yoyColor(v); });
+    .attr('fill', (f) => { const v = byFips.get(String(f.id))!.yoy[qi]; return v == null ? naColor() : yoyColor(v); });
   $('map-quarter').textContent = quarters[qi];
   slider.value = String(qi);
   slider.setAttribute('aria-valuetext', quarters[qi]);
@@ -121,14 +122,17 @@ function openPanel(s: State, el: SVGPathElement) {
   $('panel-title').textContent = s.name;
   $('panel-stats').innerHTML = statsLine(s);
   $('trend-source').textContent = `Source: FHFA House Price Index, purchase-only, seasonally adjusted, ${quarters[0]} to ${summary.period}.`;
-  $('hmda-legend').innerHTML = PURPOSES.map((p) => `<span style="--c:${p.color}">${p.key}</span>`).join('');
   panel.hidden = false;
   requestAnimationFrame(() => {
     panel.classList.add('open');
-    trendChart($('trend'), quarters, s.sa, s.name);
-    hmdaChart($('hmda'), hmda.years, hmda.byState[s.code], s.name);
+    drawPanelCharts(s);
     $('panel-close').focus();
   });
+}
+function drawPanelCharts(s: State) {
+  $('hmda-legend').innerHTML = PURPOSES.map((p) => `<span style="--c:${p.color}">${p.key}</span>`).join('');
+  trendChart($('trend'), quarters, s.sa, s.name);
+  hmdaChart($('hmda'), hmda.years, hmda.byState[s.code], s.name);
 }
 function closePanel() {
   if (panel.hidden) return;
@@ -163,5 +167,26 @@ window.addEventListener('resize', () => {
   if (window.innerWidth === lastW) return;
   lastW = window.innerWidth;
   if (metrosDrawn) drawMetros();
-  if (selected) { trendChart($('trend'), quarters, selected.sa, selected.name); hmdaChart($('hmda'), hmda.years, hmda.byState[selected.code], selected.name); }
+  if (selected) drawPanelCharts(selected);
 });
+
+// ---------- Theme toggle ----------
+const themeBtn = $<HTMLButtonElement>('theme-toggle');
+const themeMeta = document.querySelector('meta[name="theme-color"]')!;
+function applyTheme(theme: string) {
+  document.documentElement.dataset.theme = theme;
+  const next = theme === 'light' ? 'dark' : 'light';
+  themeBtn.setAttribute('aria-label', `Switch to ${next} theme`);
+  themeMeta.setAttribute('content', getComputedStyle(document.documentElement).getPropertyValue('--bg').trim());
+  refreshPalette();
+  legend($('legend'));
+  paint(false);
+  if (metrosDrawn) drawMetros();
+  if (selected) drawPanelCharts(selected);
+}
+themeBtn.addEventListener('click', () => {
+  const theme = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+  localStorage.setItem('theme', theme);
+  applyTheme(theme);
+});
+applyTheme(document.documentElement.dataset.theme ?? 'dark');

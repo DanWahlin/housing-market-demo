@@ -4,18 +4,28 @@ import { pct } from './math.ts';
 export const reducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const dur = (ms: number) => (reducedMotion() ? 0 : ms);
 
-/** Color-blind-safe diverging scale for dark backgrounds: orange (falling) to blue (rising). */
-export const yoyColor = (() => {
-  const neg = d3.interpolateLab('#ffb86b', '#343b48');
-  const pos = d3.interpolateLab('#343b48', '#8fd0ff');
-  return d3.scaleDivergingSqrt<string>((t) => (t < 0.5 ? neg(t * 2) : pos((t - 0.5) * 2))).domain([-0.1, 0, 0.1]).clamp(true);
-})();
+const css = (name: string) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
 
-export const PURPOSES = [
-  { key: 'Home purchase', color: '#6cb6ff' },
-  { key: 'Refinance', color: '#ff9b3d' },
-  { key: 'Cash-out refinance', color: '#c79bff' },
+/** Color-blind-safe diverging scale: orange (falling) to blue (rising). Colors come from the active theme. */
+function makeScale() {
+  const neg = d3.interpolateLab(css('--map-neg'), css('--map-mid'));
+  const pos = d3.interpolateLab(css('--map-mid'), css('--map-pos'));
+  return d3.scaleDivergingSqrt<string>((t) => (t < 0.5 ? neg(t * 2) : pos((t - 0.5) * 2))).domain([-0.1, 0, 0.1]).clamp(true);
+}
+const makePurposes = () => [
+  { key: 'Home purchase', color: css('--c1') },
+  { key: 'Refinance', color: css('--c2') },
+  { key: 'Cash-out refinance', color: css('--c3') },
 ];
+export let yoyColor = makeScale();
+export let PURPOSES = makePurposes();
+export const naColor = () => css('--map-na');
+
+/** Rebuild theme-based colors after the theme changes. */
+export function refreshPalette() {
+  yoyColor = makeScale();
+  PURPOSES = makePurposes();
+}
 
 function svgFor(el: HTMLElement, height: number, label: string) {
   const width = Math.max(280, el.clientWidth);
@@ -37,11 +47,11 @@ export function trendChart(el: HTMLElement, quarters: string[], values: (number 
   svg.append('g').attr('class', 'axis').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(5));
   svg.append('text').attr('class', 'axis-label').attr('x', (m.l + width - m.r) / 2).attr('y', h - 6).attr('text-anchor', 'middle').text('Year');
   svg.append('text').attr('class', 'axis-label').attr('transform', `translate(14,${(h - m.b + m.t) / 2}) rotate(-90)`).attr('text-anchor', 'middle').text('Index (1991 Q1 = 100)');
-  const path = svg.append('path').datum(pts).attr('fill', 'none').attr('stroke', '#6cb6ff').attr('stroke-width', 2.5)
+  const path = svg.append('path').datum(pts).attr('fill', 'none').style('stroke', 'var(--accent)').attr('stroke-width', 2.5)
     .attr('d', d3.line<{ x: number; y: number }>().x((d) => x(d.x)).y((d) => y(d.y)));
   const len = (path.node() as SVGPathElement).getTotalLength();
   path.attr('stroke-dasharray', `${len} ${len}`).attr('stroke-dashoffset', len).transition().duration(dur(900)).ease(d3.easeCubicOut).attr('stroke-dashoffset', 0);
-  svg.append('circle').attr('cx', x(last.x)).attr('cy', y(last.y)).attr('r', 5).attr('fill', '#6cb6ff');
+  svg.append('circle').attr('cx', x(last.x)).attr('cy', y(last.y)).attr('r', 5).style('fill', 'var(--accent)');
 }
 
 type HmdaYear = Record<string, { loans: number; volume: number }>;
@@ -103,6 +113,6 @@ export function legend(el: HTMLElement) {
   d3.range(0, 1.001, 0.1).forEach((t) => grad.append('stop').attr('offset', `${t * 100}%`).attr('stop-color', yoyColor(-0.1 + t * 0.2)));
   svg.append('rect').attr('x', 24).attr('y', 4).attr('width', w - 48).attr('height', 12).attr('rx', 6).attr('fill', 'url(#lg)');
   const x = d3.scaleLinear().domain([-0.1, 0.1]).range([24, w - 24]);
-  svg.append('g').attr('transform', 'translate(0,18)').call(d3.axisBottom(x).ticks(5, '+.0%').tickSize(4)).call((g) => g.select('.domain').remove()).selectAll('line').attr('stroke', '#9da7b3');
+  svg.append('g').attr('transform', 'translate(0,18)').call(d3.axisBottom(x).ticks(5, '+.0%').tickSize(4)).call((g) => g.select('.domain').remove()).selectAll('line').style('stroke', 'var(--muted)');
   svg.append('text').attr('x', w / 2).attr('y', h - 1).attr('text-anchor', 'middle').text('Year-over-year change (±10% or more)');
 }
