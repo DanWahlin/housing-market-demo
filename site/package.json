@@ -1,24 +1,27 @@
 {
   "name": "housing-market-explorer",
   "private": true,
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "data": "node scripts/build-data.ts",
-    "dev": "npm run data && vite",
-    "build": "npm run data && tsc --noEmit && vite build",
+    "data": "node --experimental-strip-types scripts/build-data.ts",
+    "predev": "npm run data",
+    "dev": "vite",
+    "prebuild": "npm run data",
+    "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
     "test": "vitest run"
   },
   "dependencies": {
     "d3": "^7.9.0",
-    "d3-dsv": "^3.0.1",
     "topojson-client": "^3.1.0",
     "us-atlas": "^3.0.1"
   },
   "devDependencies": {
-    "@azure/static-web-apps-cli": "^2.0.10",
     "@types/d3": "^7.4.3",
+    "@types/geojson": "^7946.0.16",
     "@types/node": "^26.6.5",
+    "@types/qrcode": "^1.5.6",
     "@types/topojson-client": "^3.1.5",
     "qrcode": "^1.5.4",
     "typescript": "^7.0.2",

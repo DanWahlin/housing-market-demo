@@ -1,81 +1,113 @@
-// Converts ../data/*.csv into small JSON files in public/data. Run with Node 24.
-import { readFileSync, writeFileSync, mkdirSync, copyFileSync } from 'node:fs';
+// Reads ../data/*.csv (read only) and writes small JSON files to public/data/.
 import { csvParse } from 'd3-dsv';
-import { qKey, qLabel, yoy, change, monthlyToQuarterly, rank, type Series } from '../src/math.ts';
+import { copyFileSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import {
+  changeBetween,
+  latestQuarter,
+  monthlyToQuarterly,
+  qKey,
+  qLabel,
+  rankByYoy,
+  yoyChange,
+  type QuarterPoint,
+} from '../src/metrics.ts';
 
-const root = new URL('../../data/', import.meta.url);
-const out = new URL('../public/data/', import.meta.url);
-mkdirSync(out, { recursive: true });
+const root = dirname(dirname(fileURLToPath(import.meta.url)));
+const dataDir = join(root, '..', 'data');
+const outDir = join(root, 'public', 'data');
+mkdirSync(outDir, { recursive: true });
 
-const read = (f: string) => csvParse(readFileSync(new URL(f, root), 'utf8'));
-const write = (f: string, data: unknown) => writeFileSync(new URL(f, out), JSON.stringify(data));
-const r3 = (v: number | null) => (v == null ? null : Math.round(v * 10000) / 10000);
-const START = qKey(2000, 1);
-const BASE_2019Q4 = qKey(2019, 4);
+const read = (f: string) => csvParse(readFileSync(join(dataDir, f), 'utf8'));
+const r1 = (n: number) => (Number.isFinite(n) ? Math.round(n * 100) / 100 : null);
+const write = (f: string, d: unknown) => writeFileSync(join(outDir, f), JSON.stringify(d));
 
-// States HPI
+const START_YEAR = 2000;
+const BASE = { year: 2019, quarter: 4 };
+
+// States
 const states = read('states.csv');
-const stateNsa = new Map<string, Series>();
-const stateSa = new Map<string, Series>();
-for (const r of read('hpi_state_quarterly.csv')) {
-  const k = qKey(+r.year!, +r.quarter!);
-  if (!stateNsa.has(r.state_code!)) { stateNsa.set(r.state_code!, new Map()); stateSa.set(r.state_code!, new Map()); }
-  stateNsa.get(r.state_code!)!.set(k, +r.index_nsa!);
-  stateSa.get(r.state_code!)!.set(k, +r.index_sa!);
-}
-const latest = Math.max(...[...stateNsa.values()].map((s) => Math.max(...s.keys())));
-const quarters: number[] = [];
-for (let k = START; k <= latest; k++) quarters.push(k);
+const stateRows = read('hpi_state_quarterly.csv');
+const latest = latestQuarter(stateRows.map((r) => ({ year: +r.year!, quarter: +r.quarter! })));
+const seriesBy = (rows: typeof stateRows, key: string) => {
+  const m = new Map<string, QuarterPoint[]>();
+  for (const r of rows) {
+    const id = r[key]!;
+    if (!m.has(id)) m.set(id, []);
+    m.get(id)!.push({ year: +r.year!, quarter: +r.quarter!, value: +r.index_nsa! });
+  }
+  return m;
+};
+const stateSeries = seriesBy(stateRows, 'state_code');
 
-write('states.json', {
-  quarters: quarters.map(qLabel),
-  states: states.map((s) => ({
-    code: s.state_code,
-    name: s.state_name,
-    fips: s.fips,
-    yoy: quarters.map((k) => r3(yoy(stateNsa.get(s.state_code!)!, k))),
-    sa: quarters.map((k) => stateSa.get(s.state_code!)!.get(k) ?? null),
-  })),
+const quarters: { year: number; quarter: number }[] = [];
+for (let k = qKey(START_YEAR, 1); k <= qKey(latest.year, latest.quarter); k++) {
+  quarters.push({ year: Math.floor(k / 4), quarter: (k % 4) + 1 });
+}
+
+const stateOut = states.map((s) => {
+  const series = stateSeries.get(s.state_code!) ?? [];
+  return {
+    code: s.state_code!,
+    name: s.state_name!,
+    fips: s.fips!,
+    region: s.region!,
+    division: s.division!,
+    index: quarters.map((q) => r1(series.find((p) => p.year === q.year && p.quarter === q.quarter)?.value ?? NaN)),
+    yoy: quarters.map((q) => r1(yoyChange(series, q.year, q.quarter))),
+    since2019: r1(changeBetween(series, BASE, latest)),
+  };
 });
 
-// U.S. national series (monthly -> quarterly mean of index_nsa)
+// U.S. from monthly data: average three months per quarter
 const usMonthly = read('hpi_us_division_monthly.csv')
   .filter((r) => r.place_id === 'USA')
   .map((r) => ({ year: +r.year!, month: +r.month!, value: +r.index_nsa! }));
-const us = monthlyToQuarterly(usMonthly);
-const usLatest = Math.min(latest, Math.max(...us.keys()));
+const usQ = monthlyToQuarterly(usMonthly);
+const usYoy = yoyChange(usQ, latest.year, latest.quarter);
+const usSince = changeBetween(usQ, BASE, latest);
 
-const stateYoy = states.map((s) => ({ code: s.state_code!, name: s.state_name! }));
-const ranked = rank(stateYoy, (s) => yoy(stateNsa.get(s.code)!, latest));
+const ranked = rankByYoy(
+  stateOut.map((s) => ({ id: s.code, name: s.name, yoy: s.yoy[s.yoy.length - 1] ?? NaN })),
+);
+const fastest = ranked[0];
+const slowest = ranked[ranked.length - 1];
 
-// Metros: top 15 by latest YoY
-const metroNsa = new Map<string, { name: string; s: Series }>();
-for (const r of read('hpi_metro_quarterly.csv')) {
-  if (!metroNsa.has(r.cbsa_code!)) metroNsa.set(r.cbsa_code!, { name: r.metro_name!, s: new Map() });
-  metroNsa.get(r.cbsa_code!)!.s.set(qKey(+r.year!, +r.quarter!), +r.index_nsa!);
+// Metros
+const metroRows = read('hpi_metro_quarterly.csv');
+const metroSeries = seriesBy(metroRows, 'cbsa_code');
+const metroNames = new Map(metroRows.map((r) => [r.cbsa_code!, r.metro_name!]));
+const metroRanked = rankByYoy(
+  [...metroSeries.entries()].map(([id, s]) => ({ id, name: metroNames.get(id)!, yoy: yoyChange(s, latest.year, latest.quarter) })),
+);
+
+// HMDA
+const hmdaRows = read('hmda_state_originations.csv');
+const purposes = ['Home purchase', 'Refinance', 'Cash-out refinance'];
+const years = [...new Set(hmdaRows.map((r) => +r.year!))].sort((a, b) => a - b);
+const hmda: Record<string, { year: number; loans: number[]; volume: number[] }[]> = {};
+for (const r of hmdaRows) {
+  const list = (hmda[r.state_code!] ??= years.map((year) => ({ year, loans: [0, 0, 0], volume: [0, 0, 0] })));
+  const row = list.find((d) => d.year === +r.year!)!;
+  const i = purposes.indexOf(r.loan_purpose!);
+  row.loans[i] = +r.loans!;
+  row.volume[i] = +r.dollar_volume!;
 }
-const metroLatest = Math.max(...[...metroNsa.values()].map((m) => Math.max(...m.s.keys())));
-const topMetros = rank([...metroNsa.entries()].map(([code, m]) => ({ code, name: m.name, s: m.s })), (m) => yoy(m.s, metroLatest), 15)
-  .map((m) => ({ code: m.code, name: m.name, yoy: r3(m.value) }));
-write('metros.json', { period: qLabel(metroLatest), count: metroNsa.size, top: topMetros });
 
 write('summary.json', {
-  period: qLabel(latest),
-  usPeriod: qLabel(usLatest),
-  usYoy: r3(yoy(us, usLatest)),
-  usSince2019Q4: r3(change(us, usLatest, BASE_2019Q4)),
-  fastest: { ...ranked[0], value: r3(ranked[0].value) },
-  slowest: { ...ranked.at(-1)!, value: r3(ranked.at(-1)!.value) },
+  latest: { ...latest, label: qLabel(latest.year, latest.quarter) },
+  us: { yoy: r1(usYoy), since2019: r1(usSince) },
+  fastest: { code: fastest.id, name: fastest.name, yoy: r1(fastest.yoy) },
+  slowest: { code: slowest.id, name: slowest.name, yoy: r1(slowest.yoy) },
+  metroCount: metroRanked.length,
 });
+write('states.json', { quarters: quarters.map((q) => qLabel(q.year, q.quarter)), states: stateOut });
+write('metros.json', metroRanked.slice(0, 15).map((m, i) => ({ rank: i + 1, cbsa: m.id, name: m.name, yoy: r1(m.yoy) })));
+write('hmda.json', { years, purposes, states: hmda });
+copyFileSync(join(root, 'node_modules', 'us-atlas', 'states-albers-10m.json'), join(outDir, 'us-states.json'));
 
-// HMDA: { state: { years: [...], purposes: { purpose: loans[] } } }
-const hmda: Record<string, Record<string, Record<string, { loans: number; volume: number }>>> = {};
-const years = new Set<number>();
-for (const r of read('hmda_state_originations.csv')) {
-  years.add(+r.year!);
-  ((hmda[r.state_code!] ??= {})[r.year!] ??= {})[r.loan_purpose!] = { loans: +r.loans!, volume: +r.dollar_volume! };
-}
-write('hmda.json', { years: [...years].sort(), byState: hmda });
-
-copyFileSync(new URL('../node_modules/us-atlas/states-albers-10m.json', import.meta.url), new URL('us-states.json', out));
-console.log(`Data built: latest state quarter ${qLabel(latest)}, U.S. ${qLabel(usLatest)}, metros ${qLabel(metroLatest)}`);
+console.log(
+  `Data: latest ${qLabel(latest.year, latest.quarter)} | U.S. YoY ${usYoy.toFixed(2)}% | since 2019 Q4 ${usSince.toFixed(2)}% | ` +
+    `fastest ${fastest.id} ${fastest.yoy.toFixed(2)}% | slowest ${slowest.id} ${slowest.yoy.toFixed(2)}%`,
+);

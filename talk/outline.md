@@ -39,12 +39,7 @@ Lunch follows the session, so the plan ends at 32:00 and keeps 3 minutes for que
 
 **Run 1** started from data that was already in the repo. The sessions lost about 16 minutes while they waited for tool approval. Without that wait, the WorkIQ brief took about 5 minutes, the Excel workbook about 8, the PowerPoint briefing about 10, and the website about 9.
 
-The results are in `main` (`site/`, `analysis/`, and `briefings/`) and on these branches. If a live session is slow, show the finished result:
-
-- `danwahlin-housing-market-explorer-site`
-- `danwahlin-excel-analysis`
-- `danwahlin-powerpoint-briefing`
-- `danwahlin-workiq-session-brief` (local only, not on GitHub, because it has private event details)
+The finished results from the latest runs are in `main`: `data/` and `scripts/` (run 2), `site/` and `briefings/` (run 2), and `analysis/` (run 3). If a live session is slow, show the finished result from `main`. The WorkIQ brief is not in the repo because it has private event details.
 
 ## Before the talk
 

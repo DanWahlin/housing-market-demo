@@ -1,5 +1,5 @@
 place_id,place_name,year,month,index_nsa,index_sa
-DV_ENC,East North Central Division,1991,1,100.0,100.0
+DV_ENC,East North Central Division,1991,1,100,100
 DV_ENC,East North Central Division,1991,2,100.87,100.86
 DV_ENC,East North Central Division,1991,3,101.32,100.89
 DV_ENC,East North Central Division,1991,4,101.73,100.96
@@ -49,7 +49,7 @@ DV_ENC,East North Central Division,1994,11,119.05,118.35
 DV_ENC,East North Central Division,1994,12,118.82,118.44
 DV_ENC,East North Central Division,1995,1,119.01,119.21
 DV_ENC,East North Central Division,1995,2,119.83,119.76
-DV_ENC,East North Central Division,1995,3,120.36,120.0
+DV_ENC,East North Central Division,1995,3,120.36,120
 DV_ENC,East North Central Division,1995,4,121.67,120.71
 DV_ENC,East North Central Division,1995,5,121.97,120.69
 DV_ENC,East North Central Division,1995,6,123.18,121.51
@@ -92,7 +92,7 @@ DV_ENC,East North Central Division,1998,6,139.28,137.4
 DV_ENC,East North Central Division,1998,7,139.59,137.68
 DV_ENC,East North Central Division,1998,8,139.92,138.23
 DV_ENC,East North Central Division,1998,9,140.46,139.03
-DV_ENC,East North Central Division,1998,10,141.0,139.82
+DV_ENC,East North Central Division,1998,10,141,139.82
 DV_ENC,East North Central Division,1998,11,141.38,140.7
 DV_ENC,East North Central Division,1998,12,141.25,141.05
 DV_ENC,East North Central Division,1999,1,141.17,141.49
@@ -222,7 +222,7 @@ DV_ENC,East North Central Division,2009,4,168.33,167.56
 DV_ENC,East North Central Division,2009,5,172.2,168.84
 DV_ENC,East North Central Division,2009,6,171.4,167.43
 DV_ENC,East North Central Division,2009,7,170.17,166.36
-DV_ENC,East North Central Division,2009,8,169.64,166.0
+DV_ENC,East North Central Division,2009,8,169.64,166
 DV_ENC,East North Central Division,2009,9,168.86,166.4
 DV_ENC,East North Central Division,2009,10,167.19,165.7
 DV_ENC,East North Central Division,2009,11,168.13,166.74
@@ -251,7 +251,7 @@ DV_ENC,East North Central Division,2011,9,158.97,156.22
 DV_ENC,East North Central Division,2011,10,156.72,155.24
 DV_ENC,East North Central Division,2011,11,158.42,156.94
 DV_ENC,East North Central Division,2011,12,155.33,156.46
-DV_ENC,East North Central Division,2012,1,153.0,155.69
+DV_ENC,East North Central Division,2012,1,153,155.69
 DV_ENC,East North Central Division,2012,2,153.29,155.64
 DV_ENC,East North Central Division,2012,3,155.2,156.52
 DV_ENC,East North Central Division,2012,4,158.43,157.58
@@ -274,7 +274,7 @@ DV_ENC,East North Central Division,2013,8,172.16,167.85
 DV_ENC,East North Central Division,2013,9,171.38,168.31
 DV_ENC,East North Central Division,2013,10,169.95,168.54
 DV_ENC,East North Central Division,2013,11,169.35,168.34
-DV_ENC,East North Central Division,2013,12,168.58,170.0
+DV_ENC,East North Central Division,2013,12,168.58,170
 DV_ENC,East North Central Division,2014,1,167.29,170.49
 DV_ENC,East North Central Division,2014,2,167.75,170.49
 DV_ENC,East North Central Division,2014,3,170.22,171.07
@@ -314,7 +314,7 @@ DV_ENC,East North Central Division,2016,12,192.28,193.84
 DV_ENC,East North Central Division,2017,1,190.78,194.04
 DV_ENC,East North Central Division,2017,2,193.06,195.26
 DV_ENC,East North Central Division,2017,3,197.02,196.83
-DV_ENC,East North Central Division,2017,4,199.26,197.0
+DV_ENC,East North Central Division,2017,4,199.26,197
 DV_ENC,East North Central Division,2017,5,202.29,198.16
 DV_ENC,East North Central Division,2017,6,203.76,197.99
 DV_ENC,East North Central Division,2017,7,204.85,199.57
@@ -377,7 +377,7 @@ DV_ENC,East North Central Division,2022,3,301.56,300.25
 DV_ENC,East North Central Division,2022,4,307.9,303.38
 DV_ENC,East North Central Division,2022,5,314.02,306.19
 DV_ENC,East North Central Division,2022,6,314.93,306.46
-DV_ENC,East North Central Division,2022,7,313.43,306.0
+DV_ENC,East North Central Division,2022,7,313.43,306
 DV_ENC,East North Central Division,2022,8,310.53,305.29
 DV_ENC,East North Central Division,2022,9,311.37,306.88
 DV_ENC,East North Central Division,2022,10,309.32,307.41
@@ -399,10 +399,10 @@ DV_ENC,East North Central Division,2024,1,331.58,336.87
 DV_ENC,East North Central Division,2024,2,337.66,339.7
 DV_ENC,East North Central Division,2024,3,344.3,342.35
 DV_ENC,East North Central Division,2024,4,349.21,343.9
-DV_ENC,East North Central Division,2024,5,355.0,345.5
+DV_ENC,East North Central Division,2024,5,355,345.5
 DV_ENC,East North Central Division,2024,6,356.92,347.45
 DV_ENC,East North Central Division,2024,7,358.53,350.41
-DV_ENC,East North Central Division,2024,8,357.1,351.0
+DV_ENC,East North Central Division,2024,8,357.1,351
 DV_ENC,East North Central Division,2024,9,357.66,352.52
 DV_ENC,East North Central Division,2024,10,357.88,355.61
 DV_ENC,East North Central Division,2024,11,355.55,356.17
@@ -423,10 +423,10 @@ DV_ENC,East North Central Division,2026,1,372.29,378.21
 DV_ENC,East North Central Division,2026,2,376.41,378.46
 DV_ENC,East North Central Division,2026,3,384.46,381.9
 DV_ENC,East North Central Division,2026,4,386.68,380.82
-DV_ENC,East North Central Division,2026,5,390.34,380.0
+DV_ENC,East North Central Division,2026,5,390.34,380
 DV_ENC,East North Central Division,2026,6,393.26,383.05
 DV_ENC,East North Central Division,2026,7,392.02,383.39
-DV_ESC,East South Central Division,1991,1,100.0,100.0
+DV_ESC,East South Central Division,1991,1,100,100
 DV_ESC,East South Central Division,1991,2,100.92,100.51
 DV_ESC,East South Central Division,1991,3,100.84,100.41
 DV_ESC,East South Central Division,1991,4,100.76,100.45
@@ -476,7 +476,7 @@ DV_ESC,East South Central Division,1994,11,118.16,117.6
 DV_ESC,East South Central Division,1994,12,117.67,117.46
 DV_ESC,East South Central Division,1995,1,117.5,117.54
 DV_ESC,East South Central Division,1995,2,119.15,118.86
-DV_ESC,East South Central Division,1995,3,119.43,119.0
+DV_ESC,East South Central Division,1995,3,119.43,119
 DV_ESC,East South Central Division,1995,4,119.37,118.81
 DV_ESC,East South Central Division,1995,5,119.69,119.1
 DV_ESC,East South Central Division,1995,6,121.51,120.5
@@ -509,14 +509,14 @@ DV_ESC,East South Central Division,1997,8,131.76,130.89
 DV_ESC,East South Central Division,1997,9,131.21,130.45
 DV_ESC,East South Central Division,1997,10,131.07,130.68
 DV_ESC,East South Central Division,1997,11,131.75,131.2
-DV_ESC,East South Central Division,1997,12,132.0,131.76
+DV_ESC,East South Central Division,1997,12,132,131.76
 DV_ESC,East South Central Division,1998,1,132.61,132.45
 DV_ESC,East South Central Division,1998,2,132.6,132.36
 DV_ESC,East South Central Division,1998,3,133.74,133.34
 DV_ESC,East South Central Division,1998,4,134.43,133.71
 DV_ESC,East South Central Division,1998,5,135.25,134.43
 DV_ESC,East South Central Division,1998,6,136.26,134.94
-DV_ESC,East South Central Division,1998,7,135.99,135.0
+DV_ESC,East South Central Division,1998,7,135.99,135
 DV_ESC,East South Central Division,1998,8,136.14,135.31
 DV_ESC,East South Central Division,1998,9,137.31,136.47
 DV_ESC,East South Central Division,1998,10,137.15,136.72
@@ -575,7 +575,7 @@ DV_ESC,East South Central Division,2003,2,158.51,158.62
 DV_ESC,East South Central Division,2003,3,158.74,158.6
 DV_ESC,East South Central Division,2003,4,159.71,159.11
 DV_ESC,East South Central Division,2003,5,160.3,159.37
-DV_ESC,East South Central Division,2003,6,161.77,160.0
+DV_ESC,East South Central Division,2003,6,161.77,160
 DV_ESC,East South Central Division,2003,7,162.11,160.6
 DV_ESC,East South Central Division,2003,8,162.85,161.29
 DV_ESC,East South Central Division,2003,9,163.31,162.18
@@ -624,7 +624,7 @@ DV_ESC,East South Central Division,2007,3,198.07,198.29
 DV_ESC,East South Central Division,2007,4,200.31,199.23
 DV_ESC,East South Central Division,2007,5,200.82,198.69
 DV_ESC,East South Central Division,2007,6,201.77,198.91
-DV_ESC,East South Central Division,2007,7,201.0,198.54
+DV_ESC,East South Central Division,2007,7,201,198.54
 DV_ESC,East South Central Division,2007,8,199.96,197.92
 DV_ESC,East South Central Division,2007,9,200.69,198.92
 DV_ESC,East South Central Division,2007,10,199.09,198.15
@@ -698,7 +698,7 @@ DV_ESC,East South Central Division,2013,5,190.32,186.86
 DV_ESC,East South Central Division,2013,6,192.76,188.67
 DV_ESC,East South Central Division,2013,7,190.6,186.89
 DV_ESC,East South Central Division,2013,8,189.95,186.95
-DV_ESC,East South Central Division,2013,9,193.41,191.0
+DV_ESC,East South Central Division,2013,9,193.41,191
 DV_ESC,East South Central Division,2013,10,190.57,189.3
 DV_ESC,East South Central Division,2013,11,188.42,187.9
 DV_ESC,East South Central Division,2013,12,188.8,189.31
@@ -712,7 +712,7 @@ DV_ESC,East South Central Division,2014,7,196.64,192.95
 DV_ESC,East South Central Division,2014,8,196.29,193.38
 DV_ESC,East South Central Division,2014,9,195.45,193.15
 DV_ESC,East South Central Division,2014,10,195.13,194.04
-DV_ESC,East South Central Division,2014,11,196.0,195.6
+DV_ESC,East South Central Division,2014,11,196,195.6
 DV_ESC,East South Central Division,2014,12,194.23,194.61
 DV_ESC,East South Central Division,2015,1,196.29,197.81
 DV_ESC,East South Central Division,2015,2,195.17,196.56
@@ -780,7 +780,7 @@ DV_ESC,East South Central Division,2020,3,260.13,258.76
 DV_ESC,East South Central Division,2020,4,263.5,261.2
 DV_ESC,East South Central Division,2020,5,264.04,260.34
 DV_ESC,East South Central Division,2020,6,266.42,261.57
-DV_ESC,East South Central Division,2020,7,271.0,265.72
+DV_ESC,East South Central Division,2020,7,271,265.72
 DV_ESC,East South Central Division,2020,8,273.3,269.57
 DV_ESC,East South Central Division,2020,9,276.37,273.8
 DV_ESC,East South Central Division,2020,10,279.57,277.57
@@ -824,7 +824,7 @@ DV_ESC,East South Central Division,2023,11,386.55,385.38
 DV_ESC,East South Central Division,2023,12,387.79,388.51
 DV_ESC,East South Central Division,2024,1,383.31,386.55
 DV_ESC,East South Central Division,2024,2,388.84,388.67
-DV_ESC,East South Central Division,2024,3,389.0,387.62
+DV_ESC,East South Central Division,2024,3,389,387.62
 DV_ESC,East South Central Division,2024,4,397.83,393.65
 DV_ESC,East South Central Division,2024,5,398.94,391.9
 DV_ESC,East South Central Division,2024,6,403.32,394.44
@@ -853,7 +853,7 @@ DV_ESC,East South Central Division,2026,4,420.88,415.58
 DV_ESC,East South Central Division,2026,5,429.53,420.55
 DV_ESC,East South Central Division,2026,6,429.61,419.12
 DV_ESC,East South Central Division,2026,7,423.6,416.89
-DV_MA,Middle Atlantic Division,1991,1,100.0,100.0
+DV_MA,Middle Atlantic Division,1991,1,100,100
 DV_MA,Middle Atlantic Division,1991,2,100.04,100.11
 DV_MA,Middle Atlantic Division,1991,3,100.08,99.77
 DV_MA,Middle Atlantic Division,1991,4,99.66,99.28
@@ -903,7 +903,7 @@ DV_MA,Middle Atlantic Division,1994,11,101.6,100.92
 DV_MA,Middle Atlantic Division,1994,12,100.25,100.02
 DV_MA,Middle Atlantic Division,1995,1,100.21,100.4
 DV_MA,Middle Atlantic Division,1995,2,100.37,100.86
-DV_MA,Middle Atlantic Division,1995,3,101.0,100.88
+DV_MA,Middle Atlantic Division,1995,3,101,100.88
 DV_MA,Middle Atlantic Division,1995,4,101.54,101.14
 DV_MA,Middle Atlantic Division,1995,5,101.78,100.95
 DV_MA,Middle Atlantic Division,1995,6,102.49,101.14
@@ -937,7 +937,7 @@ DV_MA,Middle Atlantic Division,1997,9,104.06,103.04
 DV_MA,Middle Atlantic Division,1997,10,105.21,104.32
 DV_MA,Middle Atlantic Division,1997,11,103.87,103.38
 DV_MA,Middle Atlantic Division,1997,12,104.34,104.13
-DV_MA,Middle Atlantic Division,1998,1,104.0,104.14
+DV_MA,Middle Atlantic Division,1998,1,104,104.14
 DV_MA,Middle Atlantic Division,1998,2,104.18,104.91
 DV_MA,Middle Atlantic Division,1998,3,105.68,105.66
 DV_MA,Middle Atlantic Division,1998,4,106.24,105.97
@@ -1012,7 +1012,7 @@ DV_MA,Middle Atlantic Division,2003,12,173.1,172.8
 DV_MA,Middle Atlantic Division,2004,1,173.79,173.51
 DV_MA,Middle Atlantic Division,2004,2,175.83,176.43
 DV_MA,Middle Atlantic Division,2004,3,176.11,176.45
-DV_MA,Middle Atlantic Division,2004,4,179.0,179.03
+DV_MA,Middle Atlantic Division,2004,4,179,179.03
 DV_MA,Middle Atlantic Division,2004,5,182.21,180.91
 DV_MA,Middle Atlantic Division,2004,6,185.68,182.79
 DV_MA,Middle Atlantic Division,2004,7,187.14,184.3
@@ -1149,8 +1149,8 @@ DV_MA,Middle Atlantic Division,2015,5,204.31,201.37
 DV_MA,Middle Atlantic Division,2015,6,206.56,201.53
 DV_MA,Middle Atlantic Division,2015,7,207.82,202.89
 DV_MA,Middle Atlantic Division,2015,8,207.7,203.3
-DV_MA,Middle Atlantic Division,2015,9,206.0,203.29
-DV_MA,Middle Atlantic Division,2015,10,205.77,204.0
+DV_MA,Middle Atlantic Division,2015,9,206,203.29
+DV_MA,Middle Atlantic Division,2015,10,205.77,204
 DV_MA,Middle Atlantic Division,2015,11,204.38,203.44
 DV_MA,Middle Atlantic Division,2015,12,203.98,204.29
 DV_MA,Middle Atlantic Division,2016,1,202.67,203.68
@@ -1172,7 +1172,7 @@ DV_MA,Middle Atlantic Division,2017,4,216.44,215.75
 DV_MA,Middle Atlantic Division,2017,5,219.28,216.09
 DV_MA,Middle Atlantic Division,2017,6,222.26,217.35
 DV_MA,Middle Atlantic Division,2017,7,223.4,218.36
-DV_MA,Middle Atlantic Division,2017,8,224.34,220.0
+DV_MA,Middle Atlantic Division,2017,8,224.34,220
 DV_MA,Middle Atlantic Division,2017,9,224.02,221.14
 DV_MA,Middle Atlantic Division,2017,10,223.31,221.58
 DV_MA,Middle Atlantic Division,2017,11,222.35,221.33
@@ -1180,7 +1180,7 @@ DV_MA,Middle Atlantic Division,2017,12,222.23,222.64
 DV_MA,Middle Atlantic Division,2018,1,223.74,224.64
 DV_MA,Middle Atlantic Division,2018,2,222.97,224.81
 DV_MA,Middle Atlantic Division,2018,3,227.71,227.68
-DV_MA,Middle Atlantic Division,2018,4,228.0,226.88
+DV_MA,Middle Atlantic Division,2018,4,228,226.88
 DV_MA,Middle Atlantic Division,2018,5,230.83,227.39
 DV_MA,Middle Atlantic Division,2018,6,233.13,228.28
 DV_MA,Middle Atlantic Division,2018,7,234.45,229.33
@@ -1263,7 +1263,7 @@ DV_MA,Middle Atlantic Division,2024,11,387.1,386.7
 DV_MA,Middle Atlantic Division,2024,12,386.12,389.59
 DV_MA,Middle Atlantic Division,2025,1,389.02,392.23
 DV_MA,Middle Atlantic Division,2025,2,390.73,392.58
-DV_MA,Middle Atlantic Division,2025,3,397.48,395.0
+DV_MA,Middle Atlantic Division,2025,3,397.48,395
 DV_MA,Middle Atlantic Division,2025,4,404.58,398.63
 DV_MA,Middle Atlantic Division,2025,5,405.07,395.82
 DV_MA,Middle Atlantic Division,2025,6,409.54,400.64
@@ -1280,7 +1280,7 @@ DV_MA,Middle Atlantic Division,2026,4,419.03,412.78
 DV_MA,Middle Atlantic Division,2026,5,424.92,415.18
 DV_MA,Middle Atlantic Division,2026,6,423.92,414.74
 DV_MA,Middle Atlantic Division,2026,7,430.32,420.97
-DV_MT,Mountain Division,1991,1,100.0,100.0
+DV_MT,Mountain Division,1991,1,100,100
 DV_MT,Mountain Division,1991,2,98.36,98.8
 DV_MT,Mountain Division,1991,3,100.34,100.72
 DV_MT,Mountain Division,1991,4,100.24,100.32
@@ -1307,7 +1307,7 @@ DV_MT,Mountain Division,1992,12,111.16,111.03
 DV_MT,Mountain Division,1993,1,111.63,111.79
 DV_MT,Mountain Division,1993,2,111.79,112.34
 DV_MT,Mountain Division,1993,3,112.02,112.44
-DV_MT,Mountain Division,1993,4,114.04,114.0
+DV_MT,Mountain Division,1993,4,114.04,114
 DV_MT,Mountain Division,1993,5,114.92,114.62
 DV_MT,Mountain Division,1993,6,116.21,115.56
 DV_MT,Mountain Division,1993,7,116.98,116.63
@@ -1348,7 +1348,7 @@ DV_MT,Mountain Division,1996,5,141.28,140.67
 DV_MT,Mountain Division,1996,6,141.93,141.18
 DV_MT,Mountain Division,1996,7,142.78,141.9
 DV_MT,Mountain Division,1996,8,142.57,141.63
-DV_MT,Mountain Division,1996,9,143.0,142.27
+DV_MT,Mountain Division,1996,9,143,142.27
 DV_MT,Mountain Division,1996,10,143.03,142.54
 DV_MT,Mountain Division,1996,11,142.86,142.94
 DV_MT,Mountain Division,1996,12,142.57,142.85
@@ -1356,7 +1356,7 @@ DV_MT,Mountain Division,1997,1,143.03,143.74
 DV_MT,Mountain Division,1997,2,143.34,144.11
 DV_MT,Mountain Division,1997,3,144.51,144.6
 DV_MT,Mountain Division,1997,4,145.56,144.97
-DV_MT,Mountain Division,1997,5,146.0,145.31
+DV_MT,Mountain Division,1997,5,146,145.31
 DV_MT,Mountain Division,1997,6,146.19,145.38
 DV_MT,Mountain Division,1997,7,146.69,145.74
 DV_MT,Mountain Division,1997,8,147.19,146.25
@@ -1414,7 +1414,7 @@ DV_MT,Mountain Division,2001,11,181.26,181.3
 DV_MT,Mountain Division,2001,12,181.11,181.62
 DV_MT,Mountain Division,2002,1,181.61,182.41
 DV_MT,Mountain Division,2002,2,182.69,183.64
-DV_MT,Mountain Division,2002,3,183.98,184.0
+DV_MT,Mountain Division,2002,3,183.98,184
 DV_MT,Mountain Division,2002,4,185.31,184.73
 DV_MT,Mountain Division,2002,5,186.12,185.2
 DV_MT,Mountain Division,2002,6,187.32,185.85
@@ -1489,7 +1489,7 @@ DV_MT,Mountain Division,2008,2,272.29,273.65
 DV_MT,Mountain Division,2008,3,269.69,271.06
 DV_MT,Mountain Division,2008,4,266.32,265.46
 DV_MT,Mountain Division,2008,5,265.18,262.5
-DV_MT,Mountain Division,2008,6,262.55,259.0
+DV_MT,Mountain Division,2008,6,262.55,259
 DV_MT,Mountain Division,2008,7,258.11,254.85
 DV_MT,Mountain Division,2008,8,254.83,251.94
 DV_MT,Mountain Division,2008,9,250.11,248.51
@@ -1624,7 +1624,7 @@ DV_MT,Mountain Division,2019,5,371.09,365.47
 DV_MT,Mountain Division,2019,6,372.96,367.33
 DV_MT,Mountain Division,2019,7,375.86,370.3
 DV_MT,Mountain Division,2019,8,374.74,371.25
-DV_MT,Mountain Division,2019,9,377.0,374.7
+DV_MT,Mountain Division,2019,9,377,374.7
 DV_MT,Mountain Division,2019,10,377.69,376.69
 DV_MT,Mountain Division,2019,11,378.59,379.29
 DV_MT,Mountain Division,2019,12,381.41,384.33
@@ -1707,7 +1707,7 @@ DV_MT,Mountain Division,2026,4,611.32,601.39
 DV_MT,Mountain Division,2026,5,619.51,606.72
 DV_MT,Mountain Division,2026,6,618.97,608.42
 DV_MT,Mountain Division,2026,7,613.32,603.46
-DV_NE,New England Division,1991,1,100.0,100.0
+DV_NE,New England Division,1991,1,100,100
 DV_NE,New England Division,1991,2,101.75,102.32
 DV_NE,New England Division,1991,3,101.48,101.22
 DV_NE,New England Division,1991,4,101.07,100.99
@@ -1791,7 +1791,7 @@ DV_NE,New England Division,1997,9,103.98,102.83
 DV_NE,New England Division,1997,10,105.11,104.24
 DV_NE,New England Division,1997,11,104.93,104.41
 DV_NE,New England Division,1997,12,105.23,105.22
-DV_NE,New England Division,1998,1,103.87,104.0
+DV_NE,New England Division,1998,1,103.87,104
 DV_NE,New England Division,1998,2,106.17,107.17
 DV_NE,New England Division,1998,3,106.39,106.88
 DV_NE,New England Division,1998,4,107.92,107.77
@@ -1823,7 +1823,7 @@ DV_NE,New England Division,2000,5,132.71,131.83
 DV_NE,New England Division,2000,6,136.05,133.75
 DV_NE,New England Division,2000,7,136.85,134.44
 DV_NE,New England Division,2000,8,137.42,135.4
-DV_NE,New England Division,2000,9,138.85,137.0
+DV_NE,New England Division,2000,9,138.85,137
 DV_NE,New England Division,2000,10,140.26,138.82
 DV_NE,New England Division,2000,11,140.06,139.34
 DV_NE,New England Division,2000,12,141.25,141.28
@@ -1870,7 +1870,7 @@ DV_NE,New England Division,2004,4,206.13,205.03
 DV_NE,New England Division,2004,5,208.66,206.41
 DV_NE,New England Division,2004,6,212.98,209.58
 DV_NE,New England Division,2004,7,215.33,211.5
-DV_NE,New England Division,2004,8,216.03,213.0
+DV_NE,New England Division,2004,8,216.03,213
 DV_NE,New England Division,2004,9,218.18,215.03
 DV_NE,New England Division,2004,10,218.58,216.47
 DV_NE,New England Division,2004,11,217.59,216.86
@@ -1882,7 +1882,7 @@ DV_NE,New England Division,2005,4,226.79,225.28
 DV_NE,New England Division,2005,5,230.58,227.83
 DV_NE,New England Division,2005,6,230.79,227.04
 DV_NE,New England Division,2005,7,233.02,229.13
-DV_NE,New England Division,2005,8,233.18,230.0
+DV_NE,New England Division,2005,8,233.18,230
 DV_NE,New England Division,2005,9,234.52,231.45
 DV_NE,New England Division,2005,10,233.5,231.45
 DV_NE,New England Division,2005,11,233.11,232.47
@@ -1970,12 +1970,12 @@ DV_NE,New England Division,2012,8,197.44,193.51
 DV_NE,New England Division,2012,9,195.98,193.67
 DV_NE,New England Division,2012,10,195.1,193.36
 DV_NE,New England Division,2012,11,196.59,195.11
-DV_NE,New England Division,2012,12,196.0,195.98
+DV_NE,New England Division,2012,12,196,195.98
 DV_NE,New England Division,2013,1,194.34,195.81
 DV_NE,New England Division,2013,2,194.67,197.02
 DV_NE,New England Division,2013,3,198.23,198.53
 DV_NE,New England Division,2013,4,197.94,197.81
-DV_NE,New England Division,2013,5,203.0,198.9
+DV_NE,New England Division,2013,5,203,198.9
 DV_NE,New England Division,2013,6,204.73,199.33
 DV_NE,New England Division,2013,7,205.96,200.67
 DV_NE,New England Division,2013,8,205.49,201.13
@@ -1997,7 +1997,7 @@ DV_NE,New England Division,2014,11,206.67,205.65
 DV_NE,New England Division,2014,12,205.07,205.65
 DV_NE,New England Division,2015,1,203.88,205.62
 DV_NE,New England Division,2015,2,206.87,208.99
-DV_NE,New England Division,2015,3,208.97,209.0
+DV_NE,New England Division,2015,3,208.97,209
 DV_NE,New England Division,2015,4,209.92,209.24
 DV_NE,New England Division,2015,5,214.44,209.91
 DV_NE,New England Division,2015,6,218.23,212.12
@@ -2030,7 +2030,7 @@ DV_NE,New England Division,2017,8,236.89,231.9
 DV_NE,New England Division,2017,9,235.88,232.84
 DV_NE,New England Division,2017,10,235.16,233.42
 DV_NE,New England Division,2017,11,235.78,234.67
-DV_NE,New England Division,2017,12,235.0,235.68
+DV_NE,New England Division,2017,12,235,235.68
 DV_NE,New England Division,2018,1,235.09,236.7
 DV_NE,New England Division,2018,2,236.85,238.42
 DV_NE,New England Division,2018,3,238.32,237.75
@@ -2109,7 +2109,7 @@ DV_NE,New England Division,2024,3,413.81,409.47
 DV_NE,New England Division,2024,4,420.14,410.68
 DV_NE,New England Division,2024,5,423.71,413.29
 DV_NE,New England Division,2024,6,426.65,414.51
-DV_NE,New England Division,2024,7,428.0,418.43
+DV_NE,New England Division,2024,7,428,418.43
 DV_NE,New England Division,2024,8,426.21,418.04
 DV_NE,New England Division,2024,9,429.97,424.49
 DV_NE,New England Division,2024,10,428.49,424.91
@@ -2123,7 +2123,7 @@ DV_NE,New England Division,2025,5,449.23,438.07
 DV_NE,New England Division,2025,6,449.35,436.83
 DV_NE,New England Division,2025,7,446.02,436.21
 DV_NE,New England Division,2025,8,447.83,439.1
-DV_NE,New England Division,2025,9,444.0,438.19
+DV_NE,New England Division,2025,9,444,438.19
 DV_NE,New England Division,2025,10,445.62,441.78
 DV_NE,New England Division,2025,11,444.3,445.13
 DV_NE,New England Division,2025,12,440.87,446.83
@@ -2134,7 +2134,7 @@ DV_NE,New England Division,2026,4,464.19,453.73
 DV_NE,New England Division,2026,5,467.22,455.69
 DV_NE,New England Division,2026,6,465.04,452.36
 DV_NE,New England Division,2026,7,464.03,453.94
-DV_PAC,Pacific Division,1991,1,100.0,100.0
+DV_PAC,Pacific Division,1991,1,100,100
 DV_PAC,Pacific Division,1991,2,100.17,100.64
 DV_PAC,Pacific Division,1991,3,99.95,100.13
 DV_PAC,Pacific Division,1991,4,100.13,100.04
@@ -2145,7 +2145,7 @@ DV_PAC,Pacific Division,1991,8,100.79,100.03
 DV_PAC,Pacific Division,1991,9,100.3,99.57
 DV_PAC,Pacific Division,1991,10,100.84,100.32
 DV_PAC,Pacific Division,1991,11,100.82,100.6
-DV_PAC,Pacific Division,1991,12,101.0,100.78
+DV_PAC,Pacific Division,1991,12,101,100.78
 DV_PAC,Pacific Division,1992,1,100.99,100.99
 DV_PAC,Pacific Division,1992,2,101.03,101.52
 DV_PAC,Pacific Division,1992,3,100.66,100.84
@@ -2165,7 +2165,7 @@ DV_PAC,Pacific Division,1993,4,98.4,98.3
 DV_PAC,Pacific Division,1993,5,98.22,97.93
 DV_PAC,Pacific Division,1993,6,98.46,97.85
 DV_PAC,Pacific Division,1993,7,97.58,96.88
-DV_PAC,Pacific Division,1993,8,98.0,97.23
+DV_PAC,Pacific Division,1993,8,98,97.23
 DV_PAC,Pacific Division,1993,9,97.68,96.99
 DV_PAC,Pacific Division,1993,10,97.76,97.3
 DV_PAC,Pacific Division,1993,11,97.06,96.9
@@ -2215,7 +2215,7 @@ DV_PAC,Pacific Division,1997,6,98.81,97.9
 DV_PAC,Pacific Division,1997,7,99.55,98.58
 DV_PAC,Pacific Division,1997,8,99.97,99.13
 DV_PAC,Pacific Division,1997,9,99.96,99.49
-DV_PAC,Pacific Division,1997,10,100.0,99.8
+DV_PAC,Pacific Division,1997,10,100,99.8
 DV_PAC,Pacific Division,1997,11,100.81,100.77
 DV_PAC,Pacific Division,1997,12,100.73,101.02
 DV_PAC,Pacific Division,1998,1,101.32,101.7
@@ -2259,7 +2259,7 @@ DV_PAC,Pacific Division,2001,2,135.74,136.33
 DV_PAC,Pacific Division,2001,3,137.63,137.5
 DV_PAC,Pacific Division,2001,4,138.86,138.47
 DV_PAC,Pacific Division,2001,5,140.42,139.27
-DV_PAC,Pacific Division,2001,6,141.39,140.0
+DV_PAC,Pacific Division,2001,6,141.39,140
 DV_PAC,Pacific Division,2001,7,142.07,140.79
 DV_PAC,Pacific Division,2001,8,143.02,141.85
 DV_PAC,Pacific Division,2001,9,144.09,143.23
@@ -2267,7 +2267,7 @@ DV_PAC,Pacific Division,2001,10,144.34,143.92
 DV_PAC,Pacific Division,2001,11,144.65,144.68
 DV_PAC,Pacific Division,2001,12,146.05,146.34
 DV_PAC,Pacific Division,2002,1,146.97,147.8
-DV_PAC,Pacific Division,2002,2,148.35,149.0
+DV_PAC,Pacific Division,2002,2,148.35,149
 DV_PAC,Pacific Division,2002,3,150.73,150.73
 DV_PAC,Pacific Division,2002,4,152.51,152.18
 DV_PAC,Pacific Division,2002,5,155.69,154.47
@@ -2303,7 +2303,7 @@ DV_PAC,Pacific Division,2004,10,228.97,228.28
 DV_PAC,Pacific Division,2004,11,232.74,232.65
 DV_PAC,Pacific Division,2004,12,236.16,237.02
 DV_PAC,Pacific Division,2005,1,236.59,238.95
-DV_PAC,Pacific Division,2005,2,242.0,242.77
+DV_PAC,Pacific Division,2005,2,242,242.77
 DV_PAC,Pacific Division,2005,3,246.91,247.62
 DV_PAC,Pacific Division,2005,4,251.85,251.39
 DV_PAC,Pacific Division,2005,5,257.9,255.89
@@ -2322,7 +2322,7 @@ DV_PAC,Pacific Division,2006,5,282.9,280.84
 DV_PAC,Pacific Division,2006,6,283.35,280.17
 DV_PAC,Pacific Division,2006,7,282.23,278.36
 DV_PAC,Pacific Division,2006,8,281.04,278.35
-DV_PAC,Pacific Division,2006,9,280.0,277.26
+DV_PAC,Pacific Division,2006,9,280,277.26
 DV_PAC,Pacific Division,2006,10,276.09,275.12
 DV_PAC,Pacific Division,2006,11,275.96,275.96
 DV_PAC,Pacific Division,2006,12,273.71,275.24
@@ -2375,7 +2375,7 @@ DV_PAC,Pacific Division,2010,10,179.45,178.22
 DV_PAC,Pacific Division,2010,11,178.25,178.05
 DV_PAC,Pacific Division,2010,12,175.88,177.12
 DV_PAC,Pacific Division,2011,1,171.93,174.41
-DV_PAC,Pacific Division,2011,2,172.0,173.42
+DV_PAC,Pacific Division,2011,2,172,173.42
 DV_PAC,Pacific Division,2011,3,171.13,171.89
 DV_PAC,Pacific Division,2011,4,171.19,170.93
 DV_PAC,Pacific Division,2011,5,171.16,169.48
@@ -2387,7 +2387,7 @@ DV_PAC,Pacific Division,2011,10,169.86,168.76
 DV_PAC,Pacific Division,2011,11,169.4,169.26
 DV_PAC,Pacific Division,2011,12,167.74,168.93
 DV_PAC,Pacific Division,2012,1,167.04,169.49
-DV_PAC,Pacific Division,2012,2,168.0,169.65
+DV_PAC,Pacific Division,2012,2,168,169.65
 DV_PAC,Pacific Division,2012,3,171.09,171.65
 DV_PAC,Pacific Division,2012,4,173.43,172.88
 DV_PAC,Pacific Division,2012,5,176.85,174.81
@@ -2399,7 +2399,7 @@ DV_PAC,Pacific Division,2012,10,184.9,183.93
 DV_PAC,Pacific Division,2012,11,186.03,186.03
 DV_PAC,Pacific Division,2012,12,186.94,188.37
 DV_PAC,Pacific Division,2013,1,188.82,191.61
-DV_PAC,Pacific Division,2013,2,190.98,193.0
+DV_PAC,Pacific Division,2013,2,190.98,193
 DV_PAC,Pacific Division,2013,3,196.21,196.65
 DV_PAC,Pacific Division,2013,4,200.62,199.68
 DV_PAC,Pacific Division,2013,5,205.36,202.79
@@ -2421,7 +2421,7 @@ DV_PAC,Pacific Division,2014,8,228.72,225.98
 DV_PAC,Pacific Division,2014,9,227.4,225.76
 DV_PAC,Pacific Division,2014,10,228.04,227.41
 DV_PAC,Pacific Division,2014,11,228.53,228.91
-DV_PAC,Pacific Division,2014,12,229.0,230.8
+DV_PAC,Pacific Division,2014,12,229,230.8
 DV_PAC,Pacific Division,2015,1,229.61,232.65
 DV_PAC,Pacific Division,2015,2,231.51,233.4
 DV_PAC,Pacific Division,2015,3,235.13,234.89
@@ -2473,7 +2473,7 @@ DV_PAC,Pacific Division,2018,12,302.28,304.87
 DV_PAC,Pacific Division,2019,1,302.98,305.92
 DV_PAC,Pacific Division,2019,2,305.45,305.92
 DV_PAC,Pacific Division,2019,3,309.69,307.88
-DV_PAC,Pacific Division,2019,4,313.0,309.19
+DV_PAC,Pacific Division,2019,4,313,309.19
 DV_PAC,Pacific Division,2019,5,315.34,310.46
 DV_PAC,Pacific Division,2019,6,315.94,311.72
 DV_PAC,Pacific Division,2019,7,317.3,313.89
@@ -2561,13 +2561,13 @@ DV_PAC,Pacific Division,2026,4,474.07,466.23
 DV_PAC,Pacific Division,2026,5,472.55,464.97
 DV_PAC,Pacific Division,2026,6,474.36,465.86
 DV_PAC,Pacific Division,2026,7,474.34,468.62
-DV_SA,South Atlantic Division,1991,1,100.0,100.0
+DV_SA,South Atlantic Division,1991,1,100,100
 DV_SA,South Atlantic Division,1991,2,100.58,100.36
 DV_SA,South Atlantic Division,1991,3,100.95,100.56
 DV_SA,South Atlantic Division,1991,4,100.82,100.29
 DV_SA,South Atlantic Division,1991,5,100.71,100.39
 DV_SA,South Atlantic Division,1991,6,101.29,100.49
-DV_SA,South Atlantic Division,1991,7,101.0,100.38
+DV_SA,South Atlantic Division,1991,7,101,100.38
 DV_SA,South Atlantic Division,1991,8,100.78,99.9
 DV_SA,South Atlantic Division,1991,9,100.63,99.96
 DV_SA,South Atlantic Division,1991,10,101.59,100.86
@@ -2581,7 +2581,7 @@ DV_SA,South Atlantic Division,1992,5,102.2,101.89
 DV_SA,South Atlantic Division,1992,6,102.44,101.63
 DV_SA,South Atlantic Division,1992,7,102.72,102.06
 DV_SA,South Atlantic Division,1992,8,103.77,102.87
-DV_SA,South Atlantic Division,1992,9,104.0,103.29
+DV_SA,South Atlantic Division,1992,9,104,103.29
 DV_SA,South Atlantic Division,1992,10,104.19,103.46
 DV_SA,South Atlantic Division,1992,11,104.15,103.31
 DV_SA,South Atlantic Division,1992,12,103.44,103.07
@@ -2667,11 +2667,11 @@ DV_SA,South Atlantic Division,1999,7,130.44,129.28
 DV_SA,South Atlantic Division,1999,8,131.06,129.96
 DV_SA,South Atlantic Division,1999,9,131.07,130.07
 DV_SA,South Atlantic Division,1999,10,132.03,131.24
-DV_SA,South Atlantic Division,1999,11,132.0,131.55
+DV_SA,South Atlantic Division,1999,11,132,131.55
 DV_SA,South Atlantic Division,1999,12,132.3,132.02
 DV_SA,South Atlantic Division,2000,1,133.34,133.05
 DV_SA,South Atlantic Division,2000,2,133.84,133.48
-DV_SA,South Atlantic Division,2000,3,134.54,134.0
+DV_SA,South Atlantic Division,2000,3,134.54,134
 DV_SA,South Atlantic Division,2000,4,135.99,135.18
 DV_SA,South Atlantic Division,2000,5,136.86,135.8
 DV_SA,South Atlantic Division,2000,6,138.07,136.66
@@ -2988,7 +2988,7 @@ DV_SA,South Atlantic Division,2026,4,474.16,466.86
 DV_SA,South Atlantic Division,2026,5,479.54,469.29
 DV_SA,South Atlantic Division,2026,6,475.7,466.7
 DV_SA,South Atlantic Division,2026,7,474.6,467.34
-DV_WNC,West North Central Division,1991,1,100.0,100.0
+DV_WNC,West North Central Division,1991,1,100,100
 DV_WNC,West North Central Division,1991,2,100.45,100.42
 DV_WNC,West North Central Division,1991,3,100.44,100.1
 DV_WNC,West North Central Division,1991,4,100.86,100.31
@@ -3089,7 +3089,7 @@ DV_WNC,West North Central Division,1999,2,142.85,143.18
 DV_WNC,West North Central Division,1999,3,144.15,143.67
 DV_WNC,West North Central Division,1999,4,145.42,144.59
 DV_WNC,West North Central Division,1999,5,146.81,145.23
-DV_WNC,West North Central Division,1999,6,147.97,146.0
+DV_WNC,West North Central Division,1999,6,147.97,146
 DV_WNC,West North Central Division,1999,7,148.43,146.41
 DV_WNC,West North Central Division,1999,8,149.84,147.97
 DV_WNC,West North Central Division,1999,9,149.17,147.69
@@ -3100,7 +3100,7 @@ DV_WNC,West North Central Division,2000,1,150.22,150.74
 DV_WNC,West North Central Division,2000,2,151.34,151.77
 DV_WNC,West North Central Division,2000,3,152.91,152.43
 DV_WNC,West North Central Division,2000,4,154.42,153.54
-DV_WNC,West North Central Division,2000,5,155.71,154.0
+DV_WNC,West North Central Division,2000,5,155.71,154
 DV_WNC,West North Central Division,2000,6,156.89,154.73
 DV_WNC,West North Central Division,2000,7,157.71,155.48
 DV_WNC,West North Central Division,2000,8,158.21,156.16
@@ -3148,7 +3148,7 @@ DV_WNC,West North Central Division,2004,1,188.57,189.41
 DV_WNC,West North Central Division,2004,2,189.47,190.17
 DV_WNC,West North Central Division,2004,3,191.22,190.78
 DV_WNC,West North Central Division,2004,4,191.98,191.05
-DV_WNC,West North Central Division,2004,5,195.0,192.68
+DV_WNC,West North Central Division,2004,5,195,192.68
 DV_WNC,West North Central Division,2004,6,196.12,193.29
 DV_WNC,West North Central Division,2004,7,197.3,194.01
 DV_WNC,West North Central Division,2004,8,197.77,195.05
@@ -3160,7 +3160,7 @@ DV_WNC,West North Central Division,2005,1,197.41,198.5
 DV_WNC,West North Central Division,2005,2,199.03,199.72
 DV_WNC,West North Central Division,2005,3,200.91,200.5
 DV_WNC,West North Central Division,2005,4,203.18,202.11
-DV_WNC,West North Central Division,2005,5,205.0,202.52
+DV_WNC,West North Central Division,2005,5,205,202.52
 DV_WNC,West North Central Division,2005,6,206.37,203.24
 DV_WNC,West North Central Division,2005,7,207.43,203.86
 DV_WNC,West North Central Division,2005,8,207.56,204.59
@@ -3172,7 +3172,7 @@ DV_WNC,West North Central Division,2006,1,207.63,209.11
 DV_WNC,West North Central Division,2006,2,208.47,209.19
 DV_WNC,West North Central Division,2006,3,209.8,209.51
 DV_WNC,West North Central Division,2006,4,210.89,209.59
-DV_WNC,West North Central Division,2006,5,212.66,210.0
+DV_WNC,West North Central Division,2006,5,212.66,210
 DV_WNC,West North Central Division,2006,6,213.63,210.1
 DV_WNC,West North Central Division,2006,7,214.63,210.81
 DV_WNC,West North Central Division,2006,8,214.38,211.17
@@ -3255,7 +3255,7 @@ DV_WNC,West North Central Division,2012,12,197.42,197.82
 DV_WNC,West North Central Division,2013,1,196.09,199.02
 DV_WNC,West North Central Division,2013,2,196.88,199.22
 DV_WNC,West North Central Division,2013,3,199.96,200.73
-DV_WNC,West North Central Division,2013,4,201.22,200.0
+DV_WNC,West North Central Division,2013,4,201.22,200
 DV_WNC,West North Central Division,2013,5,204.54,201.16
 DV_WNC,West North Central Division,2013,6,209.08,203.58
 DV_WNC,West North Central Division,2013,7,209.28,203.43
@@ -3270,7 +3270,7 @@ DV_WNC,West North Central Division,2014,3,207.77,208.12
 DV_WNC,West North Central Division,2014,4,211.13,209.62
 DV_WNC,West North Central Division,2014,5,212.57,208.91
 DV_WNC,West North Central Division,2014,6,215.58,209.9
-DV_WNC,West North Central Division,2014,7,216.03,210.0
+DV_WNC,West North Central Division,2014,7,216.03,210
 DV_WNC,West North Central Division,2014,8,215.28,210.91
 DV_WNC,West North Central Division,2014,9,214.07,211.26
 DV_WNC,West North Central Division,2014,10,214.02,212.23
@@ -3295,7 +3295,7 @@ DV_WNC,West North Central Division,2016,4,229.21,226.92
 DV_WNC,West North Central Division,2016,5,231.65,227.31
 DV_WNC,West North Central Division,2016,6,234.06,228.2
 DV_WNC,West North Central Division,2016,7,236.26,230.05
-DV_WNC,West North Central Division,2016,8,235.0,230.47
+DV_WNC,West North Central Division,2016,8,235,230.47
 DV_WNC,West North Central Division,2016,9,234.89,232.22
 DV_WNC,West North Central Division,2016,10,234.22,232.42
 DV_WNC,West North Central Division,2016,11,235.02,234.4
@@ -3397,7 +3397,7 @@ DV_WNC,West North Central Division,2024,10,407.52,405.32
 DV_WNC,West North Central Division,2024,11,407.48,407.77
 DV_WNC,West North Central Division,2024,12,404.45,408.53
 DV_WNC,West North Central Division,2025,1,407.58,411.49
-DV_WNC,West North Central Division,2025,2,409.69,410.0
+DV_WNC,West North Central Division,2025,2,409.69,410
 DV_WNC,West North Central Division,2025,3,413.42,410.91
 DV_WNC,West North Central Division,2025,4,419.47,412.12
 DV_WNC,West North Central Division,2025,5,423.48,412.8
@@ -3415,7 +3415,7 @@ DV_WNC,West North Central Division,2026,4,433.8,426.27
 DV_WNC,West North Central Division,2026,5,438.12,427.23
 DV_WNC,West North Central Division,2026,6,436.27,426.14
 DV_WNC,West North Central Division,2026,7,437.16,427.86
-DV_WSC,West South Central Division,1991,1,100.0,100.0
+DV_WSC,West South Central Division,1991,1,100,100
 DV_WSC,West South Central Division,1991,2,99.82,99.68
 DV_WSC,West South Central Division,1991,3,100.58,100.51
 DV_WSC,West South Central Division,1991,4,100.39,100.17
@@ -3486,8 +3486,8 @@ DV_WSC,West South Central Division,1996,8,120.07,118.91
 DV_WSC,West South Central Division,1996,9,119.98,119.27
 DV_WSC,West South Central Division,1996,10,119.72,119.16
 DV_WSC,West South Central Division,1996,11,120.08,119.4
-DV_WSC,West South Central Division,1996,12,120.1,120.0
-DV_WSC,West South Central Division,1997,1,119.87,120.0
+DV_WSC,West South Central Division,1996,12,120.1,120
+DV_WSC,West South Central Division,1997,1,119.87,120
 DV_WSC,West South Central Division,1997,2,120.49,120.44
 DV_WSC,West South Central Division,1997,3,121.05,120.84
 DV_WSC,West South Central Division,1997,4,121.32,120.85
@@ -3543,7 +3543,7 @@ DV_WSC,West South Central Division,2001,5,148.89,147.67
 DV_WSC,West South Central Division,2001,6,149.85,148.42
 DV_WSC,West South Central Division,2001,7,150.56,149.01
 DV_WSC,West South Central Division,2001,8,150.21,148.68
-DV_WSC,West South Central Division,2001,9,150.96,150.0
+DV_WSC,West South Central Division,2001,9,150.96,150
 DV_WSC,West South Central Division,2001,10,151.03,150.22
 DV_WSC,West South Central Division,2001,11,150.61,150.17
 DV_WSC,West South Central Division,2001,12,151.04,150.89
@@ -3620,12 +3620,12 @@ DV_WSC,West South Central Division,2007,10,197.47,196.1
 DV_WSC,West South Central Division,2007,11,196.17,195.71
 DV_WSC,West South Central Division,2007,12,195.99,196.53
 DV_WSC,West South Central Division,2008,1,194.68,195.72
-DV_WSC,West South Central Division,2008,2,195.01,196.0
+DV_WSC,West South Central Division,2008,2,195.01,196
 DV_WSC,West South Central Division,2008,3,195.11,194.94
 DV_WSC,West South Central Division,2008,4,196.11,194.83
 DV_WSC,West South Central Division,2008,5,196.68,194.61
 DV_WSC,West South Central Division,2008,6,198.28,195.24
-DV_WSC,West South Central Division,2008,7,198.0,195.11
+DV_WSC,West South Central Division,2008,7,198,195.11
 DV_WSC,West South Central Division,2008,8,196.18,193.6
 DV_WSC,West South Central Division,2008,9,196.78,195.42
 DV_WSC,West South Central Division,2008,10,194.71,193.43
@@ -3662,7 +3662,7 @@ DV_WSC,West South Central Division,2011,4,191.39,189.64
 DV_WSC,West South Central Division,2011,5,191.39,189.14
 DV_WSC,West South Central Division,2011,6,194.5,190.85
 DV_WSC,West South Central Division,2011,7,192.66,189.22
-DV_WSC,West South Central Division,2011,8,191.0,188.9
+DV_WSC,West South Central Division,2011,8,191,188.9
 DV_WSC,West South Central Division,2011,9,191.27,189.86
 DV_WSC,West South Central Division,2011,10,190.61,190.03
 DV_WSC,West South Central Division,2011,11,192.19,191.7
@@ -3706,7 +3706,7 @@ DV_WSC,West South Central Division,2014,12,223.67,224.45
 DV_WSC,West South Central Division,2015,1,223.75,225.33
 DV_WSC,West South Central Division,2015,2,225.36,226.63
 DV_WSC,West South Central Division,2015,3,227.88,226.42
-DV_WSC,West South Central Division,2015,4,229.72,228.0
+DV_WSC,West South Central Division,2015,4,229.72,228
 DV_WSC,West South Central Division,2015,5,233.4,229.94
 DV_WSC,West South Central Division,2015,6,234.84,230.63
 DV_WSC,West South Central Division,2015,7,235.59,231.71
@@ -3757,7 +3757,7 @@ DV_WSC,West South Central Division,2019,3,279.82,278.24
 DV_WSC,West South Central Division,2019,4,280.82,278.29
 DV_WSC,West South Central Division,2019,5,283.99,279.77
 DV_WSC,West South Central Division,2019,6,285.62,280.43
-DV_WSC,West South Central Division,2019,7,285.0,281.28
+DV_WSC,West South Central Division,2019,7,285,281.28
 DV_WSC,West South Central Division,2019,8,286.08,282.77
 DV_WSC,West South Central Division,2019,9,285.51,283.22
 DV_WSC,West South Central Division,2019,10,285.83,285.15
@@ -3842,7 +3842,7 @@ DV_WSC,West South Central Division,2026,4,428.82,423.42
 DV_WSC,West South Central Division,2026,5,432.52,424.51
 DV_WSC,West South Central Division,2026,6,433.4,425.57
 DV_WSC,West South Central Division,2026,7,432.76,427.27
-USA,United States,1991,1,100.0,100.0
+USA,United States,1991,1,100,100
 USA,United States,1991,2,100.37,100.4
 USA,United States,1991,3,100.67,100.46
 USA,United States,1991,4,100.68,100.3
@@ -3900,7 +3900,7 @@ USA,United States,1995,7,113.34,112.18
 USA,United States,1995,8,113.67,112.47
 USA,United States,1995,9,113.58,112.7
 USA,United States,1995,10,113.47,112.77
-USA,United States,1995,11,113.55,113.0
+USA,United States,1995,11,113.55,113
 USA,United States,1995,12,113.65,113.48
 USA,United States,1996,1,113.74,113.89
 USA,United States,1996,2,113.87,114.05
@@ -3915,7 +3915,7 @@ USA,United States,1996,10,116.57,115.88
 USA,United States,1996,11,116.68,116.18
 USA,United States,1996,12,116.71,116.59
 USA,United States,1997,1,116.56,116.72
-USA,United States,1997,2,116.8,117.0
+USA,United States,1997,2,116.8,117
 USA,United States,1997,3,117.71,117.44
 USA,United States,1997,4,118.22,117.66
 USA,United States,1997,5,119.09,118.13
@@ -3996,7 +3996,7 @@ USA,United States,2003,7,175.46,173.23
 USA,United States,2003,8,176.6,174.5
 USA,United States,2003,9,177.64,175.88
 USA,United States,2003,10,178.22,176.93
-USA,United States,2003,11,179.0,178.35
+USA,United States,2003,11,179,178.35
 USA,United States,2003,12,179.78,179.75
 USA,United States,2004,1,180.33,180.91
 USA,United States,2004,2,181.86,182.35
@@ -4039,7 +4039,7 @@ USA,United States,2007,2,222.83,223.59
 USA,United States,2007,3,224.54,224.41
 USA,United States,2007,4,225.76,224.47
 USA,United States,2007,5,225.98,223.33
-USA,United States,2007,6,226.0,222.48
+USA,United States,2007,6,226,222.48
 USA,United States,2007,7,224.69,221.34
 USA,United States,2007,8,223.46,220.35
 USA,United States,2007,9,221.68,219.43
@@ -4109,12 +4109,12 @@ USA,United States,2012,12,186.63,187.29
 USA,United States,2013,1,186.75,188.75
 USA,United States,2013,2,188.04,189.89
 USA,United States,2013,3,191.53,191.82
-USA,United States,2013,4,194.0,192.67
+USA,United States,2013,4,194,192.67
 USA,United States,2013,5,197.5,194.22
 USA,United States,2013,6,200.1,195.45
 USA,United States,2013,7,201.07,196.45
 USA,United States,2013,8,200.56,197.04
-USA,United States,2013,9,200.49,198.0
+USA,United States,2013,9,200.49,198
 USA,United States,2013,10,199.97,198.61
 USA,United States,2013,11,199.32,198.66
 USA,United States,2013,12,199.13,199.86
@@ -4169,13 +4169,13 @@ USA,United States,2017,12,247.21,248.09
 USA,United States,2018,1,248.07,249.96
 USA,United States,2018,2,250.75,251.63
 USA,United States,2018,3,253.78,252.43
-USA,United States,2018,4,256.0,253.16
+USA,United States,2018,4,256,253.16
 USA,United States,2018,5,258.93,254.33
 USA,United States,2018,6,260.69,255.39
 USA,United States,2018,7,261.46,256.41
 USA,United States,2018,8,261.75,257.68
 USA,United States,2018,9,260.96,258.16
-USA,United States,2018,10,260.57,259.0
+USA,United States,2018,10,260.57,259
 USA,United States,2018,11,261.01,260.49
 USA,United States,2018,12,260.28,261.32
 USA,United States,2019,1,260.9,262.81
@@ -4205,7 +4205,7 @@ USA,United States,2020,12,307.54,309.25
 USA,United States,2021,1,310.44,312.94
 USA,United States,2021,2,315.12,315.63
 USA,United States,2021,3,322.38,320.23
-USA,United States,2021,4,329.73,325.0
+USA,United States,2021,4,329.73,325
 USA,United States,2021,5,337.09,330.4
 USA,United States,2021,6,343.69,336.38
 USA,United States,2021,7,348.09,341.46

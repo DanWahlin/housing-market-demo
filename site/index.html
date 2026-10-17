@@ -1,95 +1,98 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Explore U.S. home price changes by state and metro, and mortgage originations by state, from public FHFA and CFPB data." />
-  <meta name="theme-color" content="#0d1117" />
-  <title>U.S. Housing Market Explorer</title>
-  <script>
-    document.documentElement.dataset.theme = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
-  </script>
-  <link rel="stylesheet" href="/src/style.css" />
-</head>
-<body>
-  <a class="skip" href="#main">Skip to content</a>
-  <header class="top">
-    <div class="wrap">
-      <span class="brand">U.S. Housing Market Explorer</span>
-      <div class="actions">
-        <nav aria-label="Sections">
-          <a href="#map-section">Map</a>
-          <a href="#metros-section">Metros</a>
-        </nav>
-        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to light theme">
-          <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0-5 1.5 3h-3L12 2zm0 20-1.5-3h3L12 22zM2 12l3-1.5v3L2 12zm20 0-3 1.5v-3L22 12zM4.9 4.9l3.2 1.1-2.1 2.1-1.1-3.2zm14.2 14.2-3.2-1.1 2.1-2.1 1.1 3.2zM4.9 19.1 6 15.9l2.1 2.1-3.2 1.1zM19.1 4.9 18 8.1 15.9 6l3.2-1.1z"/></svg>
-          <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 14.5A9 9 0 0 1 9.5 3a9 9 0 1 0 11.5 11.5z"/></svg>
-        </button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Interactive view of U.S. home price changes and mortgage originations from public FHFA and CFPB data." />
+    <meta name="theme-color" content="#0b0f17" />
+    <title>U.S. Housing Market Explorer</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏠</text></svg>" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <header class="site-header">
+      <div class="wrap">
+        <p class="eyebrow">Public data explorer</p>
+        <h1>U.S. Housing Market Explorer</h1>
+        <p class="lede">
+          How home prices and mortgage lending changed across the country.
+          <span class="meta">Latest period: <strong data-latest>…</strong> · Sources: FHFA House Price Index, CFPB HMDA</span>
+        </p>
       </div>
-    </div>
-  </header>
+    </header>
 
-  <main id="main">
-    <section class="hero wrap" aria-labelledby="hero-title">
-      <p class="eyebrow" id="hero-period">Latest quarter</p>
-      <h1 id="hero-title">How U.S. home prices are moving</h1>
-      <p class="lede">Home price change from the FHFA House Price Index, by state and metro, with mortgage originations from CFPB HMDA data.</p>
-      <ul class="stats" id="stats" aria-live="polite"></ul>
-      <p class="source" id="hero-source"></p>
-    </section>
+    <main id="main" class="wrap">
+      <section class="hero" aria-labelledby="hero-title">
+        <h2 id="hero-title" class="sr-only">Headline numbers</h2>
+        <div class="cards" id="hero-cards"></div>
+        <p class="source">
+          Latest period <strong data-latest>…</strong>. U.S. values average the three monthly FHFA HPI values in the quarter.
+          Source: FHFA HPI (purchase-only, not seasonally adjusted). HPI is an index (1991 Q1 = 100), not a price.
+        </p>
+      </section>
 
-    <section id="map-section" class="card wrap reveal" aria-labelledby="map-title">
-      <div class="section-head">
-        <div>
-          <h2 id="map-title">Year-over-year home price change by state</h2>
-          <p class="hint">Hover or focus a state to see its numbers. Click or press Enter to open state details.</p>
+      <section class="panel-section map-section" aria-labelledby="map-title">
+        <div class="section-head">
+          <div>
+            <h2 id="map-title">Home price change by state</h2>
+            <p class="sub">Year-over-year change in the FHFA HPI for <strong id="map-period">…</strong>. Select a state for details.</p>
+          </div>
+          <div class="timeline" role="group" aria-label="Quarter timeline">
+            <button id="play" class="play" type="button" aria-label="Play timeline">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path class="icon-play" d="M8 5v14l11-7z" /><path class="icon-pause" d="M6 5h4v14H6zM14 5h4v14h-4z" /></svg>
+            </button>
+            <label for="quarter-slider" class="sr-only">Quarter</label>
+            <input id="quarter-slider" type="range" min="0" max="0" step="1" value="0" />
+            <output id="quarter-label" for="quarter-slider" aria-live="polite">…</output>
+          </div>
         </div>
-        <div id="legend" class="legend" aria-hidden="true"></div>
-      </div>
-      <div class="map-wrap">
-        <svg id="map" viewBox="0 0 975 610" role="group" aria-labelledby="map-title map-quarter"></svg>
-        <div id="tooltip" class="tooltip" role="status" hidden></div>
-      </div>
-      <div class="player">
-        <button id="play" class="play" type="button" aria-label="Play animation through every quarter">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path id="play-icon" d="M8 5v14l11-7z" /></svg>
-        </button>
-        <label for="slider" class="visually-hidden">Quarter</label>
-        <input id="slider" type="range" min="0" step="1" />
-        <output id="map-quarter" for="slider" class="quarter" aria-live="polite"></output>
-      </div>
-      <p class="source" id="map-source"></p>
-    </section>
+        <div class="map-layout">
+          <div class="map-wrap">
+            <svg id="map" role="group" aria-label="U.S. map of year-over-year home price change by state"></svg>
+            <div id="tooltip" class="tooltip" role="status" aria-live="polite" hidden></div>
+            <div id="legend" class="legend"></div>
+          </div>
+          <aside id="state-panel" class="state-panel" aria-labelledby="state-title" hidden>
+            <div class="state-panel-head">
+              <div>
+                <p class="eyebrow" id="state-region"></p>
+                <h3 id="state-title"></h3>
+              </div>
+              <button id="close-panel" class="close" type="button" aria-label="Close state details">✕</button>
+            </div>
+            <div class="state-stats" id="state-stats"></div>
+            <h4>Price index trend</h4>
+            <div id="state-line" class="chart"></div>
+            <p class="source">Source: FHFA HPI, purchase-only, not seasonally adjusted. Latest period <span data-latest>…</span>.</p>
+            <h4>Mortgage originations by loan purpose</h4>
+            <div id="state-hmda" class="chart"></div>
+            <details class="data-table">
+              <summary>Show originations table</summary>
+              <div id="state-hmda-table"></div>
+            </details>
+            <p class="source">Source: CFPB HMDA, originated loans, 2018 to 2025.</p>
+          </aside>
+        </div>
+        <p class="source">Source: FHFA HPI (purchase-only, not seasonally adjusted). Latest period <span data-latest>…</span>.</p>
+      </section>
 
-    <section id="metros-section" class="card wrap reveal" aria-labelledby="metros-title">
-      <h2 id="metros-title">15 metros with the largest year-over-year change</h2>
-      <p class="hint" id="metros-hint"></p>
-      <div id="metros" class="chart"></div>
-      <p class="source" id="metros-source"></p>
-    </section>
-  </main>
+      <section class="panel-section" aria-labelledby="metro-title">
+        <div class="section-head">
+          <div>
+            <h2 id="metro-title">Metros with the largest year-over-year change</h2>
+            <p class="sub">Top 15 of the <span id="metro-count">100</span> largest metros, <span data-latest>…</span>.</p>
+          </div>
+        </div>
+        <div id="metro-chart" class="chart"></div>
+        <p class="source">Source: FHFA HPI (purchase-only, not seasonally adjusted). Latest period <span data-latest>…</span>.</p>
+      </section>
+    </main>
 
-  <aside id="panel" class="panel" role="dialog" aria-modal="false" aria-labelledby="panel-title" hidden>
-    <div class="panel-head">
-      <h2 id="panel-title">State</h2>
-      <button id="panel-close" class="close" type="button" aria-label="Close state details">&times;</button>
-    </div>
-    <p id="panel-stats" class="panel-stats"></p>
-    <h3>Home price index trend</h3>
-    <div id="trend" class="chart"></div>
-    <p class="source" id="trend-source"></p>
-    <h3>Mortgage originations by loan purpose</h3>
-    <div id="hmda-legend" class="key"></div>
-    <div id="hmda" class="chart"></div>
-    <p class="source">Source: CFPB HMDA Data Browser, originated loans, 2018 to 2025.</p>
-  </aside>
-
-  <footer class="foot">
-    <div class="wrap">
-      <p>Sources: <a href="https://www.fhfa.gov/data/hpi/datasets">FHFA House Price Index</a> (purchase-only) and <a href="https://ffiec.cfpb.gov/documentation/api/data-browser/">CFPB HMDA Data Browser</a>.</p>
-      <p>Built from public FHFA and CFPB data. Not an official Fannie Mae, FHFA, or CFPB product.</p>
-    </div>
-  </footer>
-  <script type="module" src="/src/main.ts"></script>
-</body>
+    <footer class="site-footer">
+      <div class="wrap">
+        <p>Built from public FHFA and CFPB data. Not an official Fannie Mae, FHFA, or CFPB product.</p>
+      </div>
+    </footer>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
 </html>
