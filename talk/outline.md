@@ -46,7 +46,7 @@ The finished results from the latest runs are in `main`: `data/` and `scripts/` 
 ### The day before
 
 1. Send the talk deck (`talk/copilot-app-put-ai-agents-to-work.pptx`) to the organizers. They asked for materials before the event.
-2. Run the private prep version of the WorkIQ prompt and read the brief. Do not show it on stage.
+2. Run the WorkIQ prompt and read the brief. Make sure that it has no names of people.
 3. Do one full rehearsal from `demo-start`. This also puts every prompt in your prompt history, so on stage you press **Cmd+R**, search, and select the prompt instead of pasting it.
 4. Record your screen during the rehearsal. If the venue network fails, you can play the recording.
 
@@ -143,29 +143,7 @@ When the deck is done, render each slide to PNG, check for text that overflows o
 
 ### Session 4: WorkIQ session brief (Autopilot, from `demo-start`)
 
-Knowledge workers and leaders. Run this prompt once before the talk and read the result before you show it live.
-
-```text
-Use WorkIQ to find the emails, Teams messages, and meetings about my upcoming GitHub Copilot app session for Fannie Mae.
-
-Write a short brief to talk/session-brief.md with:
-- The goals of the session
-- The audience roles
-- What the organizers asked the talk to cover
-
-Rules:
-- Use roles only. Never include names, email addresses, or phone numbers.
-- Do not include logistics, such as places, dates, times, travel, or building access.
-- Skip anything that looks internal or confidential, such as pricing, account plans, or contracts. Say that you skipped it, but do not describe it.
-- List your sources by type and date only.
-
-Then compare the brief with talk/outline.md. Add a "Gaps" section that lists what the organizers asked for that the talk does not cover yet.
-```
-
-This is the stage version. It leaves out logistics, so it is safe on a projector. For your own preparation the day before, use this private version, which adds logistics and open asks. Do not show its result on stage.
-
-<details>
-<summary>Private prep version</summary>
+Knowledge workers and leaders. The brief can show places, dates, and times, but never names of people. Run this prompt once before the talk and read the result before you show it live.
 
 ```text
 Use WorkIQ to find the emails, Teams messages, and meetings about my upcoming GitHub Copilot app session for Fannie Mae.
@@ -183,8 +161,6 @@ Rules:
 
 Then compare the brief with talk/outline.md. Add a "Gaps" section that lists what the organizers asked for that the talk does not cover yet.
 ```
-
-</details>
 
 ### Weekly automation
 

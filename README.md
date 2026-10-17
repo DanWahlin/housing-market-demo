@@ -134,14 +134,14 @@ Change `Fannie Mae` to the name of your event or customer.
 ```text
 Use WorkIQ to find the emails, Teams messages, and meetings about my upcoming GitHub Copilot app session for Fannie Mae.
 
-Write a short brief to talk/session-brief.md with:
+Write a one-page brief to talk/session-brief.md with:
 - The goals of the session
 - The audience roles
-- What the organizers asked the talk to cover
+- Logistics: date, time, length, and format
+- Open asks or questions from the organizers
 
 Rules:
 - Use roles only. Never include names, email addresses, or phone numbers.
-- Do not include logistics, such as places, dates, times, travel, or building access.
 - Skip anything that looks internal or confidential, such as pricing, account plans, or contracts. Say that you skipped it, but do not describe it.
 - List your sources by type and date only.
 
@@ -172,7 +172,7 @@ Review site/ for accessibility and correctness problems. Fix the problems that y
 
 The timeline, a presenter checklist, and the backup plan are in [`talk/outline.md`](talk/outline.md). Some tips from the test runs:
 
-- The WorkIQ prompt above leaves out logistics, so it is safe on a projector. It still reads your real email, so run it the day before and read the result. In our runs it found 8 to 9 gaps in the talk plan, which is worth mentioning on stage.
+- The WorkIQ prompt reads your real email. Run it the day before and read the result to make sure it has no names of people. In our runs it found 8 to 9 gaps in the talk plan, which is worth mentioning on stage.
 - Start the data and WorkIQ sessions first, and talk about where the data comes from while the agent downloads it. Then start the other three. Show the results in the order they finish: brief, briefing, website, workbook.
 - Keep the finished results in `main` as a backup. If a session is slow on stage, open the result from `main` and keep going.
 - Slide 12 has a QR code for the live site. Ask people to open it on their phones. It gets the non-developers in the room involved.
