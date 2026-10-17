@@ -171,6 +171,6 @@ The timeline, the speaker notes, and the backup plan are in [`talk/outline.md`](
 
 ## Data and disclaimer
 
-Data comes from the [FHFA House Price Index](https://www.fhfa.gov/data/hpi/datasets) and the [CFPB HMDA Data Browser](https://ffiec.cfpb.gov/documentation/api/data-browser/). Both are public U.S. government data and need no API key.
+Data comes from the [FHFA House Price Index](https://www.fhfa.gov/data/hpi/datasets) and the [CFPB HMDA Data Browser](https://ffiec.cfpb.gov/documentation/api/data-browser/). Both are public U.S. government data and need no API key. The FHFA data is public domain (CC0), and "FHFA HPI®" is a registered trademark of FHFA. The HMDA data in this repo is state-level totals only, with no loan-level records.
 
 Built from public FHFA and CFPB data. Not an official Fannie Mae, FHFA, or CFPB product.
