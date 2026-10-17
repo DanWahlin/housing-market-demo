@@ -50,7 +50,7 @@ For a live run, start from the `demo-start` branch. It has the instructions and 
 4. When the data session pushes its branch, start the website, Excel, and PowerPoint sessions (prompts 2 to 4). Set **Base branch** to the data session's branch. Start the website in **Plan** mode and the other two in **Autopilot**.
 5. When the website plan appears, approve it and pick **Autopilot**.
 
-In our test run, the data was ready in about 2 minutes. The WorkIQ, PowerPoint, and website sessions finished 2 to 9 minutes after they started. The Excel session took 20 minutes because it had to find the cause of a repair message. We added tips to `AGENTS.md` to prevent that.
+In our test run, the data was ready in about 2 minutes. The WorkIQ, PowerPoint, and website sessions finished 2 to 9 minutes after they started. Excel is the slowest. It took 20 minutes in one run because it had to find the cause of a repair message. With the Excel tips in `AGENTS.md`, it took 11 minutes.
 
 ## Prompts
 
@@ -173,7 +173,7 @@ Review site/ for accessibility and correctness problems. Fix the problems that y
 The timeline, the speaker notes, and the backup plan are in [`talk/outline.md`](talk/outline.md). Some tips from the test run:
 
 - Run the WorkIQ prompt the day before and read the brief. It reads your real email, so check it before it goes on a projector. In our run it also found eight gaps in the talk plan, which is worth mentioning on stage.
-- Start the data and WorkIQ sessions first, and talk about where the data comes from while the agent downloads it. Then start the other three. Show the results in the order they finish: brief, briefing, workbook, website.
+- Start the data and WorkIQ sessions first, and talk about where the data comes from while the agent downloads it. Then start the other three. Show the results in the order they finish: brief, briefing, website, workbook.
 - Keep the finished results in `main` as a backup. If a session is slow on stage, open the result from `main` and keep going.
 - Show the QR code from `site/qr-code.png` and ask people to open the live site on their phones. It gets the non-developers in the room involved.
 - Change the title slide, which says "Fannie Mae AI Summit," to your event. Slides 7 and 8 use a Morph transition to show you as a conductor and each session as a section of the orchestra.
