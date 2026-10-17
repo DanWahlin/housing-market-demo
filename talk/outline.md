@@ -18,8 +18,8 @@ Lunch follows the session, so the plan ends at 32:00 and keeps 3 minutes for que
 | 9:00 to 12:00 | WorkIQ brief | The brief from Microsoft 365, the privacy rules in the prompt, and the gaps that it found in this talk plan | Project managers, knowledge workers |
 | 12:00 to 15:00 | Review the agent work | Open the data session's diff: the download script and `data/README.md`. Explain worktrees: each agent works on its own branch. | Developers, IT managers |
 | 15:00 to 19:00 | PowerPoint briefing | Open the deck. Click a chart to show that it is native and editable. Show the speaker notes. | Leaders, project managers |
-| 19:00 to 23:00 | Excel workbook | PivotTable and PivotChart, the state drop-down that drives the dashboard, the heat map, the sparklines | Business analysts |
-| 23:00 to 27:00 | Website and deploy | Browser preview, Play button, state panel, tests, Azure Static Web Apps URL, QR code for phones | Developers, IT managers |
+| 19:00 to 23:00 | Website and deploy | Browser preview, Play button, state panel, tests, Azure Static Web Apps URL, QR code for phones | Developers, IT managers |
+| 23:00 to 27:00 | Excel workbook | PivotTable and PivotChart, the state drop-down that drives the dashboard, the heat map, the sparklines. Excel is the slowest session, so show it last. | Business analysts |
 | 27:00 to 29:00 | Automation | Create the weekly automation that gets new data and updates all outputs | Leaders, IT managers |
 | 29:00 to 32:00 | Slides 12 to 16 | What the agents built, how you stay in control, the quote, one task to try this week | Everyone |
 | 32:00 to 35:00 | Questions | Buffer for questions or a slow live step | Everyone |
@@ -34,7 +34,8 @@ Lunch follows the session, so the plan ends at 32:00 and keeps 3 minutes for que
 | WorkIQ brief | No names, 2 items skipped, 9 gaps found | About 2 minutes |
 | PowerPoint briefing | 7 slides, native charts, speaker notes. Same numbers as the website (+2.3% year over year, +64.0% since 2019 Q4). | About 8.5 minutes |
 | Website | 11 Vitest tests pass, build passes, deployed to the same Azure Static Web App | About 9 minutes, including the plan approval |
-| Excel workbook | PivotTable and PivotChart, dashboard, heat map, and two sparkline columns. Opens in Excel with no repair message. | About 20 minutes. About 9 minutes went to finding the cause of an Excel repair message (one bad table formula). The new Excel tips in `AGENTS.md` fix this. |
+| Excel workbook | PivotTable and PivotChart, dashboard, heat map, and two sparkline columns. Opens in Excel with no repair message. | About 20 minutes. About 9 minutes went to finding the cause of an Excel repair message (one bad table formula). |
+| Excel workbook (run 3, with the new Excel tips in `AGENTS.md`) | Same features. Opens with no repair message, the PivotTable refreshes, and the drop-down values match the data. | About 11 minutes |
 
 **Run 1** started from data that was already in the repo. The sessions lost about 16 minutes while they waited for tool approval. Without that wait, the WorkIQ brief took about 5 minutes, the Excel workbook about 8, the PowerPoint briefing about 10, and the website about 9.
 
