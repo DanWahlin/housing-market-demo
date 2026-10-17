@@ -45,9 +45,9 @@ For a live run, start from the `demo-start` branch. It has the instructions and 
 1. Clone this repo and add it as a project in the Copilot app.
 2. In the prompt box, open the mode menu and set **Tool permissions** to **Approve all**. If you skip this, sessions in Autopilot stop and wait for you to approve each command.
 3. Start two sessions from `demo-start` (in the workspace menu, set **Base branch** to `demo-start`), both in **Autopilot**:
-   - **Get the data** (prompt 1). It downloads the data, checks it, and pushes a new branch.
+   - **Get the data** (prompt 1). It downloads the data, checks it, and pushes it to the `live-data` branch.
    - **WorkIQ session brief** (prompt 5). It does not need the housing data.
-4. When the data session pushes its branch, start the website, Excel, and PowerPoint sessions (prompts 2 to 4). Set **Base branch** to the data session's branch. Start the website in **Plan** mode and the other two in **Autopilot**.
+4. When the data session pushes `live-data`, start the website, Excel, and PowerPoint sessions (prompts 2 to 4) with **Base branch** set to `live-data`. If the network fails, use `main`, which already has the data. Start the website in **Plan** mode and the other two in **Autopilot**.
 5. When the website plan appears, approve it and pick **Autopilot**.
 
 In our test run, the data was ready in about 2 minutes. The WorkIQ, PowerPoint, and website sessions finished 2 to 9 minutes after they started. Excel is the slowest. It took 20 minutes in one run because it had to find the cause of a repair message. With the Excel tips in `AGENTS.md`, it took 11 minutes.
@@ -63,7 +63,7 @@ Get the public housing data for this demo. Use the "Data" section in AGENTS.md.
 1. Write scripts/fetch-data.mjs in Node.js with no npm packages. It downloads the FHFA House Price Index and the CFPB HMDA data and writes the five CSV files listed in AGENTS.md to data/.
 2. Run it. Check each file: the row count, the first and last period, and no empty key values. Show me a short summary table.
 3. Write data/README.md: a short data dictionary with the sources and links.
-4. Commit the script and the data, and push the branch.
+4. Commit the script and the data. Then push this branch to GitHub as live-data, and replace live-data if it already exists.
 ```
 
 </details>
@@ -106,7 +106,7 @@ The workbook must have:
 - A Dashboard sheet: a state drop-down that updates KPI cards and charts through formulas, a heat map of year-over-year home price change (states by year, color scale), and a sparkline for each state.
 - Clear number formats, frozen header rows, and a Notes sheet with the sources.
 
-When the workbook is done, open it in Microsoft Excel to make sure that it opens without a repair message. Save a PNG screenshot of the Dashboard sheet to analysis/.
+When the workbook is done, open it once in Microsoft Excel to make sure that it opens without a repair message, and then close it.
 ```
 
 </details>
@@ -134,14 +134,14 @@ Change `Fannie Mae` to the name of your event or customer.
 ```text
 Use WorkIQ to find the emails, Teams messages, and meetings about my upcoming GitHub Copilot app session for Fannie Mae.
 
-Write a one-page brief to talk/session-brief.md with:
+Write a short brief to talk/session-brief.md with:
 - The goals of the session
 - The audience roles
-- Logistics: date, time, length, and format
-- Open asks or questions from the organizers
+- What the organizers asked the talk to cover
 
 Rules:
 - Use roles only. Never include names, email addresses, or phone numbers.
+- Do not include logistics, such as places, dates, times, travel, or building access.
 - Skip anything that looks internal or confidential, such as pricing, account plans, or contracts. Say that you skipped it, but do not describe it.
 - List your sources by type and date only.
 
@@ -170,12 +170,12 @@ Review site/ for accessibility and correctness problems. Fix the problems that y
 
 ## Give this talk yourself
 
-The timeline, the speaker notes, and the backup plan are in [`talk/outline.md`](talk/outline.md). Some tips from the test run:
+The timeline, a presenter checklist, and the backup plan are in [`talk/outline.md`](talk/outline.md). Some tips from the test runs:
 
-- Run the WorkIQ prompt the day before and read the brief. It reads your real email, so check it before it goes on a projector. In our run it also found eight gaps in the talk plan, which is worth mentioning on stage.
+- The WorkIQ prompt above leaves out logistics, so it is safe on a projector. It still reads your real email, so run it the day before and read the result. In our runs it found 8 to 9 gaps in the talk plan, which is worth mentioning on stage.
 - Start the data and WorkIQ sessions first, and talk about where the data comes from while the agent downloads it. Then start the other three. Show the results in the order they finish: brief, briefing, website, workbook.
 - Keep the finished results in `main` as a backup. If a session is slow on stage, open the result from `main` and keep going.
-- Show the QR code from `site/qr-code.png` and ask people to open the live site on their phones. It gets the non-developers in the room involved.
+- Slide 12 has a QR code for the live site. Ask people to open it on their phones. It gets the non-developers in the room involved.
 - Change the title slide, which says "Fannie Mae AI Summit," to your event. Slides 7 and 8 use a Morph transition to show you as a conductor and each session as a section of the orchestra.
 - Leave five minutes at the end for questions or a slow step.
 
