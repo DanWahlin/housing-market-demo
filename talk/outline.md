@@ -12,15 +12,15 @@ Lunch follows the session, so the plan ends at 30:00 and keeps 5 minutes for que
 
 | Time | Segment | What the audience sees | Roles |
 | --- | --- | --- | --- |
-| 0:00 to 4:00 | Slides 1 to 8 | The opening question, the problem for each role, the quotes, the app, the storyline | Everyone |
-| 4:00 to 7:00 | Slide 9, then start four sessions | Session 1 starts in **Plan** mode. Sessions 2, 3, and 4 start in **Autopilot**. The sidebar shows four agents at work. | Everyone |
+| 0:00 to 4:00 | Slides 1 to 10 | The opening question, the problem for each role, the quote, the app, the conductor and orchestra (Morph from slide 7 to slide 8), the storyline | Everyone |
+| 4:00 to 7:00 | Slide 11, then start four sessions | Session 1 starts in **Plan** mode. Sessions 2, 3, and 4 start in **Autopilot**. The sidebar shows four agents at work. | Everyone |
 | 7:00 to 9:00 | Approve the plan | Read the website plan, approve it, and select **Autopilot**. Explain worktrees: each agent works on its own branch. | Developers, IT managers |
 | 9:00 to 12:00 | WorkIQ brief | The brief from Microsoft 365, the privacy rules in the prompt, and the gaps that it found in this talk plan | Project managers, knowledge workers |
 | 12:00 to 16:00 | PowerPoint briefing | Open the deck. Click a chart to show that it is native and editable. Show the speaker notes. | Leaders, project managers |
 | 16:00 to 20:00 | Excel workbook | PivotTable and PivotChart, the state drop-down that drives the dashboard, the heat map, the sparklines | Business analysts |
 | 20:00 to 25:00 | Website and deploy | Browser preview, Play button, state panel, tests, Azure Static Web Apps URL, QR code for phones | Developers, IT managers |
 | 25:00 to 27:00 | Automation | Create the weekly automation that gets new data and updates all outputs | Leaders, IT managers |
-| 27:00 to 30:00 | Slides 10 to 14 | What the agents built, how you stay in control, the quote, one task to try this week | Everyone |
+| 27:00 to 30:00 | Slides 12 to 16 | What the agents built, how you stay in control, the quote, one task to try this week | Everyone |
 | 30:00 to 35:00 | Questions | Buffer for questions or a slow live step | Everyone |
 
 ## Proof run (17 October 2026)
