@@ -26,7 +26,7 @@ You don't need to write code to run the demo. You paste a prompt and check what 
 | [`talk/copilot-app-put-ai-agents-to-work.pptx`](talk/copilot-app-put-ai-agents-to-work.pptx) | The talk slides, with speaker notes |
 | [`talk/outline.md`](talk/outline.md) | The 35-minute timeline, all prompts, and the timing from a full test run |
 | [`data/`](data/) | Public housing data: FHFA House Price Index and CFPB mortgage (HMDA) data. See [`data/README.md`](data/README.md). |
-| [`scripts/fetch_data.py`](scripts/fetch_data.py) | Downloads the latest data again |
+| [`scripts/fetch-data.mjs`](scripts/fetch-data.mjs) | Downloads the latest data again |
 | [`AGENTS.md`](AGENTS.md) | Instructions that every agent reads first: data rules, output folders, and metric definitions |
 | [`templates/github-dark-template.pptx`](templates/github-dark-template.pptx) | The slide template the briefing agent copies |
 | [`site/`](site/), [`analysis/`](analysis/), [`briefings/`](briefings/) | The finished results from our test run |
@@ -48,7 +48,7 @@ For a live run, start from the `demo-start` branch. It has the data and instruct
 
    ```bash
    git switch demo-start
-   python3 scripts/fetch_data.py
+   node scripts/fetch-data.mjs
    git commit -am "Refresh data"
    ```
 
@@ -146,7 +146,7 @@ Then compare the brief with talk/outline.md. Add a "Gaps" section that lists wha
 <summary><b>5. Weekly automation</b> (create it in Automations)</summary>
 
 ```text
-Every Monday at 8:00 AM, run python3 scripts/fetch_data.py. If the FHFA or HMDA data changed, rebuild and redeploy the website, update the PowerPoint briefing and the Excel workbook, and write a five-line summary of what changed in the housing data since last week.
+Every Monday at 8:00 AM, run node scripts/fetch-data.mjs. If the FHFA or HMDA data changed, rebuild and redeploy the website, update the PowerPoint briefing and the Excel workbook, and write a five-line summary of what changed in the housing data since last week.
 ```
 
 </details>
