@@ -1,0 +1,339 @@
+{
+ "_note": "Edit plan. Times in seconds of the raw recordings. Each scene: narration (spoken text), visual source, and timing. Clip scenes play at 'speed' (1 = real time). Scene length = max(narration estimate + pad, min). Narration rate: 2.55 words per second (about 150 wpm).",
+ "fps": 30,
+ "wps": 2.55,
+ "scenes": [
+  {
+   "id": "s01",
+   "kind": "still",
+   "src": "slide-01.png",
+   "pad": 1.5,
+   "zoom": 1.03,
+   "text": "Hi, I'm Dan Wahlin from GitHub. In the next few minutes, I'll show you how the GitHub Copilot app lets you put AI agents to work, for developers, project managers, business analysts, and leaders."
+  },
+  {
+   "id": "s02",
+   "kind": "still",
+   "src": "slide-02.png",
+   "pad": 1.0,
+   "zoom": 1.03,
+   "text": "Let's start with a question. How much of your day is real work, and how much goes to hunting for information, switching between tools, and waiting on other people?"
+  },
+  {
+   "id": "s03",
+   "kind": "still",
+   "src": "slide-03.png",
+   "pad": 1.0,
+   "zoom": 1.03,
+   "text": "Every role has work that waits. Developers have bugs and missing tests. Project managers build status reports by hand. Analysts move data between spreadsheets and systems. And leaders wait on all of it. A chat assistant helps with answers, but the work still lands on you."
+  },
+  {
+   "id": "s04",
+   "kind": "build",
+   "srcs": [
+    "eq-0.png",
+    "eq-1.png",
+    "eq-2.png",
+    "eq-3.png"
+   ],
+   "pad": 1.0,
+   "text": "Here's the idea. You bring the ideas and the judgment. Agents do the steps. Multiply the two, and you get impact."
+  },
+  {
+   "id": "s05",
+   "kind": "still",
+   "src": "slide-05.png",
+   "pad": 1.0,
+   "zoom": 1.03,
+   "text": "Derek Sivers said it well: ideas are just a multiplier of execution. Agents raise the execution side for everyone, not only for people who write code."
+  },
+  {
+   "id": "s06",
+   "kind": "still",
+   "src": "slide-06.png",
+   "pad": 1.0,
+   "zoom": 1.03,
+   "text": "The GitHub Copilot app is one desktop workspace for many agents. You hand off a task, run several at once, and review the results before you accept them."
+  },
+  {
+   "id": "s07",
+   "kind": "still",
+   "src": "slide-07.png",
+   "pad": 0.5,
+   "zoom": 1.04,
+   "text": "Think of yourself as a conductor. A conductor doesn't play every instrument."
+  },
+  {
+   "id": "s08",
+   "kind": "build",
+   "srcs": [
+    "orch-0.png",
+    "orch-1.png",
+    "orch-2.png",
+    "orch-3.png",
+    "orch-4.png",
+    "orch-5.png",
+    "orch-6.png"
+   ],
+   "pad": 1.0,
+   "text": "You set the direction, and each section plays its part. In today's demo, one agent builds a website, another builds an Excel workbook, another builds an executive briefing, and another reads Microsoft 365 with WorkIQ. An automation keeps the beat every week. And you stand in the middle: you plan, review, and approve."
+  },
+  {
+   "id": "s09",
+   "kind": "still",
+   "src": "slide-09.png",
+   "pad": 1.0,
+   "zoom": 1.03,
+   "text": "Our story uses one public dataset: the FHFA House Price Index and CFPB mortgage data, for all fifty states and one hundred metro areas."
+  },
+  {
+   "id": "s09b",
+   "kind": "still",
+   "src": "slide-10.png",
+   "pad": 1.0,
+   "zoom": 1.03,
+   "text": "Here's how you work with agents. You describe the outcome you want. For bigger work, you read the plan first. Then you hand it off to Autopilot, and the agents work at the same time. When they finish, you review the diffs, previews, and files, and then you merge, share, or deploy."
+  },
+  {
+   "id": "s10",
+   "kind": "still",
+   "src": "slide-11.png",
+   "pad": 0.5,
+   "zoom": 1.03,
+   "text": "Let's go to the live demo."
+  },
+  {
+   "id": "d01",
+   "kind": "clip",
+   "src": "demo",
+   "in": 17.0,
+   "out": 33.5,
+   "speed": 1.6,
+   "pad": 0.5,
+   "label": "Agent 1: get the data",
+   "text": "I start with the session that gets the public data. I pick the demo-start branch, choose Autopilot, and paste the prompt. I also start a second session that uses WorkIQ, and I'll come back to it later."
+  },
+  {
+   "id": "d02",
+   "kind": "clip",
+   "src": "demo",
+   "in": 225.0,
+   "out": 344.0,
+   "speed": 6.0,
+   "pad": 0.5,
+   "label": "Writing and running the download script",
+   "text": "The agent reads the instructions in the repo, writes a small Node.js script with no extra packages, and downloads the data straight from FHFA and the CFPB. There's no API key, and no manual download."
+  },
+  {
+   "id": "d03",
+   "kind": "clip",
+   "src": "demo",
+   "in": 345.0,
+   "out": 366.0,
+   "speed": 1.0,
+   "pad": 0.5,
+   "zoom": [
+    0.22,
+    0.0,
+    0.72
+   ],
+   "label": "Data checked and pushed",
+   "text": "In about two minutes, the data is ready. The agent checked every file: the row counts, the first and last period, and missing values. It wrote a data dictionary, then pushed everything to a branch called live-data, so the other agents can start from it."
+  },
+  {
+   "id": "d04",
+   "kind": "clip",
+   "src": "demo",
+   "in": 368.0,
+   "out": 418.0,
+   "speed": 2.4,
+   "pad": 0.5,
+   "label": "Agents 2, 3, and 4 start from live-data",
+   "text": "Now I start three more sessions from live-data: the website in Plan mode, and the Excel workbook and the executive briefing in Autopilot. Each one works on its own branch, in its own worktree, so they never collide."
+  },
+  {
+   "id": "d05",
+   "kind": "clip",
+   "src": "demo",
+   "in": 445.0,
+   "out": 484.0,
+   "speed": 1.3,
+   "pad": 0.5,
+   "zoom": [
+    0.55,
+    0.0,
+    0.45
+   ],
+   "label": "Review the plan, then hand it off",
+   "text": "For the website, the agent shows me its plan first: the tasks, the files, and the deploy steps. It looks good, so I approve it, and the agent switches to Autopilot."
+  },
+  {
+   "id": "d06",
+   "kind": "clip",
+   "src": "demo",
+   "in": 486.0,
+   "out": 920.0,
+   "speed": 18.0,
+   "pad": 0.5,
+   "label": "Four agents working at the same time",
+   "text": "Now four agents work at the same time, each in its own session. Watch the sidebar: the website agent writes code and tests, the Excel agent builds a workbook, the briefing agent builds slides, and the WorkIQ agent reads my Microsoft 365 data. While they work, I'm free to do something else, like talk to you."
+  },
+  {
+   "id": "d07",
+   "kind": "clip",
+   "src": "demo",
+   "in": 926.0,
+   "out": 966.0,
+   "speed": 1.4,
+   "pad": 0.5,
+   "label": "Website: tested, built, and deployed",
+   "text": "The website is done. The agent ran its tests and the build, deployed the site to Azure Static Web Apps, and then opened the live site in the app's browser panel. It even checked its own work in the browser and fixed two layout problems before it deployed."
+  },
+  {
+   "id": "d08",
+   "kind": "clip",
+   "src": "demo",
+   "in": 966.0,
+   "out": 1026.0,
+   "speed": 1.6,
+   "pad": 0.5,
+   "label": "Every quarter since 2000",
+   "text": "Here's the map. When I press play, it animates home price changes for every quarter since the year two thousand."
+  },
+  {
+   "id": "d09",
+   "kind": "clip",
+   "src": "demo",
+   "in": 1026.0,
+   "out": 1066.0,
+   "speed": 1.2,
+   "pad": 0.5,
+   "label": "State details and top metros",
+   "text": "I can open any state, like Texas, to see its price trend compared with the U.S., and its mortgage loans by purpose from 2018 to 2025. Below the map are the fifteen metro areas with the largest change in the last year."
+  },
+  {
+   "id": "d10",
+   "kind": "clip",
+   "src": "demo",
+   "in": 2053.5,
+   "out": 2062.0,
+   "speed": 1.0,
+   "pad": 0.5,
+   "brighten": 2.22,
+   "label": "Excel workbook: done",
+   "text": "The Excel workbook is done too. The agent even opened it in Excel to make sure that it opens without errors."
+  },
+  {
+   "id": "d11",
+   "kind": "clip",
+   "src": "excel",
+   "in": 6.0,
+   "out": 56.0,
+   "speed": 1.5,
+   "pad": 0.5,
+   "label": "A real PivotTable, KPI cards, and a heat map",
+   "text": "Here's the dashboard. When I pick a state, like Texas, Florida, or New York, the KPI cards and charts update. There's a real PivotTable and PivotChart, and a heat map with a sparkline for every state. That's work that takes an analyst hours."
+  },
+  {
+   "id": "d12",
+   "kind": "clip",
+   "src": "demo",
+   "in": 2342.5,
+   "out": 2372.0,
+   "speed": 1.2,
+   "pad": 0.5,
+   "label": "WorkIQ: a brief from Microsoft 365",
+   "text": "Now the WorkIQ session. It searched my email, Teams, and calendar for this talk, and wrote a one-page brief. My prompt told it to use roles only, never names, and to skip anything confidential."
+  },
+  {
+   "id": "d13",
+   "kind": "scroll",
+   "src": "brief-full.png",
+   "pad": 1.0,
+   "label": "The brief: goals, roles, logistics, and gaps",
+   "text": "Here's the brief. It has the goals, the five audience roles, the date, time, and place, and the open questions from the organizers. It lists its sources by type and date only, with no names. Then it compared all of that with my talk outline, and found nine gaps I still need to close. That information was spread across eleven emails."
+  },
+  {
+   "id": "d14",
+   "kind": "clip",
+   "src": "demo",
+   "in": 2489.0,
+   "out": 2551.0,
+   "speed": 2.6,
+   "pad": 0.5,
+   "label": "Executive briefing: native, editable charts",
+   "text": "Last, the executive briefing for leaders. Seven slides, each with one headline that states the insight, and one chart. These are native PowerPoint charts that you can edit, and every slide has speaker notes. And the numbers match the website exactly, because every agent read the same instructions in the repo.",
+   "patch": {
+    "x": 570,
+    "y": 801,
+    "w": 560,
+    "h": 22,
+    "bg": [
+     13,
+     16,
+     22
+    ],
+    "fg": [
+     151,
+     156,
+     166
+    ],
+    "size": 13,
+    "tx": 5,
+    "ty": 2,
+    "text": "Built from public FHFA and CFPB data. Not an official FHFA or CFPB product."
+   }
+  },
+  {
+   "id": "d15",
+   "kind": "clip",
+   "src": "demo",
+   "in": 2561.0,
+   "out": 2667.0,
+   "speed": 3.5,
+   "pad": 0.5,
+   "label": "Automation: refresh every Monday",
+   "text": "Finally, an automation. I give it a name, pick a weekly trigger, and describe the job: every Monday, get new data, rebuild the website, the workbook, and the briefing, and summarize what changed. Set it up once, and it keeps running."
+  },
+  {
+   "id": "e01",
+   "kind": "still",
+   "src": "slide-12.png",
+   "pad": 1.0,
+   "zoom": 1.03,
+   "text": "So, four results, built at the same time from one dataset: a live website, an analyst workbook, an executive briefing, and a brief from Microsoft 365."
+  },
+  {
+   "id": "e02",
+   "kind": "still",
+   "src": "slide-13.png",
+   "pad": 1.0,
+   "zoom": 1.03,
+   "text": "And you stay in control. You read the plan before work starts. Each agent works on its own branch. You choose which tools can run without asking. And nothing is accepted until you review it."
+  },
+  {
+   "id": "e03",
+   "kind": "still",
+   "src": "slide-14.png",
+   "pad": 1.0,
+   "zoom": 1.03,
+   "text": "Alan Kay said, the best way to predict the future is to invent it. With agents, more people can invent."
+  },
+  {
+   "id": "e04",
+   "kind": "still",
+   "src": "slide-15.png",
+   "pad": 1.0,
+   "zoom": 1.03,
+   "text": "So pick one task this week and hand it to an agent. The free course, GitHub Copilot app for beginners, shows you how, step by step."
+  },
+  {
+   "id": "e05",
+   "kind": "still",
+   "src": "slide-16.png",
+   "pad": 2.0,
+   "zoom": 1.02,
+   "text": "Bring an idea, and put an agent to work on it. Thanks for watching."
+  }
+ ]
+}

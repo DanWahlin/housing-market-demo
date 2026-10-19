@@ -1,0 +1,54 @@
+1
+00:00:00,350 --> 00:00:01,919
+The website is done.
+
+2
+00:00:01,919 --> 00:00:07,409
+The agent ran its tests and the build,
+deployed the site to Azure Static
+
+3
+00:00:07,409 --> 00:00:12,507
+Web Apps, and then opened the live
+site in the app's browser panel.
+
+4
+00:00:12,507 --> 00:00:17,605
+It even checked its own work in
+the browser and fixed two layout
+
+5
+00:00:17,605 --> 00:00:19,174
+problems before it deployed.
+
+6
+00:00:22,670 --> 00:00:23,846
+Here's the map.
+
+7
+00:00:23,846 --> 00:00:28,552
+When I press play, it animates home
+price changes for every quarter
+
+8
+00:00:28,552 --> 00:00:30,513
+since the year two thousand.
+
+9
+00:00:34,010 --> 00:00:39,500
+I can open any state, like Texas, to
+see its price trend compared with
+
+10
+00:00:39,500 --> 00:00:44,598
+the U.S., and its mortgage loans
+by purpose from 2018 to 2025.
+
+11
+00:00:44,598 --> 00:00:50,088
+Below the map are the fifteen metro
+areas with the largest change in the
+
+12
+00:00:50,088 --> 00:00:50,873
+last year.

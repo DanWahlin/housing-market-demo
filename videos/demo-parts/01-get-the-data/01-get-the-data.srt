@@ -1,0 +1,59 @@
+1
+00:00:00,350 --> 00:00:04,272
+I start with the session
+that gets the public data.
+
+2
+00:00:04,272 --> 00:00:08,585
+I pick the demo-start branch, choose
+Autopilot, and paste the prompt.
+
+3
+00:00:08,585 --> 00:00:14,468
+I also start a second session that
+uses WorkIQ, and I'll come back to it
+
+4
+00:00:14,468 --> 00:00:14,860
+later.
+
+5
+00:00:15,360 --> 00:00:20,458
+The agent reads the instructions in
+the repo, writes a small Node.js
+
+6
+00:00:20,458 --> 00:00:25,164
+script with no extra packages, and
+downloads the data straight from FHFA
+
+7
+00:00:25,164 --> 00:00:26,340
+and the CFPB.
+
+8
+00:00:26,340 --> 00:00:29,478
+There's no API key, and no manual download.
+
+9
+00:00:32,980 --> 00:00:36,117
+In about two minutes, the data is ready.
+
+10
+00:00:36,117 --> 00:00:38,078
+The agent checked every file:
+
+11
+00:00:38,078 --> 00:00:42,392
+the row counts, the first and
+last period, and missing values.
+
+12
+00:00:42,392 --> 00:00:47,098
+It wrote a data dictionary, then
+pushed everything to a branch called
+
+13
+00:00:47,098 --> 00:00:50,627
+live-data, so the other
+agents can start from it.

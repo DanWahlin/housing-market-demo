@@ -1,0 +1,38 @@
+1
+00:00:00,350 --> 00:00:02,703
+The Excel workbook is done too.
+
+2
+00:00:02,703 --> 00:00:08,193
+The agent even opened it in Excel
+to make sure that it opens without
+
+3
+00:00:08,193 --> 00:00:08,585
+errors.
+
+4
+00:00:09,090 --> 00:00:10,266
+Here's the dashboard.
+
+5
+00:00:10,266 --> 00:00:16,149
+When I pick a state, like Texas,
+Florida, or New York, the KPI cards and
+
+6
+00:00:16,149 --> 00:00:16,933
+charts update.
+
+7
+00:00:16,933 --> 00:00:21,639
+There's a real PivotTable and
+PivotChart, and a heat map with a
+
+8
+00:00:21,639 --> 00:00:23,208
+sparkline for every state.
+
+9
+00:00:23,208 --> 00:00:25,953
+That's work that takes an analyst hours.

@@ -1,0 +1,21 @@
+1
+00:00:00,350 --> 00:00:01,526
+Finally, an automation.
+
+2
+00:00:01,526 --> 00:00:06,625
+I give it a name, pick a weekly
+trigger, and describe the job:
+
+3
+00:00:06,625 --> 00:00:11,330
+every Monday, get new data, rebuild
+the website, the workbook, and the
+
+4
+00:00:11,330 --> 00:00:13,291
+briefing, and summarize what changed.
+
+5
+00:00:13,291 --> 00:00:16,428
+Set it up once, and it keeps running.

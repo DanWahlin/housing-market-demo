@@ -1,0 +1,52 @@
+WEBVTT
+
+00:00:00.350 --> 00:00:03.487
+Now I start three more
+sessions from live-data:
+
+00:00:03.487 --> 00:00:08.193
+the website in Plan mode, and the
+Excel workbook and the executive
+
+00:00:08.193 --> 00:00:09.370
+briefing in Autopilot.
+
+00:00:09.370 --> 00:00:14.860
+Each one works on its own branch,
+in its own worktree, so they never
+
+00:00:14.860 --> 00:00:15.252
+collide.
+
+00:00:18.750 --> 00:00:22.672
+For the website, the agent
+shows me its plan first:
+
+00:00:22.672 --> 00:00:25.809
+the tasks, the files, and the deploy steps.
+
+00:00:25.809 --> 00:00:30.907
+It looks good, so I approve it, and
+the agent switches to Autopilot.
+
+00:00:34.410 --> 00:00:39.508
+Now four agents work at the same
+time, each in its own session.
+
+00:00:39.508 --> 00:00:40.685
+Watch the sidebar:
+
+00:00:40.685 --> 00:00:45.390
+the website agent writes code and
+tests, the Excel agent builds a
+
+00:00:45.390 --> 00:00:49.704
+workbook, the briefing agent builds
+slides, and the WorkIQ agent reads
+
+00:00:49.704 --> 00:00:51.273
+my Microsoft 365 data.
+
+00:00:51.273 --> 00:00:56.371
+While they work, I'm free to do
+something else, like talk to you.

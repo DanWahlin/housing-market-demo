@@ -1,0 +1,580 @@
+1
+00:00:00,350 --> 00:00:02,703
+Hi, I'm Dan Wahlin from GitHub.
+
+2
+00:00:02,703 --> 00:00:08,193
+In the next few minutes, I'll show
+you how the GitHub Copilot app lets
+
+3
+00:00:08,193 --> 00:00:12,507
+you put AI agents to work, for
+developers, project managers, business
+
+4
+00:00:12,507 --> 00:00:13,683
+analysts, and leaders.
+
+5
+00:00:15,180 --> 00:00:17,141
+Let's start with a question.
+
+6
+00:00:17,141 --> 00:00:23,023
+How much of your day is real work,
+and how much goes to hunting for
+
+7
+00:00:23,023 --> 00:00:26,553
+information, switching between
+tools, and waiting on other people?
+
+8
+00:00:27,550 --> 00:00:29,903
+Every role has work that waits.
+
+9
+00:00:29,903 --> 00:00:32,256
+Developers have bugs and missing tests.
+
+10
+00:00:32,256 --> 00:00:35,001
+Project managers build
+status reports by hand.
+
+11
+00:00:35,001 --> 00:00:37,746
+Analysts move data between
+spreadsheets and systems.
+
+12
+00:00:37,746 --> 00:00:40,491
+And leaders wait on all of it.
+
+13
+00:00:40,491 --> 00:00:45,589
+A chat assistant helps with answers,
+but the work still lands on you.
+
+14
+00:00:46,590 --> 00:00:47,766
+Here's the idea.
+
+15
+00:00:47,766 --> 00:00:50,512
+You bring the ideas and the judgment.
+
+16
+00:00:50,512 --> 00:00:52,080
+Agents do the steps.
+
+17
+00:00:52,080 --> 00:00:54,825
+Multiply the two, and you get impact.
+
+18
+00:00:55,830 --> 00:00:57,791
+Derek Sivers said it well:
+
+19
+00:00:57,791 --> 00:01:00,536
+ideas are just a multiplier of execution.
+
+20
+00:01:00,536 --> 00:01:05,242
+Agents raise the execution side for
+everyone, not only for people who
+
+21
+00:01:05,242 --> 00:01:06,026
+write code.
+
+22
+00:01:07,030 --> 00:01:11,344
+The GitHub Copilot app is one
+desktop workspace for many agents.
+
+23
+00:01:11,344 --> 00:01:16,834
+You hand off a task, run several at
+once, and review the results before
+
+24
+00:01:16,834 --> 00:01:18,010
+you accept them.
+
+25
+00:01:19,010 --> 00:01:21,363
+Think of yourself as a conductor.
+
+26
+00:01:21,363 --> 00:01:23,716
+A conductor doesn't play every instrument.
+
+27
+00:01:24,220 --> 00:01:28,142
+You set the direction, and
+each section plays its part.
+
+28
+00:01:28,142 --> 00:01:32,847
+In today's demo, one agent builds
+a website, another builds an Excel
+
+29
+00:01:32,847 --> 00:01:36,377
+workbook, another builds an
+executive briefing, and another reads
+
+30
+00:01:36,377 --> 00:01:37,945
+Microsoft 365 with WorkIQ.
+
+31
+00:01:37,945 --> 00:01:40,691
+An automation keeps the beat every week.
+
+32
+00:01:40,691 --> 00:01:43,044
+And you stand in the middle:
+
+33
+00:01:43,044 --> 00:01:45,004
+you plan, review, and approve.
+
+34
+00:01:46,000 --> 00:01:48,353
+Our story uses one public dataset:
+
+35
+00:01:48,353 --> 00:01:53,451
+the FHFA House Price Index and CFPB
+mortgage data, for all fifty states
+
+36
+00:01:53,451 --> 00:01:55,412
+and one hundred metro areas.
+
+37
+00:01:56,410 --> 00:01:58,763
+Here's how you work with agents.
+
+38
+00:01:58,763 --> 00:02:01,116
+You describe the outcome you want.
+
+39
+00:02:01,116 --> 00:02:04,253
+For bigger work, you read the plan first.
+
+40
+00:02:04,253 --> 00:02:10,135
+Then you hand it off to Autopilot,
+and the agents work at the same time.
+
+41
+00:02:10,135 --> 00:02:14,841
+When they finish, you review the
+diffs, previews, and files, and then
+
+42
+00:02:14,841 --> 00:02:16,802
+you merge, share, or deploy.
+
+43
+00:02:17,800 --> 00:02:20,153
+Let's go to the live demo.
+
+44
+00:02:20,800 --> 00:02:24,722
+I start with the session
+that gets the public data.
+
+45
+00:02:24,722 --> 00:02:29,035
+I pick the demo-start branch, choose
+Autopilot, and paste the prompt.
+
+46
+00:02:29,035 --> 00:02:34,918
+I also start a second session that
+uses WorkIQ, and I'll come back to it
+
+47
+00:02:34,918 --> 00:02:35,310
+later.
+
+48
+00:02:35,810 --> 00:02:40,908
+The agent reads the instructions in
+the repo, writes a small Node.js
+
+49
+00:02:40,908 --> 00:02:45,614
+script with no extra packages, and
+downloads the data straight from FHFA
+
+50
+00:02:45,614 --> 00:02:46,790
+and the CFPB.
+
+51
+00:02:46,790 --> 00:02:49,928
+There's no API key, and no manual download.
+
+52
+00:02:53,430 --> 00:02:56,567
+In about two minutes, the data is ready.
+
+53
+00:02:56,567 --> 00:02:58,528
+The agent checked every file:
+
+54
+00:02:58,528 --> 00:03:02,842
+the row counts, the first and
+last period, and missing values.
+
+55
+00:03:02,842 --> 00:03:07,548
+It wrote a data dictionary, then
+pushed everything to a branch called
+
+56
+00:03:07,548 --> 00:03:11,077
+live-data, so the other
+agents can start from it.
+
+57
+00:03:14,430 --> 00:03:17,567
+Now I start three more
+sessions from live-data:
+
+58
+00:03:17,567 --> 00:03:22,273
+the website in Plan mode, and the
+Excel workbook and the executive
+
+59
+00:03:22,273 --> 00:03:23,450
+briefing in Autopilot.
+
+60
+00:03:23,450 --> 00:03:28,940
+Each one works on its own branch,
+in its own worktree, so they never
+
+61
+00:03:28,940 --> 00:03:29,332
+collide.
+
+62
+00:03:32,830 --> 00:03:36,752
+For the website, the agent
+shows me its plan first:
+
+63
+00:03:36,752 --> 00:03:39,889
+the tasks, the files, and the deploy steps.
+
+64
+00:03:39,889 --> 00:03:44,987
+It looks good, so I approve it, and
+the agent switches to Autopilot.
+
+65
+00:03:48,490 --> 00:03:53,588
+Now four agents work at the same
+time, each in its own session.
+
+66
+00:03:53,588 --> 00:03:54,765
+Watch the sidebar:
+
+67
+00:03:54,765 --> 00:03:59,470
+the website agent writes code and
+tests, the Excel agent builds a
+
+68
+00:03:59,470 --> 00:04:03,784
+workbook, the briefing agent builds
+slides, and the WorkIQ agent reads
+
+69
+00:04:03,784 --> 00:04:05,353
+my Microsoft 365 data.
+
+70
+00:04:05,353 --> 00:04:10,451
+While they work, I'm free to do
+something else, like talk to you.
+
+71
+00:04:12,600 --> 00:04:14,169
+The website is done.
+
+72
+00:04:14,169 --> 00:04:19,659
+The agent ran its tests and the build,
+deployed the site to Azure Static
+
+73
+00:04:19,659 --> 00:04:24,757
+Web Apps, and then opened the live
+site in the app's browser panel.
+
+74
+00:04:24,757 --> 00:04:29,855
+It even checked its own work in
+the browser and fixed two layout
+
+75
+00:04:29,855 --> 00:04:31,424
+problems before it deployed.
+
+76
+00:04:34,920 --> 00:04:36,096
+Here's the map.
+
+77
+00:04:36,096 --> 00:04:40,802
+When I press play, it animates home
+price changes for every quarter
+
+78
+00:04:40,802 --> 00:04:42,763
+since the year two thousand.
+
+79
+00:04:46,260 --> 00:04:51,750
+I can open any state, like Texas, to
+see its price trend compared with
+
+80
+00:04:51,750 --> 00:04:56,848
+the U.S., and its mortgage loans
+by purpose from 2018 to 2025.
+
+81
+00:04:56,848 --> 00:05:02,338
+Below the map are the fifteen metro
+areas with the largest change in the
+
+82
+00:05:02,338 --> 00:05:03,123
+last year.
+
+83
+00:05:06,620 --> 00:05:08,973
+The Excel workbook is done too.
+
+84
+00:05:08,973 --> 00:05:14,463
+The agent even opened it in Excel
+to make sure that it opens without
+
+85
+00:05:14,463 --> 00:05:14,855
+errors.
+
+86
+00:05:15,360 --> 00:05:16,536
+Here's the dashboard.
+
+87
+00:05:16,536 --> 00:05:22,419
+When I pick a state, like Texas,
+Florida, or New York, the KPI cards and
+
+88
+00:05:22,419 --> 00:05:23,203
+charts update.
+
+89
+00:05:23,203 --> 00:05:27,909
+There's a real PivotTable and
+PivotChart, and a heat map with a
+
+90
+00:05:27,909 --> 00:05:29,478
+sparkline for every state.
+
+91
+00:05:29,478 --> 00:05:32,223
+That's work that takes an analyst hours.
+
+92
+00:05:35,720 --> 00:05:37,289
+Now the WorkIQ session.
+
+93
+00:05:37,289 --> 00:05:42,387
+It searched my email, Teams, and
+calendar for this talk, and wrote a
+
+94
+00:05:42,387 --> 00:05:43,171
+one-page brief.
+
+95
+00:05:43,171 --> 00:05:48,661
+My prompt told it to use roles only,
+never names, and to skip anything
+
+96
+00:05:48,661 --> 00:05:49,053
+confidential.
+
+97
+00:05:52,550 --> 00:05:53,726
+Here's the brief.
+
+98
+00:05:53,726 --> 00:05:58,825
+It has the goals, the five audience
+roles, the date, time, and place,
+
+99
+00:05:58,825 --> 00:06:01,570
+and the open questions from the organizers.
+
+100
+00:06:01,570 --> 00:06:06,275
+It lists its sources by type
+and date only, with no names.
+
+101
+00:06:06,275 --> 00:06:12,158
+Then it compared all of that with my
+talk outline, and found nine gaps I
+
+102
+00:06:12,158 --> 00:06:13,726
+still need to close.
+
+103
+00:06:13,726 --> 00:06:16,472
+That information was spread
+across eleven emails.
+
+104
+00:06:17,470 --> 00:06:19,823
+Last, the executive briefing for leaders.
+
+105
+00:06:19,823 --> 00:06:24,529
+Seven slides, each with one headline
+that states the insight, and one
+
+106
+00:06:24,529 --> 00:06:24,921
+chart.
+
+107
+00:06:24,921 --> 00:06:29,627
+These are native PowerPoint charts
+that you can edit, and every slide
+
+108
+00:06:29,627 --> 00:06:30,803
+has speaker notes.
+
+109
+00:06:30,803 --> 00:06:35,509
+And the numbers match the website
+exactly, because every agent read the
+
+110
+00:06:35,509 --> 00:06:37,470
+same instructions in the repo.
+
+111
+00:06:40,970 --> 00:06:42,146
+Finally, an automation.
+
+112
+00:06:42,146 --> 00:06:47,245
+I give it a name, pick a weekly
+trigger, and describe the job:
+
+113
+00:06:47,245 --> 00:06:51,950
+every Monday, get new data, rebuild
+the website, the workbook, and the
+
+114
+00:06:51,950 --> 00:06:53,911
+briefing, and summarize what changed.
+
+115
+00:06:53,911 --> 00:06:57,048
+Set it up once, and it keeps running.
+
+116
+00:07:00,550 --> 00:07:04,864
+So, four results, built at the
+same time from one dataset:
+
+117
+00:07:04,864 --> 00:07:09,570
+a live website, an analyst workbook,
+an executive briefing, and a brief
+
+118
+00:07:09,570 --> 00:07:10,746
+from Microsoft 365.
+
+119
+00:07:11,750 --> 00:07:13,711
+And you stay in control.
+
+120
+00:07:13,711 --> 00:07:16,456
+You read the plan before work starts.
+
+121
+00:07:16,456 --> 00:07:19,201
+Each agent works on its own branch.
+
+122
+00:07:19,201 --> 00:07:22,338
+You choose which tools
+can run without asking.
+
+123
+00:07:22,338 --> 00:07:25,475
+And nothing is accepted until you review it.
+
+124
+00:07:26,480 --> 00:07:31,970
+Alan Kay said, the best way to
+predict the future is to invent it.
+
+125
+00:07:31,970 --> 00:07:34,323
+With agents, more people can invent.
+
+126
+00:07:35,320 --> 00:07:40,026
+So pick one task this week
+and hand it to an agent.
+
+127
+00:07:40,026 --> 00:07:44,732
+The free course, GitHub Copilot app
+for beginners, shows you how, step
+
+128
+00:07:44,732 --> 00:07:45,516
+by step.
+
+129
+00:07:46,520 --> 00:07:50,834
+Bring an idea, and put
+an agent to work on it.
+
+130
+00:07:50,834 --> 00:07:52,010
+Thanks for watching.
