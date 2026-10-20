@@ -84,7 +84,7 @@ Get the public housing data for this demo. Use the "Data" section in AGENTS.md.
 4. Commit the script and the data. Then push this branch to GitHub as live-data, and replace live-data if it already exists.
 ```
 
-### Session 1: Website (Plan mode, then Autopilot)
+### Session 1: Website (Plan mode, then Autopilot, from `live-data`)
 
 Developers and IT managers.
 
@@ -111,7 +111,7 @@ Keep the plan short.
 
 When the plan appears, approve it and select **Autopilot**.
 
-### Session 2: Excel workbook (Autopilot)
+### Session 2: Excel workbook (Autopilot, from `live-data`)
 
 Business analysts.
 
@@ -127,7 +127,7 @@ The workbook must have:
 When the workbook is done, open it once in Microsoft Excel to make sure that it opens without a repair message, and then close it.
 ```
 
-### Session 3: PowerPoint briefing (Autopilot)
+### Session 3: PowerPoint briefing (Autopilot, from `live-data`)
 
 Knowledge workers and leaders.
 
