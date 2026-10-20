@@ -20,7 +20,8 @@ The script uses Node.js 18 or later and no npm packages. It takes about 15 secon
 
 - **HPI is an index, not a price.** 1991 Q1 = 100 (January 1991 = 100 for monthly data). It shows the change in prices, not dollar values.
 - All HPI files use the **traditional, purchase-only** index.
-- `index_nsa` = not seasonally adjusted. `index_sa` = seasonally adjusted. Use `index_nsa` for year-over-year change.
+- `index_nsa` = not seasonally adjusted. `index_sa` = seasonally adjusted. Use `index_nsa` to compare the same quarter in two years (year over year). Use `index_sa` to compare two different quarters, for example the change since 2019 Q4.
+- For U.S. values, use `hpi_us_quarterly.csv`, FHFA's official quarterly U.S. index. Do not average the monthly values.
 - HMDA rows are **originated loans** only (`actions_taken=1`). One API request for each state and year.
 - **Latest complete quarter** in this snapshot: **2026 Q2**. The monthly file goes to July 2026.
 
@@ -53,6 +54,16 @@ The script uses Node.js 18 or later and no npm packages. It takes about 15 secon
 | --- | --- |
 | `cbsa_code` | Core-based statistical area (CBSA) code. Some are metro divisions (MSAD). |
 | `metro_name` | Metro name, for example `Albany-Schenectady-Troy, NY` (has commas, so it is in quotes) |
+| `year`, `quarter`, `index_nsa`, `index_sa` | Same as the state file |
+
+### `hpi_us_quarterly.csv` (142 rows: United States, 1991 Q1 to 2026 Q2)
+
+FHFA's official quarterly U.S. index.
+
+| Column | Description |
+| --- | --- |
+| `place_id` | `USA` |
+| `place_name` | `United States` |
 | `year`, `quarter`, `index_nsa`, `index_sa` | Same as the state file |
 
 ### `hpi_us_division_monthly.csv` (4,270 rows: U.S. and 9 divisions, January 1991 to July 2026)

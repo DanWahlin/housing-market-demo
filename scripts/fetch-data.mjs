@@ -136,6 +136,16 @@ async function fetchHpi() {
     }))
     .sort(byKeys('place_id', 'year', 'month'));
 
+  // FHFA's official quarterly U.S. index. Use it for U.S. values instead of averaging monthly values.
+  const usQuarterly = pick('quarterly', 'USA or Census Division')
+    .filter((r) => r.place_id === 'USA')
+    .map((r) => ({
+      place_id: r.place_id, place_name: r.place_name,
+      year: +r.yr, quarter: +r.period, index_nsa: num(r.index_nsa), index_sa: num(r.index_sa),
+    }))
+    .sort(byKeys('year', 'quarter'));
+
+  await writeCsv('hpi_us_quarterly.csv', ['place_id', 'place_name', 'year', 'quarter', 'index_nsa', 'index_sa'], usQuarterly);
   await writeCsv('hpi_state_quarterly.csv', ['state_code', 'state_name', 'year', 'quarter', 'index_nsa', 'index_sa'], state);
   await writeCsv('hpi_metro_quarterly.csv', ['cbsa_code', 'metro_name', 'year', 'quarter', 'index_nsa', 'index_sa'], metro);
   await writeCsv('hpi_us_division_monthly.csv', ['place_id', 'place_name', 'year', 'month', 'index_nsa', 'index_sa'], division);

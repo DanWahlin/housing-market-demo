@@ -4,9 +4,8 @@ import { copyFileSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
-  changeBetween,
   latestQuarter,
-  monthlyToQuarterly,
+  placeMetrics,
   qKey,
   qLabel,
   rankByYoy,
@@ -20,7 +19,8 @@ const outDir = join(root, 'public', 'data');
 mkdirSync(outDir, { recursive: true });
 
 const read = (f: string) => csvParse(readFileSync(join(dataDir, f), 'utf8'));
-const r1 = (n: number) => (Number.isFinite(n) ? Math.round(n * 100) / 100 : null);
+// Keep 4 decimals so that the page rounds only once (rounding twice can change the last digit).
+const r1 = (n: number) => (Number.isFinite(n) ? Math.round(n * 10000) / 10000 : null);
 const write = (f: string, d: unknown) => writeFileSync(join(outDir, f), JSON.stringify(d));
 
 const START_YEAR = 2000;
@@ -30,16 +30,17 @@ const BASE = { year: 2019, quarter: 4 };
 const states = read('states.csv');
 const stateRows = read('hpi_state_quarterly.csv');
 const latest = latestQuarter(stateRows.map((r) => ({ year: +r.year!, quarter: +r.quarter! })));
-const seriesBy = (rows: typeof stateRows, key: string) => {
+const seriesBy = (rows: typeof stateRows, key: string, column: 'index_nsa' | 'index_sa' = 'index_nsa') => {
   const m = new Map<string, QuarterPoint[]>();
   for (const r of rows) {
     const id = r[key]!;
     if (!m.has(id)) m.set(id, []);
-    m.get(id)!.push({ year: +r.year!, quarter: +r.quarter!, value: +r.index_nsa! });
+    m.get(id)!.push({ year: +r.year!, quarter: +r.quarter!, value: +r[column]! });
   }
   return m;
 };
 const stateSeries = seriesBy(stateRows, 'state_code');
+const stateSeriesSa = seriesBy(stateRows, 'state_code', 'index_sa');
 
 const quarters: { year: number; quarter: number }[] = [];
 for (let k = qKey(START_YEAR, 1); k <= qKey(latest.year, latest.quarter); k++) {
@@ -56,17 +57,15 @@ const stateOut = states.map((s) => {
     division: s.division!,
     index: quarters.map((q) => r1(series.find((p) => p.year === q.year && p.quarter === q.quarter)?.value ?? NaN)),
     yoy: quarters.map((q) => r1(yoyChange(series, q.year, q.quarter))),
-    since2019: r1(changeBetween(series, BASE, latest)),
+    since2019: r1(placeMetrics(series, stateSeriesSa.get(s.state_code!) ?? [], latest, BASE).since),
   };
 });
 
-// U.S. from monthly data: average three months per quarter
-const usMonthly = read('hpi_us_division_monthly.csv')
-  .filter((r) => r.place_id === 'USA')
-  .map((r) => ({ year: +r.year!, month: +r.month!, value: +r.index_nsa! }));
-const usQ = monthlyToQuarterly(usMonthly);
-const usYoy = yoyChange(usQ, latest.year, latest.quarter);
-const usSince = changeBetween(usQ, BASE, latest);
+// U.S.: FHFA's official quarterly U.S. index (see AGENTS.md)
+const usRows = read('hpi_us_quarterly.csv');
+const us = placeMetrics(seriesBy(usRows, 'place_id').get('USA')!, seriesBy(usRows, 'place_id', 'index_sa').get('USA')!, latest, BASE);
+const usYoy = us.yoy;
+const usSince = us.since;
 
 const ranked = rankByYoy(
   stateOut.map((s) => ({ id: s.code, name: s.name, yoy: s.yoy[s.yoy.length - 1] ?? NaN })),

@@ -75,7 +75,7 @@ export function createMap({ data, topo, onSelect, onQuarter }: MapOptions) {
           `<dl><dt>Year over year</dt><dd>${fmtPct(s.yoy[current])}</dd>` +
           `<dt>HPI</dt><dd>${idx == null ? 'n/a' : idx.toFixed(1)}</dd>` +
           `<dt>Since 2019 Q4</dt><dd>${fmtPct(s.since2019)}*</dd></dl>` +
-          `<span class="tip-note">*Latest quarter</span>`,
+          `<span class="tip-note">*Latest quarter, seasonally adjusted</span>`,
       );
     const tip = tooltip.node()!;
     const left = Math.min(Math.max(x - box.left + 14, 4), box.width - tip.offsetWidth - 4);

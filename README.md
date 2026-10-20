@@ -189,4 +189,8 @@ The timeline, a presenter checklist, and the backup plan are in [`talk/outline.m
 
 Data comes from the [FHFA House Price Index](https://www.fhfa.gov/data/hpi/datasets) and the [CFPB HMDA Data Browser](https://ffiec.cfpb.gov/documentation/api/data-browser/). Both are public U.S. government data and need no API key. The FHFA data is public domain (CC0), and "FHFA HPI®" is a registered trademark of FHFA. The HMDA data in this repo is state-level totals only, with no loan-level records.
 
+U.S. values use FHFA's official quarterly U.S. index. Year-over-year changes use the index that is not seasonally adjusted. Changes since 2019 Q4 use the seasonally adjusted index, because they compare two different seasons. `AGENTS.md` has these rules for every agent.
+
+The recorded video in `videos/` was made before this correction. It shows +2.3% (U.S. year over year) and +64.0% (since 2019 Q4). The correct values for 2026 Q2 are +2.1% and +60.5%.
+
 Built from public FHFA and CFPB data. Not an official Fannie Mae, FHFA, or CFPB product.

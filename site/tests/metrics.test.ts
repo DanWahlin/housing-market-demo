@@ -2,8 +2,8 @@ import { describe, expect, it } from 'vitest';
 import {
   changeBetween,
   latestQuarter,
-  monthlyToQuarterly,
   pctChange,
+  placeMetrics,
   rankByYoy,
   topN,
   yoyChange,
@@ -51,22 +51,25 @@ describe('latestQuarter', () => {
   });
 });
 
-describe('monthlyToQuarterly', () => {
-  it('averages three months and drops incomplete quarters', () => {
-    const q = monthlyToQuarterly([
-      { year: 2026, month: 4, value: 100 },
-      { year: 2026, month: 5, value: 110 },
-      { year: 2026, month: 6, value: 120 },
-      { year: 2026, month: 7, value: 130 },
-    ]);
-    expect(q).toEqual([{ year: 2026, quarter: 2, value: 110 }]);
+describe('placeMetrics', () => {
+  // Q2 is seasonally high, so the NSA value in Q2 is above the SA value.
+  const nsa: QuarterPoint[] = [
+    { year: 2019, quarter: 4, value: 200 },
+    { year: 2025, quarter: 2, value: 306 },
+    { year: 2026, quarter: 2, value: 321.3 },
+  ];
+  const sa: QuarterPoint[] = [
+    { year: 2019, quarter: 4, value: 202 },
+    { year: 2025, quarter: 2, value: 300 },
+    { year: 2026, quarter: 2, value: 315 },
+  ];
+  const m = placeMetrics(nsa, sa, { year: 2026, quarter: 2 }, { year: 2019, quarter: 4 });
+  it('uses the unadjusted index for year over year', () => {
+    expect(m.yoy).toBeCloseTo((321.3 / 306 - 1) * 100);
   });
-  it('gives U.S. YoY from monthly averages', () => {
-    const months = [
-      ...[1, 2, 3].map((m) => ({ year: 2025, month: m, value: 100 })),
-      ...[1, 2, 3].map((m, i) => ({ year: 2026, month: m, value: 102 + i * 2 })),
-    ];
-    expect(yoyChange(monthlyToQuarterly(months), 2026, 1)).toBeCloseTo(4);
+  it('uses the seasonally adjusted index for the change since a base quarter', () => {
+    expect(m.since).toBeCloseTo((315 / 202 - 1) * 100);
+    expect(m.since).not.toBeCloseTo((321.3 / 200 - 1) * 100);
   });
 });
 

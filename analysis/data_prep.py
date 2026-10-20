@@ -15,10 +15,15 @@ def read(name):
 
 def load():
     states = sorted(read("states.csv"), key=lambda r: r["state_name"])
-    hpi = {(r["state_code"], int(r["year"]), int(r["quarter"])): float(r["index_nsa"])
-           for r in read("hpi_state_quarterly.csv")}
-    us_month = {(int(r["year"]), int(r["month"])): float(r["index_nsa"])
-                for r in read("hpi_us_division_monthly.csv") if r["place_id"] == "USA"}
+    # Rules (see AGENTS.md): year over year compares the same quarter, so it uses index_nsa.
+    # Index levels and the change since 2019 Q4 compare different seasons, so they use index_sa.
+    state_rows = read("hpi_state_quarterly.csv")
+    hpi = {(r["state_code"], int(r["year"]), int(r["quarter"])): float(r["index_nsa"]) for r in state_rows}
+    hpi_sa = {(r["state_code"], int(r["year"]), int(r["quarter"])): float(r["index_sa"]) for r in state_rows}
+    # FHFA's official quarterly U.S. index.
+    us_rows = read("hpi_us_quarterly.csv")
+    us_nsa = {(int(r["year"]), int(r["quarter"])): float(r["index_nsa"]) for r in us_rows}
+    us_sa = {(int(r["year"]), int(r["quarter"])): float(r["index_sa"]) for r in us_rows}
     hmda = defaultdict(lambda: [0, 0])
     for r in read("hmda_state_originations.csv"):
         hmda[(r["state_code"], int(r["year"]), r["loan_purpose"])] = [int(r["loans"]), int(r["dollar_volume"])]
@@ -28,9 +33,6 @@ def load():
     latest = max(k for k in quarters if all((c, *k) in hpi for c in codes))
     ly, lq = latest
 
-    def us_q(y, q):
-        vals = [us_month[(y, m)] for m in range(3 * q - 2, 3 * q + 1)]
-        return sum(vals) / 3
 
     rows = []
     for s in states:
@@ -49,16 +51,17 @@ def load():
     state_metrics = [{
         "code": s["state_code"], "name": s["state_name"], "region": s["region"],
         "yoy": hpi[(s["state_code"], ly, lq)] / hpi[(s["state_code"], ly - 1, lq)] - 1,
-        "since": hpi[(s["state_code"], ly, lq)] / hpi[(s["state_code"], 2019, 4)] - 1,
-        "index": hpi[(s["state_code"], ly, lq)],
+        "since": hpi_sa[(s["state_code"], ly, lq)] / hpi_sa[(s["state_code"], 2019, 4)] - 1,
+        "index": hpi_sa[(s["state_code"], ly, lq)],
     } for s in states]
 
     us = {
-        "yoy": us_q(ly, lq) / us_q(ly - 1, lq) - 1,
-        "since": us_q(ly, lq) / us_q(2019, 4) - 1,
-        "q4_yoy": {y: us_q(y, 4) / us_q(y - 1, 4) - 1 for y in YEARS},
+        "yoy": us_nsa[(ly, lq)] / us_nsa[(ly - 1, lq)] - 1,
+        "since": us_sa[(ly, lq)] / us_sa[(2019, 4)] - 1,
+        "q4_yoy": {y: us_nsa[(y, 4)] / us_nsa[(y - 1, 4)] - 1 for y in YEARS},
     }
     qrange = [k for k in quarters if (2015, 1) <= k <= latest]
-    hpi_matrix = [(f"{y} Q{q}", round(us_q(y, q), 2), [hpi[(c, y, q)] for c in codes]) for (y, q) in qrange]
+    # The trend chart shows index levels over many seasons, so it uses the seasonally adjusted index.
+    hpi_matrix = [(f"{y} Q{q}", round(us_sa[(y, q)], 2), [hpi_sa[(c, y, q)] for c in codes]) for (y, q) in qrange]
     return {"states": states, "codes": codes, "rows": rows, "state_metrics": state_metrics,
             "us": us, "latest": latest, "hpi_matrix": hpi_matrix}

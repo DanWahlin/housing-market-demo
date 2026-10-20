@@ -38,19 +38,18 @@ def rgb(h):
 
 # ---------- Data ----------
 def load():
-    m = pd.read_csv(DATA / "hpi_us_division_monthly.csv")
-    us = m[m.place_id == "USA"].copy()
-    us["quarter"] = (us.month - 1) // 3 + 1
-    uq = us.groupby(["year", "quarter"]).agg(v=("index_nsa", "mean"), n=("index_nsa", "size")).reset_index()
-    uq = uq[uq.n == 3].reset_index(drop=True)
+    # FHFA's official quarterly U.S. index (see AGENTS.md). v = not seasonally adjusted, sa = seasonally adjusted.
+    uq = pd.read_csv(DATA / "hpi_us_quarterly.csv").sort_values(["year", "quarter"])
+    uq = uq.rename(columns={"index_nsa": "v", "index_sa": "sa"})[["year", "quarter", "v", "sa"]].reset_index(drop=True)
+    # Year over year compares the same quarter, so it uses the unadjusted index.
     uq["yoy"] = uq.v.pct_change(4) * 100
 
     sq = pd.read_csv(DATA / "hpi_state_quarterly.csv")
     ly, lq = (int(x) for x in sq.sort_values(["year", "quarter"]).iloc[-1][["year", "quarter"]])
     uq = uq[(uq.year < ly) | ((uq.year == ly) & (uq.quarter <= lq))].reset_index(drop=True)
 
-    def uv(y, q):
-        return uq[(uq.year == y) & (uq.quarter == q)].v.iloc[0]
+    def uv(y, q, col="v"):
+        return uq[(uq.year == y) & (uq.quarter == q)][col].iloc[0]
 
     def change(df, key):
         cur = df[(df.year == ly) & (df.quarter == lq)].set_index(key).index_nsa
@@ -61,9 +60,10 @@ def load():
     peak = uq.loc[uq.yoy.idxmax()]
     return dict(
         ly=ly, lq=lq, period=f"{ly} Q{lq}", uq=uq,
-        us_level=uv(ly, lq), us_yoy=uv(ly, lq) / uv(ly - 1, lq) * 100 - 100,
-        us_19=uv(ly, lq) / uv(2019, 4) * 100 - 100,
-        record=uv(ly, lq) >= uq.v.max(),
+        # Levels and the change since 2019 Q4 compare different seasons, so they use the seasonally adjusted index.
+        us_level=uv(ly, lq, "sa"), us_yoy=uv(ly, lq) / uv(ly - 1, lq) * 100 - 100,
+        us_19=uv(ly, lq, "sa") / uv(2019, 4, "sa") * 100 - 100,
+        record=uv(ly, lq, "sa") >= uq.sa.max(),
         peak_yoy=peak.yoy, peak_label=f"{int(peak.year)} Q{int(peak.quarter)}",
         st=change(sq, "state_code"),
         st_names=pd.read_csv(DATA / "states.csv").set_index("state_code").state_name,
@@ -248,7 +248,7 @@ def build():
 
     P, ly, lq, uq = d["period"], d["ly"], d["lq"], d["uq"]
     st, mt, hm, sn = d["st"], d["mt"], d["hm"], d["st_names"]
-    hpi_src = f"Source: FHFA House Price Index, purchase-only, not seasonally adjusted (1991 Q1 = 100). Latest period: {P}."
+    hpi_src = f"Source: FHFA HPI, purchase-only (1991 Q1 = 100), {P}. YoY: not seasonally adjusted. Levels and since 2019 Q4: seasonally adjusted."
     hmda_src = "Source: CFPB HMDA Data Browser, originated loans, 50 states and DC. Latest year: 2025."
     lead_st, lag_st = st.index[-1], st.index[0]
     st_down, mt_down, mt_n = int((st < 0).sum()), int((mt < 0).sum()), len(mt)
@@ -262,7 +262,7 @@ def build():
     text(s, 0.53, 2.35, 8.9, 0.3,
          "Where prices are, how fast they change, who leads, and how mortgage lending changed.", size=14)
     kpis = [
-        (f"{d['us_level']:.1f}", "U.S. house price index", f"{P}, 1991 Q1 = 100"),
+        (f"{d['us_level']:.1f}", "U.S. house price index", f"{P}, seasonally adjusted"),
         (f"+{d['us_yoy']:.1f}%", "U.S. year-over-year change", f"{P} compared with {ly - 1} Q{lq}"),
         (f"+{d['us_19']:.1f}%", "Change since 2019 Q4", "Last quarter before the pandemic"),
     ]
@@ -278,7 +278,8 @@ def build():
              f"The U.S. index is {d['us_level']:.1f}, where 1991 Q1 equals 100. The index shows price change, not dollar prices. "
              f"Prices are {d['us_19']:.1f}% above 2019 Q4, the last quarter before the pandemic. "
              f"Compared with {ly - 1} Q{lq}, they rose {d['us_yoy']:.1f}%. "
-             "Each U.S. quarterly value is the average of the three monthly values.")
+             "The U.S. values come from FHFA's quarterly U.S. index. The index level and the change since 2019 Q4 are seasonally adjusted, "
+             "because they compare different seasons. The year-over-year change is not seasonally adjusted.")
 
     # 2. Where prices are now: long-run index
     rec = "a record high" if d["record"] else "near its high"
@@ -288,8 +289,8 @@ def build():
                    hpi_src)
     cd = CategoryChartData()
     cd.categories = [str(y) if q == 1 else f"{y} Q{q}" for y, q in zip(uq.year, uq.quarter)]
-    cd.add_series("U.S. HPI", [round(v, 1) for v in uq.v])
-    ch = chart_card(s, "U.S. house price index (1991 Q1 = 100), quarterly", XL_CHART_TYPE.LINE, cd)
+    cd.add_series("U.S. HPI, seasonally adjusted", [round(v, 1) for v in uq.sa])
+    ch = chart_card(s, "U.S. house price index (1991 Q1 = 100), quarterly, seasonally adjusted", XL_CHART_TYPE.LINE, cd)
     ser = ch.series[0]
     ser.format.line.color.rgb = rgb(C_BLUE)
     ser.format.line.width = Pt(2.5)
@@ -301,9 +302,9 @@ def build():
     axis_title(ch.category_axis, "Year")
     point_label(ser, len(uq) - 1, f"{P}\n{d['us_level']:.1f}", XL_LABEL_POSITION.ABOVE)
     i19 = int(uq.index[(uq.year == 2019) & (uq.quarter == 4)][0])
-    point_label(ser, i19, f"2019 Q4\n{uq.v[i19]:.1f}", XL_LABEL_POSITION.ABOVE, size=10, color=BODY)
+    point_label(ser, i19, f"2019 Q4\n{uq.sa[i19]:.1f}", XL_LABEL_POSITION.ABOVE, size=10, color=BODY)
     notes(s, "The line shows the U.S. purchase-only house price index since 1991. "
-             f"In 2019 Q4 the index was {uq.v[i19]:.1f}. In {P} it is {d['us_level']:.1f}, an increase of {d['us_19']:.1f}%. "
+             f"In 2019 Q4 the seasonally adjusted index was {uq.sa[i19]:.1f}. In {P} it is {d['us_level']:.1f}, an increase of {d['us_19']:.1f}%. "
              "The steepest climb was from 2020 to 2022. Since then the line continues to go up, but more slowly. "
              "This is an index of price change, not an average dollar price.")
 

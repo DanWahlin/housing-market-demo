@@ -4,12 +4,6 @@ export interface QuarterPoint {
   value: number;
 }
 
-export interface MonthPoint {
-  year: number;
-  month: number;
-  value: number;
-}
-
 export interface Ranked {
   id: string;
   name: string;
@@ -52,20 +46,18 @@ export function changeBetween(
   return pctChange(valueAt(series, to.year, to.quarter), valueAt(series, from.year, from.quarter));
 }
 
-/** Average monthly values into quarters. Only quarters with all three months are kept. */
-export function monthlyToQuarterly(points: MonthPoint[]): QuarterPoint[] {
-  const groups = new Map<number, { year: number; quarter: number; values: number[] }>();
-  for (const p of points) {
-    const quarter = Math.ceil(p.month / 3);
-    const k = qKey(p.year, quarter);
-    const g = groups.get(k) ?? { year: p.year, quarter, values: [] };
-    g.values.push(p.value);
-    groups.set(k, g);
-  }
-  return [...groups.entries()]
-    .sort((a, b) => a[0] - b[0])
-    .filter(([, g]) => g.values.length === 3)
-    .map(([, g]) => ({ year: g.year, quarter: g.quarter, value: g.values.reduce((s, v) => s + v, 0) / 3 }));
+/**
+ * Standard metrics for one place (see AGENTS.md):
+ * - Year over year compares the same quarter in two years, so it uses the unadjusted index (NSA).
+ * - Change since a base quarter compares two different seasons, so it uses the seasonally adjusted index (SA).
+ */
+export function placeMetrics(
+  nsa: QuarterPoint[],
+  sa: QuarterPoint[],
+  latest: { year: number; quarter: number },
+  base: { year: number; quarter: number },
+): { yoy: number; since: number } {
+  return { yoy: yoyChange(nsa, latest.year, latest.quarter), since: changeBetween(sa, base, latest) };
 }
 
 /** Sort by year-over-year change, largest first. Ties sort by name. NaN values are dropped. */

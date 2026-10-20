@@ -270,8 +270,8 @@ c3.set_y_axis({"name": "HPI (1991 Q1 = 100)", "num_format": "0", "num_font": {"s
 
 src = [
     "Source: CFPB HMDA, originated loans, 2018-2025 (latest HMDA year: 2025).",
-    "Source: FHFA HPI, purchase-only, index_nsa. U.S. Q4 = average of Oct-Dec monthly index. Years 2018-2025.",
-    f"Source: FHFA HPI, purchase-only, index_nsa. Latest quarter: {LATEST}. U.S. = average of 3 monthly values.",
+    "Source: FHFA HPI, purchase-only, index_nsa (not seasonally adjusted). U.S. = FHFA quarterly U.S. index. Years 2018-2025.",
+    f"Source: FHFA HPI, purchase-only, index_sa (seasonally adjusted). Latest quarter: {LATEST}. U.S. = FHFA quarterly U.S. index.",
 ]
 for k, c in enumerate([c1, c2, c3]):
     top = 10 + 16 * k
@@ -287,7 +287,7 @@ notes.set_column("A:A", 30); notes.set_column("B:B", 70); notes.set_column("C:C"
 notes.write(0, 0, "Notes and sources", fmt["title"])
 notes.write_row(2, 0, ["Source", "Link", "Used for"], fmt["h"])
 srcs = [
-    ("FHFA House Price Index (HPI) master file", "https://www.fhfa.gov/hpi/download/monthly/hpi_master.csv", "Heat map, home price cards and charts (traditional, purchase-only, index_nsa)"),
+    ("FHFA House Price Index (HPI) master file", "https://www.fhfa.gov/hpi/download/monthly/hpi_master.csv", "Heat map, home price cards and charts (traditional, purchase-only; index_nsa for year over year, index_sa for levels and since 2019 Q4)"),
     ("CFPB HMDA Data Browser API", "https://ffiec.cfpb.gov/v2/data-browser-api/view/aggregations", "Loans and dollar volume by state, year, and loan purpose (originated loans only)"),
     ("U.S. Census Bureau regions and divisions", "https://www2.census.gov/geo/pdfs/maps-data/maps/reference/us_regdiv.pdf", "Region and division for each state"),
 ]
@@ -298,8 +298,9 @@ defs = [
     ("HPI", "The HPI is an index, not a price. 1991 Q1 = 100 (January 1991 = 100 for monthly data)."),
     ("Q4 HPI YoY change", "State Q4 index_nsa divided by the same state's Q4 index_nsa one year earlier, minus 1."),
     ("State YoY change (cards)", f"State index_nsa for {LATEST} compared with the same quarter one year earlier."),
-    ("U.S. YoY change", f"Average of the three monthly U.S. index_nsa values for {LATEST}, compared with the same quarter one year earlier."),
-    ("Change since 2019 Q4", f"{LATEST} index compared with 2019 Q4 (the last quarter before the pandemic)."),
+    ("U.S. YoY change", f"FHFA's quarterly U.S. index_nsa for {LATEST}, compared with the same quarter one year earlier."),
+    ("Change since 2019 Q4", f"index_sa (seasonally adjusted) for {LATEST} compared with 2019 Q4, the last quarter before the pandemic. The two quarters are different seasons, so the seasonally adjusted index is used."),
+    ("HPI trend chart", "index_sa (seasonally adjusted), because the chart compares many different quarters."),
     ("Loans", "HMDA originated loans (action taken = 1). Purposes: Home purchase (1), Refinance (31), Cash-out refinance (32)."),
     ("Avg loan size", "Total dollar volume / total loans for the three loan purposes. The PivotTable uses the calculated field 'Weighted loan size' (= sum of dollar volume / sum of loans)."),
     ("Sheets", "Dashboard (state drop-down, KPI cards, charts, heat map, sparklines); Data (tblData table); Pivot (PivotTable and PivotChart); Calc (formula helpers for the dashboard)."),

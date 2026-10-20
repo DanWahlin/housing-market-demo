@@ -44,7 +44,7 @@ export function createStatePanel(data: StatesFile, hmda: HmdaFile, onClose: (cod
     const lastYear = rows[rows.length - 1];
     d3.select('#state-stats').html(
       stat(`YoY, ${data.quarters[quarter]}`, fmtPct(s.yoy[quarter])) +
-        stat(`Since 2019 Q4`, fmtPct(s.since2019)) +
+        stat(`Since 2019 Q4 (SA)`, fmtPct(s.since2019)) +
         stat(`Loans, ${lastYear?.year ?? ''}`, lastYear ? fmtCompact(d3.sum(lastYear.loans)) : 'n/a'),
     );
     drawLine(s, quarter, latest, animate);
