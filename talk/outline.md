@@ -84,7 +84,7 @@ Get the public housing data for this demo. Use the "Data" section in AGENTS.md.
 4. Commit the script and the data. Then push this branch to GitHub as live-data, and replace live-data if it already exists.
 ```
 
-### Session 1: Website (Plan mode, then Autopilot)
+### Session 1: Website (Plan mode, then Autopilot, from `live-data`)
 
 Developers and IT managers.
 
@@ -111,7 +111,7 @@ Keep the plan short.
 
 When the plan appears, approve it and select **Autopilot**.
 
-### Session 2: Excel workbook (Autopilot)
+### Session 2: Excel workbook (Autopilot, from `live-data`)
 
 Business analysts.
 
@@ -127,14 +127,14 @@ The workbook must have:
 When the workbook is done, open it once in Microsoft Excel to make sure that it opens without a repair message, and then close it.
 ```
 
-### Session 3: PowerPoint briefing (Autopilot)
+### Session 3: PowerPoint briefing (Autopilot, from `live-data`)
 
 Knowledge workers and leaders.
 
 ```text
 Create a 7-slide executive briefing, briefings/housing-market-briefing.pptx, about the U.S. housing market. Use the data in data/. Use the look of templates/github-dark-template.pptx (colors, fonts, and card style).
 
-The audience is busy leaders. Tell this story: where home prices are now, how fast they changed, which states and metros lead and which lag, how mortgage originations changed from 2018 to 2025 (home purchase compared to refinance), and three takeaways.
+The audience is business leaders. Tell this story: where home prices are now, how fast they changed, which states and metros lead and which lag, how mortgage originations changed from 2018 to 2025 (home purchase compared to refinance), and three takeaways.
 
 Each slide has one headline that states the insight and one chart or visual. Use native PowerPoint charts so people can edit them. Add speaker notes to each slide.
 
