@@ -81,3 +81,18 @@ main().catch((err) => {
   console.error(err);
   d3.select('#main').insert('p', ':first-child').attr('class', 'error').attr('role', 'alert').text('The data could not load. Please reload the page.');
 });
+
+// Light and dark theme. The inline script in index.html sets the first theme before paint.
+const themeButton = document.getElementById('theme-toggle')!;
+const themeMeta = document.querySelector('meta[name="theme-color"]')!;
+function applyTheme(theme: string) {
+  document.documentElement.dataset.theme = theme;
+  themeButton.setAttribute('aria-label', `Switch to ${theme === 'light' ? 'dark' : 'light'} theme`);
+  themeMeta.setAttribute('content', getComputedStyle(document.documentElement).getPropertyValue('--bg').trim());
+}
+themeButton.addEventListener('click', () => {
+  const theme = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+  localStorage.setItem('theme', theme);
+  applyTheme(theme);
+});
+applyTheme(document.documentElement.dataset.theme ?? 'dark');

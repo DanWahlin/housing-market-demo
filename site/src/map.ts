@@ -90,7 +90,9 @@ export function createMap({ data, topo, onSelect, onQuarter }: MapOptions) {
   function setQuarter(i: number, animate = false) {
     current = i;
     const t = paths.transition().duration(animate && !reducedMotion() ? 280 : 0).ease(d3.easeCubicOut);
-    t.attr('fill', (d) => (d.s.yoy[i] == null ? '#3a4250' : yoyColor(d.s.yoy[i]!)));
+    // States with no value get the .na class; its CSS fill follows the theme.
+    paths.classed('na', (d) => d.s.yoy[i] == null);
+    t.attr('fill', (d) => (d.s.yoy[i] == null ? null : yoyColor(d.s.yoy[i]!)));
     paths.attr('aria-label', (d) => label(d.s));
     d3.select('#map-period').text(data.quarters[i]);
     slider.value = String(i);
