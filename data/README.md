@@ -1,39 +1,93 @@
-# Data
+# Housing data dictionary
 
-Public housing data for the demo. Regenerate with `node scripts/fetch-data.mjs` (Node 18+, no npm packages, no API keys).
+Public data for the housing market demo. Do not edit these files by hand. To refresh them, run:
 
-Snapshot pulled 2026-10-17. Latest complete quarter in `hpi_state_quarterly.csv`: **2026 Q2**. Monthly U.S./division data runs through 2026-07.
+```bash
+node scripts/fetch-data.mjs
+```
+
+The script uses Node.js 18 or later and no npm packages. It takes about 15 seconds.
 
 ## Sources
 
-- **FHFA House Price Index (HPI)**, master file: <https://www.fhfa.gov/hpi/download/monthly/hpi_master.csv> ([about the HPI](https://www.fhfa.gov/data/hpi)). Filtered to `hpi_type = traditional`, `hpi_flavor = purchase-only`.
-- **CFPB HMDA Data Browser API**: <https://ffiec.cfpb.gov/v2/data-browser-api/view/aggregations> ([docs](https://ffiec.cfpb.gov/documentation/api/data-browser/)). Originated loans only (`actions_taken=1`), one request per state and year.
+| Source | Link | Used for |
+| --- | --- | --- |
+| FHFA House Price Index (HPI) master file | <https://www.fhfa.gov/hpi/download/monthly/hpi_master.csv> ([about the HPI](https://www.fhfa.gov/data/hpi)) | All `hpi_*.csv` files |
+| CFPB HMDA Data Browser API | <https://ffiec.cfpb.gov/v2/data-browser-api/view/aggregations> ([documentation](https://ffiec.cfpb.gov/documentation/api/data-browser/)) | `hmda_state_originations.csv` |
+| U.S. Census Bureau regions and divisions | <https://www2.census.gov/geo/pdfs/maps-data/maps/reference/us_regdiv.pdf> | `states.csv` |
 
-HPI is an **index, not a price**: 1991 Q1 = 100. `index_nsa` = not seasonally adjusted, `index_sa` = seasonally adjusted.
+## Important notes
+
+- **HPI is an index, not a price.** 1991 Q1 = 100 (January 1991 = 100 for monthly data). It shows the change in prices, not dollar values.
+- All HPI files use the **traditional, purchase-only** index.
+- `index_nsa` = not seasonally adjusted. `index_sa` = seasonally adjusted. Use `index_nsa` to compare the same quarter in two years (year over year). Use `index_sa` to compare two different quarters, for example the change since 2019 Q4.
+- For U.S. values, use `hpi_us_quarterly.csv`, FHFA's official quarterly U.S. index. Do not average the monthly values.
+- HMDA rows are **originated loans** only (`actions_taken=1`). One API request for each state and year.
+- **Latest complete quarter** in this snapshot: **2026 Q2**. The monthly file goes to July 2026.
 
 ## Files
 
-| File | Rows | Coverage | Columns |
-| --- | --- | --- | --- |
-| `states.csv` | 51 | 50 states + DC | `state_code` (USPS), `state_name`, `fips`, `region`, `division` (Census) |
-| `hpi_state_quarterly.csv` | 7,242 | 51 states, 1991 Q1 – 2026 Q2 | `state_code`, `state_name`, `year`, `quarter` (1–4), `index_nsa`, `index_sa` |
-| `hpi_metro_quarterly.csv` | 14,200 | 100 largest metros (CBSA), 1991 Q1 – 2026 Q2 | `cbsa_code`, `metro_name`, `year`, `quarter`, `index_nsa`, `index_sa` |
-| `hpi_us_division_monthly.csv` | 4,270 | U.S. (`USA`) + 9 Census divisions (`DV_*`), 1991-01 – 2026-07 | `place_id`, `place_name`, `year`, `month` (1–12), `index_nsa`, `index_sa` |
-| `hmda_state_originations.csv` | 1,224 | 51 states × 2018–2025 × 3 purposes | `state_code`, `year`, `loan_purpose`, `loans`, `dollar_volume` (USD) |
+### `states.csv` (51 rows: 50 states and DC)
 
-`loan_purpose` values: `Home purchase` (HMDA code 1), `Refinance` (31), `Cash-out refinance` (32).
+| Column | Description |
+| --- | --- |
+| `state_code` | Two-letter USPS code, for example `VA` |
+| `state_name` | Full state name |
+| `fips` | Two-digit state FIPS code (text, with a leading zero) |
+| `region` | Census region: Northeast, Midwest, South, West |
+| `division` | Census division, for example South Atlantic |
 
-## Standard metrics (use these everywhere)
+### `hpi_state_quarterly.csv` (7,242 rows: 51 states, 1991 Q1 to 2026 Q2)
 
-- **Latest period:** latest complete quarter in `hpi_state_quarterly.csv`.
-- **U.S. year-over-year:** average the three monthly `USA` `index_nsa` values for the latest quarter; compare with the same quarter a year earlier.
-- **Change since 2019 Q4:** latest quarter vs. 2019 Q4.
-- **State / metro year-over-year:** `index_nsa` latest quarter vs. same quarter a year earlier.
+| Column | Description |
+| --- | --- |
+| `state_code` | Two-letter USPS code |
+| `state_name` | Full state name |
+| `year` | Year |
+| `quarter` | Quarter, 1 to 4 |
+| `index_nsa` | HPI, not seasonally adjusted |
+| `index_sa` | HPI, seasonally adjusted |
 
-## Notes
+### `hpi_metro_quarterly.csv` (14,200 rows: 100 largest metros, 1991 Q1 to 2026 Q2)
 
-- The HMDA API returns `dollar_volume` rounded to about 7 significant digits.
-- Some metro names contain commas and are quoted; use a real CSV parser.
-- Cite "FHFA HPI" and/or "CFPB HMDA" with the latest period next to every chart.
+| Column | Description |
+| --- | --- |
+| `cbsa_code` | Core-based statistical area (CBSA) code. Some are metro divisions (MSAD). |
+| `metro_name` | Metro name, for example `Albany-Schenectady-Troy, NY` (has commas, so it is in quotes) |
+| `year`, `quarter`, `index_nsa`, `index_sa` | Same as the state file |
+
+### `hpi_us_quarterly.csv` (142 rows: United States, 1991 Q1 to 2026 Q2)
+
+FHFA's official quarterly U.S. index.
+
+| Column | Description |
+| --- | --- |
+| `place_id` | `USA` |
+| `place_name` | `United States` |
+| `year`, `quarter`, `index_nsa`, `index_sa` | Same as the state file |
+
+### `hpi_us_division_monthly.csv` (4,270 rows: U.S. and 9 divisions, January 1991 to July 2026)
+
+| Column | Description |
+| --- | --- |
+| `place_id` | `USA` for the United States, or a division ID such as `DV_SA` |
+| `place_name` | `United States` or the Census division name |
+| `year` | Year |
+| `month` | Month, 1 to 12 |
+| `index_nsa`, `index_sa` | Same as above |
+
+### `hmda_state_originations.csv` (1,224 rows: 51 states, 2018 to 2025, 3 loan purposes)
+
+| Column | Description |
+| --- | --- |
+| `state_code` | Two-letter USPS code |
+| `year` | HMDA reporting year |
+| `loan_purpose` | `Home purchase` (code 1), `Refinance` (code 31), or `Cash-out refinance` (code 32) |
+| `loans` | Number of originated loans |
+| `dollar_volume` | Total loan amount in U.S. dollars |
+
+## Attribution
+
+Show the source (FHFA HPI, CFPB HMDA) and the latest period next to every chart.
 
 Built from public FHFA and CFPB data. Not an official Fannie Mae, FHFA, or CFPB product.

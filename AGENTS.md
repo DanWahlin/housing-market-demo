@@ -13,6 +13,7 @@ The first session (the data session) downloads the data into `data/` and pushes 
 | `states.csv` | 50 states and DC with Census regions and divisions | `state_code`, `state_name`, `fips`, `region`, `division` |
 | `hpi_state_quarterly.csv` | FHFA HPI master file: `traditional`, `purchase-only`, `quarterly`, level `State` (50 states and DC only) | `state_code`, `state_name`, `year`, `quarter`, `index_nsa`, `index_sa` |
 | `hpi_metro_quarterly.csv` | FHFA HPI master file: `traditional`, `purchase-only`, `quarterly`, level `MSA` | `cbsa_code`, `metro_name`, `year`, `quarter`, `index_nsa`, `index_sa` |
+| `hpi_us_quarterly.csv` | FHFA HPI master file: `traditional`, `purchase-only`, `quarterly`, level `USA or Census Division`, `place_id` `USA` (the official quarterly U.S. index) | `place_id`, `place_name`, `year`, `quarter`, `index_nsa`, `index_sa` |
 | `hpi_us_division_monthly.csv` | FHFA HPI master file: `traditional`, `purchase-only`, `monthly`, level `USA or Census Division` | `place_id`, `place_name`, `year`, `month`, `index_nsa`, `index_sa` |
 | `hmda_state_originations.csv` | CFPB HMDA API: originated loans for each state and year, 2018 to 2025 | `state_code`, `year`, `loan_purpose`, `loans`, `dollar_volume` |
 
@@ -30,9 +31,10 @@ The first session (the data session) downloads the data into `data/` and pushes 
 - Use only the data in `data/`. Do not invent numbers. Show the latest period and the source (FHFA HPI, CFPB HMDA) next to every chart.
 - Use these standard metrics so that every output shows the same numbers:
   - **Latest period:** the latest complete quarter in `hpi_state_quarterly.csv`.
-  - **U.S. year-over-year change:** average the three monthly U.S. `index_nsa` values for the latest complete quarter, then compare with the same quarter one year earlier.
-  - **Change since 2019 Q4:** the latest quarter compared with 2019 Q4 (the last quarter before the pandemic).
-  - **State and metro year-over-year change:** `index_nsa` for the latest quarter compared with the same quarter one year earlier.
+  - **U.S. values:** use FHFA's official quarterly U.S. index in `hpi_us_quarterly.csv`. Do not average the monthly values.
+  - **Year-over-year change (U.S., state, and metro):** `index_nsa` for the latest quarter compared with the same quarter one year earlier. Both quarters are the same season, so the unadjusted index is correct.
+  - **Change since 2019 Q4 (U.S. and state):** `index_sa` for the latest quarter compared with 2019 Q4 (the last quarter before the pandemic). These are two different seasons, so use the seasonally adjusted index. The unadjusted index overstates this change by about 3 points.
+  - **Rule for any other comparison:** if the two periods are the same quarter or month in different years, use `index_nsa`. If they are different quarters or months, use `index_sa`.
 - Never include names of people, email addresses, or phone numbers in any output.
 - Report facts from the data. Do not make forecasts, give investment advice, or say anything about Fannie Mae's views. Add this footer to each output: "Built from public FHFA and CFPB data. Not an official Fannie Mae, FHFA, or CFPB product."
 

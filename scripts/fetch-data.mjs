@@ -1,16 +1,16 @@
-// Downloads FHFA HPI and CFPB HMDA data and writes five CSV files to data/.
-// Usage: node scripts/fetch-data.mjs   (Node 18+, no npm packages)
+// Downloads public housing data (FHFA HPI and CFPB HMDA) and writes CSV files to data/.
+// Usage: node scripts/fetch-data.mjs   (Node.js 18+, no npm packages)
 import { mkdir, writeFile } from 'node:fs/promises';
-import { join, dirname } from 'node:path';
+import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const DATA = join(dirname(fileURLToPath(import.meta.url)), '..', 'data');
+const DATA_DIR = join(dirname(fileURLToPath(import.meta.url)), '..', 'data');
 const HPI_URL = 'https://www.fhfa.gov/hpi/download/monthly/hpi_master.csv';
 const HMDA_URL = 'https://ffiec.cfpb.gov/v2/data-browser-api/view/aggregations';
 const HMDA_YEARS = [2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025];
 const LOAN_PURPOSES = { 1: 'Home purchase', 31: 'Refinance', 32: 'Cash-out refinance' };
 
-// 50 states + DC: [code, name, fips, region, division]
+// [code, name, fips, region, division]
 const STATES = [
   ['AL', 'Alabama', '01', 'South', 'East South Central'],
   ['AK', 'Alaska', '02', 'West', 'Pacific'],
@@ -64,18 +64,18 @@ const STATES = [
   ['WI', 'Wisconsin', '55', 'Midwest', 'East North Central'],
   ['WY', 'Wyoming', '56', 'West', 'Mountain'],
 ];
-const STATE_NAME = Object.fromEntries(STATES.map(s => [s[0], s[1]]));
+const STATE_NAMES = new Map(STATES.map(([code, name]) => [code, name]));
 
-// Minimal RFC 4180 CSV parser (handles quoted fields with commas and "" escapes).
+// Minimal RFC 4180 parser: handles quoted fields with commas, quotes, and newlines.
 function parseCsv(text) {
   const rows = [];
   let row = [], field = '', inQuotes = false;
   for (let i = 0; i < text.length; i++) {
     const c = text[i];
     if (inQuotes) {
-      if (c === '"') {
-        if (text[i + 1] === '"') { field += '"'; i++; } else inQuotes = false;
-      } else field += c;
+      if (c === '"' && text[i + 1] === '"') { field += '"'; i++; }
+      else if (c === '"') inQuotes = false;
+      else field += c;
     } else if (c === '"') inQuotes = true;
     else if (c === ',') { row.push(field); field = ''; }
     else if (c === '\n' || c === '\r') {
@@ -84,88 +84,111 @@ function parseCsv(text) {
     } else field += c;
   }
   if (field || row.length) { row.push(field); rows.push(row); }
-  return rows.filter(r => r.length > 1 || r[0] !== '');
+  const [header, ...body] = rows.filter((r) => r.length > 1 || r[0] !== '');
+  return body.map((r) => Object.fromEntries(header.map((h, i) => [h, r[i] ?? ''])));
 }
 
-const esc = v => {
-  const s = v == null ? '' : String(v);
-  return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
-};
-async function writeCsv(name, header, rows) {
-  const body = [header, ...rows].map(r => r.map(esc).join(',')).join('\n') + '\n';
-  await writeFile(join(DATA, name), body);
+const csvCell = (v) => (/[",\n]/.test(String(v)) ? `"${String(v).replace(/"/g, '""')}"` : String(v));
+
+async function writeCsv(name, columns, rows) {
+  const lines = [columns.join(','), ...rows.map((r) => columns.map((c) => csvCell(r[c] ?? '')).join(','))];
+  await writeFile(join(DATA_DIR, name), lines.join('\n') + '\n');
   console.log(`wrote data/${name} (${rows.length} rows)`);
 }
 
 const byKeys = (...keys) => (a, b) => {
-  for (const k of keys) { if (a[k] < b[k]) return -1; if (a[k] > b[k]) return 1; }
+  for (const k of keys) {
+    const x = a[k], y = b[k];
+    if (x !== y) return typeof x === 'number' ? x - y : String(x).localeCompare(String(y));
+  }
   return 0;
 };
 
 async function fetchHpi() {
-  console.log(`downloading ${HPI_URL} ...`);
+  console.log(`downloading ${HPI_URL}`);
   const res = await fetch(HPI_URL);
-  if (!res.ok) throw new Error(`FHFA HTTP ${res.status}`);
-  const [header, ...rows] = parseCsv(await res.text());
-  const col = Object.fromEntries(header.map((h, i) => [h.trim(), i]));
-  const recs = rows
-    .map(r => Object.fromEntries(Object.entries(col).map(([k, i]) => [k, (r[i] ?? '').trim()])))
-    .filter(r => r.hpi_type === 'traditional' && r.hpi_flavor === 'purchase-only')
-    .map(r => ({ ...r, yr: +r.yr, period: +r.period }));
-  const pick = (freq, level) => recs.filter(r => r.frequency === freq && r.level === level)
-    .sort(byKeys('place_id', 'yr', 'period'));
+  if (!res.ok) throw new Error(`HPI download failed: HTTP ${res.status}`);
+  const rows = parseCsv(await res.text()).filter(
+    (r) => r.hpi_type === 'traditional' && r.hpi_flavor === 'purchase-only',
+  );
+  const pick = (frequency, level) => rows.filter((r) => r.frequency === frequency && r.level === level);
+  const num = (v) => (v === '' ? '' : Number(v));
 
-  const state = pick('quarterly', 'State').filter(r => STATE_NAME[r.place_id])
-    .map(r => [r.place_id, STATE_NAME[r.place_id], r.yr, r.period, r.index_nsa, r.index_sa]);
-  await writeCsv('hpi_state_quarterly.csv', ['state_code', 'state_name', 'year', 'quarter', 'index_nsa', 'index_sa'], state);
+  const state = pick('quarterly', 'State')
+    .filter((r) => STATE_NAMES.has(r.place_id))
+    .map((r) => ({
+      state_code: r.place_id, state_name: STATE_NAMES.get(r.place_id),
+      year: +r.yr, quarter: +r.period, index_nsa: num(r.index_nsa), index_sa: num(r.index_sa),
+    }))
+    .sort(byKeys('state_code', 'year', 'quarter'));
 
   const metro = pick('quarterly', 'MSA')
-    .map(r => [r.place_id, r.place_name, r.yr, r.period, r.index_nsa, r.index_sa]);
-  await writeCsv('hpi_metro_quarterly.csv', ['cbsa_code', 'metro_name', 'year', 'quarter', 'index_nsa', 'index_sa'], metro);
+    .map((r) => ({
+      cbsa_code: r.place_id, metro_name: r.place_name,
+      year: +r.yr, quarter: +r.period, index_nsa: num(r.index_nsa), index_sa: num(r.index_sa),
+    }))
+    .sort(byKeys('cbsa_code', 'year', 'quarter'));
 
-  const div = pick('monthly', 'USA or Census Division')
-    .map(r => [r.place_id, r.place_name, r.yr, r.period, r.index_nsa, r.index_sa]);
-  await writeCsv('hpi_us_division_monthly.csv', ['place_id', 'place_name', 'year', 'month', 'index_nsa', 'index_sa'], div);
+  const division = pick('monthly', 'USA or Census Division')
+    .map((r) => ({
+      place_id: r.place_id, place_name: r.place_name,
+      year: +r.yr, month: +r.period, index_nsa: num(r.index_nsa), index_sa: num(r.index_sa),
+    }))
+    .sort(byKeys('place_id', 'year', 'month'));
+
+  // FHFA's official quarterly U.S. index. Use it for U.S. values instead of averaging monthly values.
+  const usQuarterly = pick('quarterly', 'USA or Census Division')
+    .filter((r) => r.place_id === 'USA')
+    .map((r) => ({
+      place_id: r.place_id, place_name: r.place_name,
+      year: +r.yr, quarter: +r.period, index_nsa: num(r.index_nsa), index_sa: num(r.index_sa),
+    }))
+    .sort(byKeys('year', 'quarter'));
+
+  await writeCsv('hpi_us_quarterly.csv', ['place_id', 'place_name', 'year', 'quarter', 'index_nsa', 'index_sa'], usQuarterly);
+  await writeCsv('hpi_state_quarterly.csv', ['state_code', 'state_name', 'year', 'quarter', 'index_nsa', 'index_sa'], state);
+  await writeCsv('hpi_metro_quarterly.csv', ['cbsa_code', 'metro_name', 'year', 'quarter', 'index_nsa', 'index_sa'], metro);
+  await writeCsv('hpi_us_division_monthly.csv', ['place_id', 'place_name', 'year', 'month', 'index_nsa', 'index_sa'], division);
 }
 
-async function fetchHmdaOne(state, year) {
-  const url = `${HMDA_URL}?years=${year}&states=${state}&actions_taken=1&loan_purposes=1,31,32`;
-  for (let attempt = 1; attempt <= 4; attempt++) {
-    try {
-      const res = await fetch(url, { headers: { 'User-Agent': 'curl/8.7.1', Accept: 'application/json' } });
-      if (res.status === 400 || res.status === 404) return []; // year not published
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const json = await res.json();
-      return (json.aggregations ?? []).filter(a => a.count > 0).map(a =>
-        [state, year, LOAN_PURPOSES[a.loan_purposes] ?? a.loan_purposes, a.count, Math.round(a.sum)]);
-    } catch (err) {
-      if (attempt === 4) throw new Error(`HMDA ${state} ${year}: ${err.message}`);
-      await new Promise(r => setTimeout(r, 1000 * attempt));
-    }
+async function fetchHmdaOne(state, year, attempt = 1) {
+  const url = `${HMDA_URL}?years=${year}&states=${state}&actions_taken=1&loan_purposes=${Object.keys(LOAN_PURPOSES).join(',')}`;
+  try {
+    // The API returns HTTP 403 for some User-Agent values.
+    const res = await fetch(url, { headers: { 'User-Agent': 'curl/8.7.1', Accept: 'application/json' } });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const { aggregations } = await res.json();
+    return aggregations.map((a) => ({
+      state_code: state, year, loan_purpose: LOAN_PURPOSES[a.loan_purposes],
+      loans: a.count, dollar_volume: Math.round(a.sum),
+    }));
+  } catch (err) {
+    if (attempt >= 4) throw new Error(`HMDA ${state} ${year} failed: ${err.message}`);
+    await new Promise((r) => setTimeout(r, 1000 * attempt));
+    return fetchHmdaOne(state, year, attempt + 1);
   }
 }
 
 async function fetchHmda() {
-  const jobs = STATES.flatMap(([code]) => HMDA_YEARS.map(y => [code, y]));
+  const jobs = STATES.flatMap(([code]) => HMDA_YEARS.map((year) => [code, year]));
+  console.log(`downloading HMDA aggregations (${jobs.length} requests, 4 at a time)`);
   const results = [];
   let next = 0;
-  console.log(`fetching ${jobs.length} HMDA aggregations (4 at a time) ...`);
   const worker = async () => {
     while (next < jobs.length) {
-      const [s, y] = jobs[next++];
-      results.push(...await fetchHmdaOne(s, y));
+      const [state, year] = jobs[next++];
+      results.push(...(await fetchHmdaOne(state, year)));
     }
   };
   await Promise.all(Array.from({ length: 4 }, worker));
-  const order = Object.values(LOAN_PURPOSES);
-  results.sort((a, b) => a[0].localeCompare(b[0]) || a[1] - b[1] || order.indexOf(a[2]) - order.indexOf(b[2]));
-  const years = [...new Set(results.map(r => r[1]))];
-  const missing = HMDA_YEARS.filter(y => !years.includes(y));
-  if (missing.length) console.warn(`HMDA: no data returned for ${missing.join(', ')}`);
+  const purposeOrder = Object.values(LOAN_PURPOSES);
+  results.sort((a, b) => byKeys('state_code', 'year')(a, b) || purposeOrder.indexOf(a.loan_purpose) - purposeOrder.indexOf(b.loan_purpose));
   await writeCsv('hmda_state_originations.csv', ['state_code', 'year', 'loan_purpose', 'loans', 'dollar_volume'], results);
 }
 
-await mkdir(DATA, { recursive: true });
-await writeCsv('states.csv', ['state_code', 'state_name', 'fips', 'region', 'division'], STATES);
-await Promise.all([fetchHpi(), fetchHmda()]);
+await mkdir(DATA_DIR, { recursive: true });
+await writeCsv('states.csv', ['state_code', 'state_name', 'fips', 'region', 'division'],
+  STATES.map(([state_code, state_name, fips, region, division]) => ({ state_code, state_name, fips, region, division })));
+await fetchHpi();
+await fetchHmda();
 console.log('done');
